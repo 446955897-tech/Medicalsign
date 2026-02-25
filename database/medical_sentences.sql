@@ -1,0 +1,10 @@
+CREATE TABLE Medical_sentences (
+    sentence_id INT AUTO_INCREMENT PRIMARY KEY,
+    sentence_text VARCHAR(255) NOT NULL,
+    category VARCHAR(100),
+    sign_video VARCHAR(255) NOT NULL,
+    description TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+    ON UPDATE CURRENT_TIMESTAMP
+);
