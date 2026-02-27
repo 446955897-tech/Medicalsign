@@ -4,3 +4,7 @@ CREATE TABLE Users (
     email VARCHAR(100),
     role VARCHAR(50)
 );
+
+ALTER TABLE Users
+ADD full_name VARCHAR(150),
+ADD password VARCHAR(255);
