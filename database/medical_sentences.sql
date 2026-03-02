@@ -11,6 +11,12 @@ CREATE TABLE Medical_sentences (
 
 USE medicasign;
 
+ALTER TABLE Medical_sentences CHANGE sentence_text name_ar VARCHAR(255) NOT NULL;
+ALTER TABLE Medical_sentences CHANGE description description_ar TEXT;
+ALTER TABLE Medical_sentences CHANGE sign_video video_url VARCHAR(255) NOT NULL;
+
+ALTER TABLE Medical_sentences CHANGE category icon VARCHAR(255);
+
 INSERT INTO Medical_sentences(name_ar, description_ar, icon, video_url)
 VALUES
 -- 1

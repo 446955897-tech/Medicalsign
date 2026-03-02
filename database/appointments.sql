@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS appointments (
         ON UPDATE CURRENT_TIMESTAMP
 );
 
-
+ 
 ALTER TABLE appointments
 ADD CONSTRAINT fk_patient
 FOREIGN KEY (patient_id)
@@ -28,3 +28,5 @@ ALTER TABLE appointments
 ADD COLUMN status
 ENUM('scheduled','completed','canceled')
 DEFAULT 'scheduled';
+
+SELECT * FROM appointments;
