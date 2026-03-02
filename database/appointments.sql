@@ -13,13 +13,13 @@ CREATE TABLE IF NOT EXISTS appointments (
 ALTER TABLE appointments
 ADD CONSTRAINT fk_patient
 FOREIGN KEY (patient_id)
-REFERENCES users(id)
+REFERENCES users(user_id)
 ON DELETE CASCADE;
 
 ALTER TABLE appointments
 ADD CONSTRAINT fk_doctor
 FOREIGN KEY (doctor_id)
-REFERENCES users(id)
+REFERENCES users(user_id)
 ON DELETE CASCADE;
 
 
