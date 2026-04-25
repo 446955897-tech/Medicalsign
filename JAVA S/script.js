@@ -13,3 +13,36 @@ function searchSymptoms() {
         }
     }
 }
+
+function showAppointments() {
+    document.getElementById('patient-profile').style.display = 'none';
+    document.getElementById('appointments-list').style.display = 'block';
+}
+
+function showProfile() {
+    document.getElementById('appointments-list').style.display = 'none';
+    document.getElementById('patient-profile').style.display = 'block';
+}
+function openEditModal() {
+    document.getElementById('editModal').style.display = 'block';
+}
+
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+function closeEditModal() {
+    document.getElementById('editModal').style.display = 'none';
+}
+
+function saveChanges() {
+    let nameValue = document.getElementById('newName').value;
+    let phoneValue = document.getElementById('newPhone').value;
+    let emailValue = document.getElementById('newEmail').value;
+
+
+    if(nameValue) document.getElementById('patientName').innerText = nameValue;
+    if(phoneValue) document.getElementById('patientPhone').innerText = phoneValue;
+    if(emailValue) document.getElementById('patientEmail').innerText = emailValue;
+
+    closeEditModal();
+}
