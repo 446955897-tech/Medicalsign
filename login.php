@@ -1,24 +1,17 @@
 <?php
-include "database/db.php";
+include "db.php";
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password']; 
+    $role = $_POST['role'];
 
-$query = "SELECT * FROM users WHERE email='$email' AND password='$password'";
-$result = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($result) == 1) {
-    $user = mysqli_fetch_assoc($result);
-
-    if ($user['role'] == 'patient') {
-        header("<Location:patient/ patient_dashboard.php");
-        exit();
-    } else if ($user['role'] == 'doctor') {
-        header("Location: doctor/doctor_dashboard.php");
-        exit();
+    $query = "INSERT INTO users (email, password, role) VALUES ('$email', '$password', '$role')";
+    
+    if (mysqli_query($conn, $query)) {
+        echo "<script>alert('تم إنشاء الحساب بنجاح!'); window.location.href='index.html';</script>";
+    } else {
+        echo "خطأ: " . mysqli_error($conn);
     }
-
-} else {
-    echo "بيانات الدخول غير صحيحة";
 }
 ?>

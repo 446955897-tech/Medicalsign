@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="CSS/style.css"> 
 </head>
+
 <body>
+    <div class="logo-top-corner">
+        <a href="index.php">
+            <img src="images/logo.png" alt="MedicalSign">
+        </a>
+    </div>
+<div class="login-container">
+    <h2>تسجيل الدخول</h2>
+    <form action="login.php" method="POST">
+        <input type="email" placeholder="البريد الإلكتروني">
+        
+        <div class="password-box">
+            <input type="password" id="passwordField" placeholder="كلمة المرور">
+            <span class="toggle-password" id="toggleIcon">👁️</span>
+        </div>
 
-<h2>تسجيل الدخول</h2>
+        <button type="submit">دخول</button>
+        <a href="register.html" class="register-link">إنشاء حساب جديد</a>
+    </form>
+</div>
 
-<form action="login.php" method="POST">
-    <input type="email" name="email" placeholder="الإيميل" required>
-    <input type="password" name="password" placeholder="كلمة المرور" required>
-    <button type="submit">دخول</button>
-</form>
-
+    <script src="JAVA S/script.js"></script>
 </body>
 </html>
