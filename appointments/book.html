@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="main-html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز موعد - MedicalSign</title>
+ <link rel="stylesheet" href="../CSS/style.css">
+</head>
+<body>
+    <div class="container fade-in">
+        <img src="../logo.jpg" alt="MedicalSign Logo" class="main-logo">
+        
+        <div id="booking-form">
+            <h2 id="title-text">📅 حجز موعد</h2>
+            <p id="subtitle-text" class="subtitle">يرجى تحديد تفاصيل موعدك</p>
+            
+            <label id="label-clinic">نوع العيادة:</label>
+            <select id="clinic-type">
+                <option value="" disabled selected id="opt-default">اختر العيادة المناسبة</option>
+                <option value="السمعيات" class="clinic-opt">عيادة السمعيات</option>
+                <option value="الأسنان" class="clinic-opt">عيادة الأسنان</option>
+                <option value="العيون" class="clinic-opt">عيادة العيون</option>
+                <option value="الأطفال" class="clinic-opt">عيادة الأطفال</option>
+                <option value="الجلدية" class="clinic-opt">عيادة الجلدية</option>
+                <option value="العظام" class="clinic-opt">عيادة العظام</option>
+                <option value="القلب" class="clinic-opt">عيادة القلب</option>
+                <option value="الأنف والأذن والحنجرة" class="clinic-opt">عيادة الأنف والأذن والحنجرة</option>
+                <option value="العلاج الطبيعي" class="clinic-opt">عيادة العلاج الطبيعي</option>
+                <option value="الباطنية" class="clinic-opt">عيادة الباطنية</option>
+                <option value="النفسية" class="clinic-opt">عيادة الصحة النفسية</option>
+            </select>
+
+            <label id="label-date">اختيار التاريخ:</label>
+            <div class="date-input-wrapper">
+                <input type="date" id="app-date" required data-placeholder="Select Date">
+            </div>
+            
+            <label id="label-period">فترة الموعد:</label>
+            <div class="period-selector">
+                <div class="radio-item">
+                    <input type="radio" id="morning" name="period" value="صباحاً" checked onclick="updateTimes()">
+                    <label for="morning" id="label-morning">صباحاً</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="evening" name="period" value="مساءً" onclick="updateTimes()">
+                    <label for="evening" id="label-evening">مساءً</label>
+                </div>
+            </div>
+
+            <label id="label-time">المواعيد المتاحة:</label>
+            <select id="app-time"></select>
+            
+            <button id="confirm-btn" onclick="confirmBooking()" class="btn-main">تأكيد الحجز</button>
+        </div>
+
+        <div id="confirmation-msg" style="display: none;">
+            <div class="success-icon">💙</div>
+            <h2 id="success-title">تم تأكيد الحجز</h2>
+            <div class="success-box">
+                <p id="final-details"></p>
+            </div>
+            <button id="reset-btn" class="secondary-btn" onclick="resetForm()">حجز موعد آخر</button>
+        </div>
+    </div>
+
+   <script src="../JAVA%20S/script.js"></script>
+    <div id="custom-alert" class="modal-overlay" style="display:none;">
+    <div class="modal-box">
+        <p id="alert-message"></p> <button onclick="closeAlert()" id="modal-btn">موافق</button>
+    </div>
+</div>
+
+</body>
+</html>
