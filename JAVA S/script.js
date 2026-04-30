@@ -57,51 +57,56 @@ function saveChanges() {
     closeEditModal();
 }
 //مواعيد
+// تحديث المواعيد بناءً على الفترة
 function updateTimes() {
     const periodElements = document.getElementsByName('period');
-    let selectedPeriod = "";
-    
-    // معرفة أي خيار تم اختياره (صباحاً/مساءً)
-    for(let i = 0; i < periodElements.length; i++) {
-        if(periodElements[i].checked) {
-            selectedPeriod = periodElements[i].value;
-        }
+    let selected = "صباحاً";
+    for(let i=0; i<periodElements.length; i++) {
+        if(periodElements[i].checked) selected = periodElements[i].value;
     }
 
     const timeSelect = document.getElementById('app-time');
     if(!timeSelect) return;
     
-    timeSelect.innerHTML = ""; // تنظيف القائمة
-    
-    let times = (selectedPeriod === "صباحاً") 
+    timeSelect.innerHTML = "";
+    let slots = (selected === "صباحاً") 
         ? ["08:00 صباحاً", "09:30 صباحاً", "11:00 صباحاً"] 
         : ["04:00 مساءً", "05:30 مساءً", "07:15 مساءً"];
-    
-    times.forEach(t => {
+
+    slots.forEach(s => {
         let opt = document.createElement("option");
-        opt.value = t;
-        opt.innerHTML = t;
+        opt.value = s; opt.innerHTML = s;
         timeSelect.appendChild(opt);
     });
 }
 
-function confirmBooking() {
+// حفظ البيانات والانتقال لصفحة التأكيد
+function goToConfirmation() {
     const clinic = document.getElementById('clinic-type').value;
     const date = document.getElementById('app-date').value;
     const time = document.getElementById('app-time').value;
 
-    if (!clinic || !date) {
-        alert("يرجى اختيار العيادة والتاريخ أولاً");
+    if(!clinic || !date) {
+        alert("يرجى إكمال اختيار العيادة والتاريخ");
         return;
     }
 
-    // إخفاء الفورم وإظهار رسالة النجاح
-    document.getElementById('booking-form').style.display = 'none';
-    document.getElementById('confirmation-msg').style.display = 'block';
+    localStorage.setItem('booking_clinic', clinic);
+    localStorage.setItem('booking_date', date);
+    localStorage.setItem('booking_time', time);
 
-    document.getElementById('final-details').innerHTML = 
-        `تم حجز موعد في <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
+    window.location.href = "confirmation.html";
 }
 
-// تنفيذ تحديث المواعيد عند فتح الصفحة لأول مرة
-window.onload = updateTimes;
+// عرض البيانات في صفحة التأكيد عند تحميلها
+window.onload = function() {
+    if(document.getElementById('display-details')) {
+        const c = localStorage.getItem('booking_clinic');
+        const d = localStorage.getItem('booking_date');
+        const t = localStorage.getItem('booking_time');
+        document.getElementById('display-details').innerHTML = 
+            `تم حجز موعد في <b>${c}</b> <br> بتاريخ <b>${d}</b> <br> الساعة <b>${t}</b>`;
+    } else {
+        updateTimes(); // تشغيل المواعيد إذا كنا في صفحة الحجز
+    }
+}

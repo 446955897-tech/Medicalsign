@@ -32,7 +32,11 @@ body {
     align-items: center;
     width: 100%;
 }
-
+a {
+    display: block;
+    margin-top: 15px; /* لترك مسافة بسيطة بين الزر والرابط */
+    text-align: center; /* لتوسيط النص */
+}
 h2 {
     color: #2980b9;
     margin-bottom: 20px;
@@ -110,8 +114,10 @@ button {
     text-decoration: none;
     font-size: 14px;
 }
+
 /* تنسيق الاعراض */
-* {
+
+.symptoms-container{
     box-sizing: border-box;
 }
 
@@ -261,7 +267,7 @@ h2 {
     cursor: pointer;
 }
 
-<<<<<<< HEAD
+ HEAD
 .btn:hover {
     opacity: 0.9;
     transform: scale(1.05);
@@ -503,7 +509,6 @@ h1, h2 {
 }
 
 /*appointments*/
-/* الإعدادات العامة */
 body {
     background-color: #f4f7f6;
     display: flex;
@@ -524,38 +529,26 @@ body {
     border-top: 6px solid #2980b9;
     position: relative;
     padding-top: 70px;
-    z-index: 10; /* لضمان أن الحاوية فوق أي خلفيات */
 }
 
-/* الشعار */
 .logo-top-corner {
     position: absolute;
     top: 15px;
     right: 15px;
-    z-index: 5;
+    pointer-events: none; /* لمنع حجب النقر عن العناصر تحتها */
 }
-.logo-top-corner img { width: 100px; height: auto; }
+.logo-top-corner img { width: 100px; }
 
-/* النصوص */
-h2 { color: #2c3e50; margin: 0; }
-.subtitle { color: #7f8c8d; font-size: 14px; margin-bottom: 20px; }
-
-/* الحقول */
 .input-group { text-align: right; margin-bottom: 15px; }
-label { display: block; font-weight: bold; margin-bottom: 5px; color: #333; }
+label { display: block; font-weight: bold; margin-bottom: 5px; }
 
 select, input[type="date"] {
     width: 100%;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    font-size: 15px;
-    box-sizing: border-box;
-    background-color: #fff;
-    cursor: pointer; /* تجعل المستخدم يعرف أنه قابل للضغط */
 }
 
-/* الراديو */
 .period-selector {
     display: flex;
     justify-content: space-around;
@@ -563,26 +556,26 @@ select, input[type="date"] {
     padding: 10px;
     border-radius: 10px;
 }
-.radio-item { display: flex; align-items: center; gap: 8px; cursor: pointer; }
 
-/* الأزرار */
 .btn-main {
     background-color: #2980b9;
     color: white;
     border: none;
     padding: 15px;
-    border-radius: 12px;
     width: 100%;
-    font-size: 17px;
+    border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
-    position: relative;
-    z-index: 20; /* لضمان أن الزر هو أعلى طبقة */
 }
-.btn-main:hover { background-color: #1a5276; }
 
-/* رسالة النجاح */
-.success-box { background-color: #ebf5fb; padding: 20px; border-radius: 12px; color: #2980b9; margin-top: 15px; line-height: 1.6; }
+.success-box {
+    background-color: #ebf5fb;
+    padding: 20px;
+    border-radius: 12px;
+    color: #2980b9;
+    margin: 20px 0;
+    line-height: 1.8;
+}
+
 .success-icon { font-size: 60px; margin-bottom: 10px; }
-.secondary-btn { background-color: #bdc3c7; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; margin-top: 20px; cursor: pointer; }
+.secondary-btn { background-color: #bdc3c7; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; cursor: pointer; }

@@ -2,16 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حجز موعد - MedicalSign</title>
     <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
-    <div class="container fade-in">
+    <div class="container">
         <div class="logo-top-corner">
             <img src="../images/logo.png" alt="MedicalSign">
         </div>
-
         <div id="booking-form">
             <h2>📅 حجز موعد</h2>
             <p class="subtitle">يرجى تحديد تفاصيل موعدك</p>
@@ -20,9 +18,9 @@
                 <label>نوع العيادة:</label>
                 <select id="clinic-type">
                     <option value="" disabled selected>اختر العيادة المناسبة</option>
-                    <option value="عيادة الأسنان">عيادة الأسنان</option>
-                    <option value="عيادة العيون">عيادة العيون</option>
-                    <option value="عيادة الأطفال">عيادة الأطفال</option>
+                    <option value="الأسنان">عيادة الأسنان</option>
+                    <option value="العيون">عيادة العيون</option>
+                    <option value="الأطفال">عيادة الأطفال</option>
                 </select>
             </div>
 
@@ -47,23 +45,12 @@
 
             <div class="input-group">
                 <label>المواعيد المتاحة:</label>
-                <select id="app-time">
-                    </select>
+                <select id="app-time"></select>
             </div>
 
-            <button class="btn-main" id="confirm-btn" onclick="confirmBooking()">تأكيد الحجز</button>
-        </div>
-
-        <div id="confirmation-msg" style="display: none;">
-            <div class="success-icon">💙</div>
-            <h2>تم تأكيد الحجز</h2>
-            <div class="success-box">
-                <p id="final-details"></p>
-            </div>
-            <button class="secondary-btn" onclick="location.reload()">حجز موعد آخر</button>
+            <button class="btn-main" onclick="goToConfirmation()">تأكيد الحجز</button>
         </div>
     </div>
-
     <script src="../JAVA S/script.js"></script>
 </body>
 </html>
