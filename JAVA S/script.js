@@ -2,86 +2,45 @@ let savedClinic = "";
 let savedDate = "";
 let savedTime = "";
 
-
-function updateConfirmationText() {
-    let timeDisplay = savedTime;
-
-    timeDisplay = timeDisplay.replace("AM", "صباحاً").replace("PM", "مساءً");
-
-    const introText = "تم حجز موعد في";
-    document.getElementById('final-details').innerHTML = 
-        `${introText} <b>${savedClinic}</b> <br> بتاريخ <b>${savedDate}</b> <br> الساعة <b>${timeDisplay}</b>`;
-}
-
-
 function updateTimes() {
     const periodInput = document.querySelector('input[name="period"]:checked');
-    if (!periodInput) return;
-    
     const timeSelect = document.getElementById('app-time');
-    if (!timeSelect) return; 
+    if (!periodInput || !timeSelect) return;
     
     timeSelect.innerHTML = "";
-    
-    let m = "صباحاً";
-    let e = "مساءً";
-    
     let times = (periodInput.value === "صباحاً") ? 
-        [`08:00 ${m}`, `09:30 ${m}`, `10:45 ${m}`, `11:30 ${m}`] : 
-        [`04:00 ${e}`, `05:15 ${e}`, `06:30 ${e}`, `07:45 ${e}`, `08:30 ${e}`];
+        ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
+        ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
     
     times.forEach(t => {
         let opt = document.createElement("option");
-        opt.value = t; 
-        opt.innerHTML = t;
+        opt.value = t; opt.innerHTML = t;
         timeSelect.appendChild(opt);
     });
 }
 
-
 function confirmBooking() {
-    const clinicElement = document.getElementById('clinic-type');
-    const dateElement = document.getElementById('app-date');
-    const timeElement = document.getElementById('app-time');
+    const clinic = document.getElementById('clinic-type').value;
+    const date = document.getElementById('app-date').value;
+    const time = document.getElementById('app-time').value;
 
-    if (!clinicElement || !dateElement || !timeElement) return;
-
-    savedClinic = clinicElement.value;
-    savedDate = dateElement.value;
-    savedTime = timeElement.value;
-
-    if (!savedClinic || !savedDate) {
+    if (!clinic || !date) {
         showAlert("يرجى اختيار العيادة والتاريخ أولاً"); 
         return;
     }
 
-   
     document.getElementById('booking-form').style.display = 'none';
     document.getElementById('confirmation-msg').style.display = 'block';
-    updateConfirmationText();
+    
+        document.getElementById('final-details').innerHTML = 
+    `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
 }
 
-
-function resetForm() { 
-    location.reload(); 
+function resetForm() { location.reload(); }
+function showAlert(msg) {
+    document.getElementById('alert-message').innerText = msg;
+    document.getElementById('custom-alert').style.display = 'flex';
 }
+function closeAlert() { document.getElementById('custom-alert').style.display = 'none'; }
 
 window.onload = updateTimes;
-
-function showAlert(msg) {
-    const alertBox = document.getElementById('custom-alert');
-    const alertMsg = document.getElementById('alert-message');
-    if (alertBox && alertMsg) {
-        alertMsg.innerText = msg;
-        document.getElementById('modal-btn').innerText = "موافق";
-        alertBox.style.display = 'flex';
-    }
-}
-
-
-function closeAlert() {
-    const alertBox = document.getElementById('custom-alert');
-    if (alertBox) {
-        alertBox.style.display = 'none';
-    }
-}
