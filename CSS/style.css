@@ -152,11 +152,12 @@ button {
 
 /* الحاوية الرئيسية للمحتوى */
 .symp-container {
-    max-width: 1100px !important; 
-    margin: 0 auto !important;    
-    padding: 20px;
-    margin-top: 60px; /* مسافة إضافية لمنع التداخل مع اللوجو */
-    display: block !important;    
+    max-width: 1100px !important;
+    margin: 150px auto 0 auto !important; /* الرقم 150 سيجبره على النزول مسافة كبيرة */
+    padding: 20px !important;
+    display: block !important;
+    position: relative !important;
+    clear: both !important;
 }
 
 /* العنوان الرئيسي */
@@ -176,7 +177,7 @@ button {
     border-radius: 30px;
     padding: 15px 25px;
     outline: none;
-    margin-bottom: 30px;
+    margin-bottom: 20px 0 50px 0 !important;
     font-size: 16px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     transition: all 0.3s ease;
