@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+<style>
+     :root {
+            --primary-blue: #2980b9;
+            --hover-blue: #1a5276;
+            --page-bg: #eef2f7;
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --success-bg: #ebf5fb;
+            --border-light: #ecf0f1;
+            --shadow-blue: rgba(41, 128, 185, 0.1);
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--page-bg);
+            color: var(--text-main);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .logo {
+            display: block;
+            width: 120px;
+            margin: 0 auto 15px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-sub);
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px var(--shadow-blue);
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form input,
+        .form textarea {
+            padding: 12px;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            outline: none;
+            color: var(--text-main);
+        }
+
+        .form textarea {
+            min-height: 140px;
+            resize: none;
+        }
+
+        .form input:focus,
+        .form textarea:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--hover-blue);
+            transform: scale(1.05);
+        }
+
+        .success {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: var(--success-bg);
+            border-radius: 10px;
+            color: var(--primary-blue);
+        }
+        </style>
+</head>
+<body>
+
+<div class="container"></div>
+     <img src="../images/logo.png" alt="MedicalSign">
+  
+    <h1 class="page-title">Contact Us</h1>
+    <p class="page-subtitle">Send us your message</p>
+
+    <div class="card">
+        <form class="form" id="contactForm">
+            <input type="text" placeholder="Enter your name" required>
+            <textarea placeholder="Write your message" required></textarea>
+            <button class="btn" type="submit">Send</button>
+        </form>
+
+        <div class="success" id="successMessage">
+            Message sent successfully
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        document.getElementById("successMessage").style.display = "block";
+        this.reset();
+    });
+</script>
+</body>
+</html>

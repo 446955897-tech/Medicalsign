@@ -8,19 +8,20 @@ include '../database/db.php';
     <title>استكشف الأعراض الطبية</title>
     <link rel="stylesheet" href="../CSS/style.css"> 
 </head>
-<body>
 
+
+<body class="symptoms-body">
 <div class="logo-top-corner">
     <a href="index.php">
         <img src="../images/logo.png" alt="MedicalSign">
     </a>
 </div>
 
-<div class="container">
+<div class="symp-container">
     <?php
     echo '<h2>استكشف الأعراض الطبية</h2>';
     echo '<input type="search" id="searchbar" onkeyup="searchSymptoms()" placeholder="ابحث عن عرض…">';
-    echo '<div class="s_grid" id="cards" aria-live="polite">';
+    echo '<div class="symp_grid" id="cards" aria-live="polite">';
 
    
     $res = mysqli_query($conn, "SELECT id, name_ar, description_ar, icon, video_url FROM symptoms ORDER BY created_at DESC, id DESC");
@@ -56,7 +57,7 @@ include '../database/db.php';
                 $statusStyle = "style='background:#fff5f5; color:#e53e3e;'"; 
             }
 
-            echo '<article class="card" data-title="'. htmlspecialchars(mb_strtolower($title), ENT_QUOTES, "UTF-8") .'">';
+            echo '<article class="symp-card" data-title="'. htmlspecialchars($title) .'">';
                 echo '<div class="status-tag" '.$statusStyle.'>'.$statusText.'</div>';
                 
                 echo '<div class="card-img" style="display:flex; align-items:center; justify-content:center; font-size:45px; background:#f0f7ff; margin: 0 auto 15px; width:90px; height:90px; border-radius:50%;">';
@@ -67,7 +68,7 @@ include '../database/db.php';
                 echo '<p class="desc">'. htmlspecialchars(mb_strimwidth($desc, 0, 100, "...", "UTF-8"), ENT_QUOTES, "UTF-8") .'</p>';
                 
                 echo '<div style="margin-top:12px">';
-                    echo '<a href="symptom-details.php?id='. (int)$row['id'] .'" class="btn">التفاصيل</a>';
+                    echo '<a href="symptom-details.php?id='. (int)$row['id'] .'" class="symp-btn">التفاصيل</a>';
                 echo '</div>';
             echo '</article>';
         }
@@ -77,7 +78,7 @@ include '../database/db.php';
     echo '</div>';
     ?>
 
- <script src="../JAVA S/script.js"></script>
+ <script src=".../JAVA S/script.js"></script>
 
 </body>
 </html>

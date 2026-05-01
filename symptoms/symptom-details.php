@@ -25,9 +25,10 @@ $video = trim((string)($data['video_url'] ?? ''));
   <title>تفاصيل العرض | <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></title>
   <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body class="page-detail">
-  <div class="container">
-    <article class="card details-card" style="text-align:center">
+
+<body class="symptoms-body">
+  <div class="symp-container">
+    <article class="symp-card details-card" style="text-align:center">
       
       <img src="<?= $src ?>" class="card-img" style="width:200px; height:200px; object-fit:cover; border-radius:20px;" 
             onerror="this.src='../images/placeholder.png'">
@@ -42,14 +43,14 @@ $video = trim((string)($data['video_url'] ?? ''));
 
       <?php if ($video !== ''): ?>
         <div style="margin:20px 0;">
-          <a href="<?= htmlspecialchars($video, ENT_QUOTES, 'UTF-8') ?>" target="_blank" class="btn">
+          <a href="<?= htmlspecialchars($video, ENT_QUOTES, 'UTF-8') ?>" target="_blank" class="symp-btn">
              🎥 مشاهدة فيديو توضيحي
           </a>
         </div>
       <?php endif; ?>
 
       <div style="margin-top:30px; border-top:1px solid #eee; padding-top:20px;">
-        <a href="symptoms.php" class="btn btn-back">⬅️ الرجوع لقائمة الأعراض</a>
+        <a href="symptoms.php" class="symp-btn btn-back">⬅️ الرجوع لقائمة الأعراض</a>
       </div>
       
     </article>

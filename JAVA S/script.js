@@ -11,15 +11,15 @@
 // وظيفة البحث عن الأعراض
 
 function searchSymptoms() {
-    let input = document.getElementById('searchbar').value.toLowerCase();
-    let cards = document.getElementsByClassName('card');
+    let input = document.getElementById('searchbar').value.toLowerCase().trim();
+    let cards = document.getElementsByClassName('symp-card');
 
     for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title');
-        if (title.includes(input)) {
-            cards[i].style.display = "";
+        let title = cards[i].getAttribute('data-title') || "";
+        if (title.toLowerCase().includes(input)) {
+            cards[i].style.setProperty('display', 'flex', 'important'); 
         } else {
-            cards[i].style.display = "none";
+            cards[i].style.setProperty('display', 'none', 'important');
         }
     }
 }
@@ -110,3 +110,4 @@ window.onload = function() {
         updateTimes(); // تشغيل المواعيد إذا كنا في صفحة الحجز
     }
 }
+

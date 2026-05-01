@@ -1,5 +1,5 @@
 /* الإعدادات العامة للجسم */
-body {
+.login-body {
     background: #eef2f7;
     color: #333;
     font-family: Arial, sans-serif;
@@ -115,24 +115,22 @@ button {
     font-size: 14px;
 }
 
-/* تنسيق الاعراض */
+/* --- قسم تنسيق الأعراض الرئيسي --- */
 
-.symptoms-container{
-    box-sizing: border-box;
-}
-
-body {
-    /* التدرج اللطيف الذي اخترتموه (يخدم هوية المشروع) */
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+/* خلفية الصفحة وإعدادات النصوص العامة */
+.symptoms-body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     direction: rtl;
     margin: 0;
     padding: 0;
     color: #333;
     min-height: 100vh;
+    display: block !important;  
+    text-align: right; 
 }
 
-/* تنسيق اللوجو في الزاوية العلوية (تم التعديل ليكون كبيراً وشفافاً) */
+/* تنسيق اللوجو - تم ضبط العرض ليكون تلقائياً لمنع الانضغاط */
 .logo-top-corner {
     position: absolute;
     top: 15px;
@@ -141,9 +139,9 @@ body {
 }
 
 .logo-top-corner img {
-    height: 140px; /* الحجم الكبير والواضح */
-    width: auto;
-    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.1)); /* ظل يبرز اللوجو */
+    height: 100px; 
+    width: auto !important;
+    filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.1));
     transition: transform 0.3s ease;
     cursor: pointer;
 }
@@ -152,19 +150,21 @@ body {
     transform: scale(1.05);
 }
 
-.container {
-    max-width: 1100px;
-    margin: 10px auto;
+/* الحاوية الرئيسية للمحتوى */
+.symp-container {
+    max-width: 1100px !important; 
+    margin: 0 auto !important;    
     padding: 20px;
-    /* أضفنا مسافة علوية لكي لا يغطي اللوجو على المحتوى في الشاشات الكبيرة */
-    margin-top: 20px; 
+    margin-top: 60px; /* مسافة إضافية لمنع التداخل مع اللوجو */
+    display: block !important;    
 }
 
 /* العنوان الرئيسي */
-h2 {
+.symptoms-body h2 {
     color: #2c3e50;
     text-align: center;
     font-weight: 700;
+    margin-top: 50px;
     margin-bottom: 30px;
 }
 
@@ -180,6 +180,7 @@ h2 {
     font-size: 16px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.02);
     transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
 #searchbar:focus {
@@ -187,17 +188,18 @@ h2 {
     box-shadow: 0 4px 12px rgba(79, 172, 254, 0.2);
 }
 
-/* شبكة البطاقات */
-.s_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+/* شبكة البطاقات - لضمان ظهورها بجانب بعضها بشكل متجاوب */
+.symp_grid {
+    display: grid !important; 
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important; 
+    gap: 25px !important;
     padding: 10px;
+    width: 100% !important;
 }
 
-/* تنسيق البطاقة */
-.card {
-    background: #ffffff;
+/* تنسيق بطاقة العرض الواحدة */
+.symp-card {
+    background: #ffffff !important;
     border-radius: 30px;
     padding: 25px;
     text-align: center;
@@ -206,9 +208,14 @@ h2 {
     border: 1px solid rgba(255,255,255,0.3);
     position: relative;
     overflow: hidden;
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 380px; /* توحيد طول البطاقات لشكل أرتب */
 }
 
-.card:hover {
+.symp-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
@@ -217,7 +224,7 @@ h2 {
 .card-img {
     width: 90px;
     height: 90px;
-    background: #f0f4f8; /* يتناسب مع ألوان خلفية الموقع */
+    background: #f0f4f8;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -226,8 +233,8 @@ h2 {
     font-size: 45px;
 }
 
-.card h3 {
-    color: #1a508b; /* نفس اللون الأزرق الموجود في اللوجو */
+.symp-card h3 {
+    color: #1a508b;
     font-size: 1.4rem;
     margin: 10px 0;
 }
@@ -241,7 +248,7 @@ h2 {
     margin-bottom: 15px;
 }
 
-/* شارة الحالة */
+/* شارة الحالة (معلومات عامة / يحتاج انتباه) */
 .status-tag {
     display: inline-block;
     padding: 5px 15px;
@@ -253,10 +260,10 @@ h2 {
     font-weight: bold;
 }
 
-/* الزر الأزرق المتدرج */
-.btn {
-    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
-    color: #fff;
+/* زر التفاصيل المتدرج */
+.symp-btn {
+    background: linear-gradient(to right, #4facfe 0%, #00f2fe 100%) !important;
+    color: #fff !important;
     padding: 10px 30px;
     border-radius: 25px;
     text-decoration: none;
@@ -267,36 +274,20 @@ h2 {
     cursor: pointer;
 }
 
- HEAD
-.btn:hover {
+.symp-btn:hover {
     opacity: 0.9;
     transform: scale(1.05);
 }
 
-/* زر الرجوع (لمسة الأحمر) */
+/* زر الرجوع للخلف */
 .btn-back {
-    background: #fff5f5; /* خلفية حمراء باهتة */
-    color: #e53e3e; /* نص أحمر */
-    border: 1px solid #fed7d7;
+    background: #fff5f5 !important;
+    color: #e53e3e !important;
+    border: 1px solid #fed7d7 !important;
     margin-top: 15px;
 }
 
-.btn-back:hover {
-    background: #e53e3e;
-    color: #fff;
-}
-
-/* تنسيق خاص لصفحة التفاصيل */
-.details-card {
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-.details-card .desc {
-    max-height: none; /* إظهار كامل النص في صفحة التفاصيل */
-}
-
-/* حالة البحث الفارغ */
+/* حالة عدم وجود نتائج للبحث */
 .empty {
     grid-column: 1 / -1;
     text-align: center;
@@ -509,7 +500,7 @@ h1, h2 {
 }
 
 /*appointments*/
-body {
+.body {
     background-color: #f4f7f6;
     display: flex;
     justify-content: center;
@@ -579,3 +570,4 @@ select, input[type="date"] {
 
 .success-icon { font-size: 60px; margin-bottom: 10px; }
 .secondary-btn { background-color: #bdc3c7; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; cursor: pointer; }
+
