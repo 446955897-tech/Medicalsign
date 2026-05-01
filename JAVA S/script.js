@@ -105,3 +105,37 @@ function confirmBooking() {
 
 // تنفيذ تحديث المواعيد عند فتح الصفحة لأول مرة
 window.onload = updateTimes;
+function saveData() {
+    let newPass = document.getElementById("newPassword").value;
+    let confirmPass = document.getElementById("confirmPassword").value;
+    let message = document.getElementById("successMsg");
+
+    // التحقق من أن الحقول ليست فارغة
+    if (newPass === "" || confirmPass === "") {
+        alert("يرجى تعبئة جميع الحقول المطلوبة");
+        return;
+    }
+
+    // التحقق من تطابق كلمات المرور
+    if (newPass !== confirmPass) {
+        alert("كلمة المرور غير متطابقة");
+        return;
+    }
+
+    // التحقق من طول كلمة المرور
+    if (newPass.length < 6) {
+        alert("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
+        return;
+    }
+
+    // حفظ في التخزين المحلي (Local Storage)
+    localStorage.setItem("password", newPass);
+
+    // إظهار رسالة النجاح
+    message.style.display = "block";
+
+    // إخفاء الرسالة بعد 3 ثواني
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 3000);
+}
