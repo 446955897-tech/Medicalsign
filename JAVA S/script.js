@@ -105,37 +105,45 @@ function confirmBooking() {
 
 // تنفيذ تحديث المواعيد عند فتح الصفحة لأول مرة
 window.onload = updateTimes;
+// ==========================================
+// كود إعدادات الحساب - بشاير (بداية)
+// ==========================================
+
 function saveData() {
     let newPass = document.getElementById("newPassword").value;
     let confirmPass = document.getElementById("confirmPassword").value;
     let message = document.getElementById("successMsg");
 
-    // التحقق من أن الحقول ليست فارغة
+    // 1. التحقق من أن الحقول ليست فارغة
     if (newPass === "" || confirmPass === "") {
         alert("يرجى تعبئة جميع الحقول المطلوبة");
         return;
     }
 
-    // التحقق من تطابق كلمات المرور
+    // 2. التحقق من تطابق كلمة المرور الجديدة مع التأكيد
     if (newPass !== confirmPass) {
         alert("كلمة المرور غير متطابقة");
         return;
     }
 
-    // التحقق من طول كلمة المرور
+    // 3. التحقق من أن طول كلمة المرور لا يقل عن 6 خانات
     if (newPass.length < 6) {
         alert("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
         return;
     }
 
-    // حفظ في التخزين المحلي (Local Storage)
+    // 4. حفظ كلمة المرور في التخزين المحلي (Local Storage)
     localStorage.setItem("password", newPass);
 
-    // إظهار رسالة النجاح
+    // 5. إظهار رسالة النجاح للمستخدم
     message.style.display = "block";
 
-    // إخفاء الرسالة بعد 3 ثواني
+    // 6. إخفاء الرسالة تلقائياً بعد 3 ثواني
     setTimeout(() => {
         message.style.display = "none";
     }, 3000);
 }
+
+// ==========================================
+// كود إعدادات الحساب - بشاير (نهاية)
+// ==========================================
