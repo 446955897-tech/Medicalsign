@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إعدادات الحساب</title>
+    
+    <link rel="stylesheet" href="CSS/style.css">
+
+</head>
+<body>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <img src="images/logo.png" width="120">
+    </div>
+
+    <h1>إعدادات الحساب</h1>
+
+    <div class="account-settings">
+        <div class="box-description">
+            يمكنك هنا تغيير كلمة المرور الخاصة بك 
+        </div>
+        
+        <div class="setting-item">
+            <label>كلمة المرور الجديدة</label>
+            <input type="password" id="newPassword" placeholder="يرجى إدخال كلمة المرور">
+        </div>
+
+        <div class="setting-item">
+            <label>تأكيد كلمة المرور</label>
+            <input type="password" id="confirmPassword" placeholder="يرجى إعادة إدخال كلمة المرور">
+        </div>
+
+        <button class="btn-save" onclick="saveData()">حفظ التعديلات</button>
+
+        <div class="success-message" id="successMsg">
+            تم تحديث بيانات الحساب بنجاح
+        </div>
+    </div>
+
+    <script src="JAVA%20S/script.js"></script>
+
+</body>
+</html>

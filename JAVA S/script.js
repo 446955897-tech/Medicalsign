@@ -111,3 +111,50 @@ window.onload = function() {
     }
 }
 
+<<<<<<< HEAD
+=======
+// تنفيذ تحديث المواعيد عند فتح الصفحة لأول مرة
+window.onload = updateTimes;
+// ==========================================
+// كود إعدادات الحساب - بشاير (بداية)
+// ==========================================
+
+function saveData() {
+    let newPass = document.getElementById("newPassword").value;
+    let confirmPass = document.getElementById("confirmPassword").value;
+    let message = document.getElementById("successMsg");
+
+    // 1. التحقق من أن الحقول ليست فارغة
+    if (newPass === "" || confirmPass === "") {
+        alert("يرجى تعبئة جميع الحقول المطلوبة");
+        return;
+    }
+
+    // 2. التحقق من تطابق كلمة المرور الجديدة مع التأكيد
+    if (newPass !== confirmPass) {
+        alert("كلمة المرور غير متطابقة");
+        return;
+    }
+
+    // 3. التحقق من أن طول كلمة المرور لا يقل عن 6 خانات
+    if (newPass.length < 6) {
+        alert("كلمة المرور يجب أن تكون 6 أحرف على الأقل");
+        return;
+    }
+
+    // 4. حفظ كلمة المرور في التخزين المحلي (Local Storage)
+    localStorage.setItem("password", newPass);
+
+    // 5. إظهار رسالة النجاح للمستخدم
+    message.style.display = "block";
+
+    // 6. إخفاء الرسالة تلقائياً بعد 3 ثواني
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 3000);
+}
+
+// ==========================================
+// كود إعدادات الحساب - بشاير (نهاية)
+// ==========================================
+>>>>>>> 25a95478576f46e9d85a1ee98ecc14364d89e936

@@ -23,7 +23,7 @@ $video = trim((string)($data['video_url'] ?? ''));
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>تفاصيل العرض | <?= htmlspecialchars($title, ENT_QUOTES, 'UTF-8') ?></title>
-  <link rel="stylesheet" href="../CSS/style.css">
+
 </head>
 
 <body class="symptoms-body">

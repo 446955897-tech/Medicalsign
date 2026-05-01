@@ -569,5 +569,69 @@ select, input[type="date"] {
 }
 
 .success-icon { font-size: 60px; margin-bottom: 10px; }
+<<<<<<< HEAD
 .secondary-btn { background-color: #bdc3c7; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; cursor: pointer; }
 
+=======
+.secondary-btn { background-color: #bdc3c7; color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; margin-top: 20px; cursor: pointer; }
+
+/* --- بداية كود صفحة الإعدادات (بشاير) --- */
+.account-settings {
+    background-color: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.1);
+    width: 80%;
+    max-width: 500px;
+    margin: 30px auto;
+    animation: fadeInUp 0.6s ease;
+}
+
+.box-description {
+    margin-bottom: 20px;
+    color: #34495e;
+    font-size: 14px;
+}
+
+.setting-item {
+    margin-bottom: 15px;
+}
+
+.setting-item label {
+    display: block;
+    margin-bottom: 5px;
+    color: #7f8c8d;
+}
+
+.btn-save {
+    background-color: #2980b9;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.btn-save:hover {
+    background-color: #1a5276;
+    transform: scale(1.05);
+}
+
+.success-message {
+    background-color: #ebf5fb;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+    display: none;
+    text-align: center;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- نهاية كود بشاير --- */
+>>>>>>> 25a95478576f46e9d85a1ee98ecc14364d89e936
