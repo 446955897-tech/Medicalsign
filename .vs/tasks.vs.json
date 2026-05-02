@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-medical.html",
+      "appliesTo": "medical.html.txt",
+      "type": "launch"
+    }
+  ]
+}
