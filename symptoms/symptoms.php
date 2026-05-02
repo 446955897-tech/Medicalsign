@@ -86,21 +86,21 @@ include '../database/db.php';
     echo '</div>';
     ?>
 
- <script src=".../JAVA S/script.js"></script>
-<script>
-function searchSymptoms() {
-    let input = document.getElementById('searchbar').value.toLowerCase().trim();
-    let cards = document.getElementsByClassName('symp-card');
+ <script>
+    function searchSymptoms() {
+        let input = document.getElementById('searchbar').value.toLowerCase().trim();
+        let cards = document.getElementsByClassName('symp-card');
 
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title') || "";
-        if (title.toLowerCase().includes(input)) {
-            cards[i].style.setProperty('display', 'flex', 'important');
-        } else {
-            cards[i].style.setProperty('display', 'none', 'important');
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getAttribute('data-title') || "";
+            if (title.toLowerCase().includes(input)) {
+                cards[i].style.setProperty('display', 'flex', 'important'); 
+            } else {
+                cards[i].style.setProperty('display', 'none', 'important');
+            }
         }
     }
-}
-</script>
+ </script>
+
 </body>
 </html>
