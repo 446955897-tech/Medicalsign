@@ -499,8 +499,8 @@ h1, h2 {
 /*appointments*/
 .body {
     background-color: #f4f7f6;
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
-=======
+
+
     font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
@@ -535,15 +535,14 @@ select, input[type="date"] {
 }
 
 .period-selector 
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
+
   
 
 
 
-=======
 .btn-main {
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
-=======
+
+
     width: 100%;
     border-radius: 12px;
     font-weight: bold;
@@ -634,8 +633,7 @@ h1 {
 }
 
 /* --- نهاية كود بشاير --- */
-<<<<<<< HEAD
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
+
 
 
 
@@ -785,7 +783,7 @@ input[type="date"]:valid::-webkit-datetime-edit-text {
     color: #2c3e50 !important;
 }
 /*-- نهاية كود ري--*/
-=======
+
 
 
 /* -- كود لينا -- */
@@ -895,4 +893,4 @@ h1 {
 }
 
 /* -- نهاية كود لينا -- */
->>>>>>> 36365e2c56e4052a5de6091df47ab78501b7d378
+
