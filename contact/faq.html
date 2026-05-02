@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+
+    <style>
+        :root {
+            --primary-blue: #2980b9;
+            --hover-blue: #1a5276;
+            --page-bg: #eef2f7;
+            --text-main: #2c3e50;
+            --text-sub: #7f8c8d;
+            --success-bg: #ebf5fb;
+            --border-light: #ecf0f1;
+            --shadow-blue: rgba(41, 128, 185, 0.1);
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--page-bg);
+            color: var(--text-main);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            animation: fadeUp 0.8s ease;
+        }
+
+        .logo {
+            display: block;
+            width: 120px;
+            margin: 0 auto 15px;
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-sub);
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px var(--shadow-blue);
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .faq-item {
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            background: var(--white);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 15px;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .faq-question:hover {
+            color: var(--primary-blue);
+        }
+
+        .faq-answer {
+            display: none;
+            padding: 10px 15px 15px;
+            color: var(--text-sub);
+            border-top: 1px solid var(--border-light);
+        }
+    </style>
+</head>
+<body>
+
+
+     
+<div class="logo-top-corner">
+    <a href="index.php">
+        <img src="../images/logo.png" alt="MedicalSign">
+    </a>
+</div>
+
+
+    <h1 class="page-title">FAQ</h1>
+    <p class="page-subtitle">Frequently Asked Questions</p>
+
+    <div class="card">
+        <div class="faq-item">
+            <button class="faq-question">How do I book an appointment?</button>
+            <div class="faq-answer">
+                Choose the service, select the date and time, then confirm your booking.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">How do I use the sign language translator?</button>
+            <div class="faq-answer">
+                Open the translator page, enter your text, and the system will show the sign language translation.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Can I edit my booking?</button>
+            <div class="faq-answer">
+                Yes, you can edit your booking from the appointments page if the appointment is still available for editing.
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const questions = document.querySelectorAll(".faq-question");
+
+    questions.forEach(function(q) {
+        q.addEventListener("click", function() {
+            const answer = q.nextElementSibling;
+
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                document.querySelectorAll(".faq-answer").forEach(function(a) {
+                    a.style.display = "none";
+                });
+                answer.style.display = "block";
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
