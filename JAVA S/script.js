@@ -1,3 +1,64 @@
+/*-- تنسيقات صفحة حجز  الموعد --*/
+function updateTimes() {
+    const periodInput = document.querySelector('input[name="period"]:checked');
+    const timeSelect = document.getElementById('app-time');
+    
+    if (!periodInput || !timeSelect) return;
+    
+    timeSelect.innerHTML = "";
+    
+    let times = (periodInput.value === "صباحاً") ? 
+        ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
+        ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
+    
+    times.forEach(t => {
+        let opt = document.createElement("option");
+        opt.value = t; 
+        opt.innerHTML = t;
+        timeSelect.appendChild(opt);
+    });
+}
+
+
+function confirmBooking() {
+    const clinic = document.getElementById('clinic-type').value;
+    const date = document.getElementById('app-date').value;
+    const time = document.getElementById('app-time').value;
+
+    
+    if (!clinic || !date || !time) {
+        showAlert("يرجى اختيار العيادة، التاريخ، والوقت أولاً"); 
+        return;
+    }
+
+    
+    document.getElementById('booking-form').style.display = 'none';
+    document.getElementById('confirmation-msg').style.display = 'block';
+    
+    
+    document.getElementById('final-details').innerHTML = 
+    `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
+}
+
+function resetForm() { 
+    location.reload(); 
+}
+
+function showAlert(msg) {
+    document.getElementById('alert-message').innerText = msg;
+    document.getElementById('custom-alert').style.display = 'flex';
+}
+
+function closeAlert() { 
+    document.getElementById('custom-alert').style.display = 'none'; 
+}
+
+
+window.onload = function() {
+    updateTimes();
+};
+/* --نهاية تنسيقات صفحة حجز الموعد --*/
+=======
 
         const passwordField = document.getElementById('passwordField');
         const toggleIcon = document.getElementById('toggleIcon');
@@ -8,21 +69,7 @@
             this.textContent = type === 'password' ? '👁️' : '🙈';
         });
 
-// وظيفة البحث عن الأعراض
 
-function searchSymptoms() {
-    let input = document.getElementById('searchbar').value.toLowerCase().trim();
-    let cards = document.getElementsByClassName('symp-card');
-
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title') || "";
-        if (title.toLowerCase().includes(input)) {
-            cards[i].style.setProperty('display', 'flex', 'important'); 
-        } else {
-            cards[i].style.setProperty('display', 'none', 'important');
-        }
-    }
-}
 
 function showAppointments() {
     document.getElementById('patient-profile').style.display = 'none';
@@ -76,27 +123,23 @@ function updateTimes() {
     slots.forEach(s => {
         let opt = document.createElement("option");
         opt.value = s; opt.innerHTML = s;
+>>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
         timeSelect.appendChild(opt);
     });
 }
 
+
+=======
 // حفظ البيانات والانتقال لصفحة التأكيد
 function goToConfirmation() {
+>>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
     const clinic = document.getElementById('clinic-type').value;
     const date = document.getElementById('app-date').value;
     const time = document.getElementById('app-time').value;
 
-    if(!clinic || !date) {
-        alert("يرجى إكمال اختيار العيادة والتاريخ");
-        return;
-    }
 
-    localStorage.setItem('booking_clinic', clinic);
-    localStorage.setItem('booking_date', date);
-    localStorage.setItem('booking_time', time);
+=======
 
-    window.location.href = "confirmation.html";
-}
 
 // عرض البيانات في صفحة التأكيد عند تحميلها
 window.onload = function() {
@@ -155,3 +198,4 @@ function saveData() {
 // ==========================================
 // كود إعدادات الحساب - بشاير (نهاية)
 // ==========================================
+>>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867

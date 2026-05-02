@@ -297,10 +297,6 @@ button {
     font-size: 1.2rem;
 }
 
-
-
-
-
 /* الألوان الأساسية */
 :root {
     --royal-blue: #2980b9;
@@ -503,11 +499,8 @@ h1, h2 {
 /*appointments*/
 .body {
     background-color: #f4f7f6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0;
+
+
     font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
@@ -541,19 +534,15 @@ select, input[type="date"] {
     border-radius: 10px;
 }
 
-.period-selector {
-    display: flex;
-    justify-content: space-around;
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 10px;
-}
+.period-selector 
+
+  
+
+
 
 .btn-main {
-    background-color: #2980b9;
-    color: white;
-    border: none;
-    padding: 15px;
+
+
     width: 100%;
     border-radius: 12px;
     font-weight: bold;
@@ -644,6 +633,157 @@ h1 {
 }
 
 /* --- نهاية كود بشاير --- */
+
+
+
+
+/*--بداية كود ري --*/
+.booking-page-body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7;
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    min-height: 100vh;
+    margin: 0;
+}
+
+.booking-card-container {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    width: 380px; 
+    text-align: right; 
+    border-top: 6px solid #2980b9;
+    position: relative;
+    padding-top: 80px;
+    margin: auto; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.8s ease-out; }
+
+.booking-card-container label {
+    display: block;
+    margin: 15px 0 8px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.booking-card-container select, 
+.booking-card-container input[type="date"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ecf0f1;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 16px;
+    color: #2c3e50;
+    box-sizing: border-box;
+    outline: none;
+    text-align: right; 
+}
+
+.booking-card-container .period-selector {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.booking-card-container .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.booking-card-container .btn-main {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.booking-card-container .main-logo {
+    position: absolute; 
+    top: 15px;          
+    right: 15px;        
+    width: 130px;        
+    height: auto;
+}
+
+#confirmation-msg {
+    text-align: center !important;
+}
+
+.booking-card-container .success-box { 
+    background-color: #ebf5fb; 
+    padding: 20px; 
+    border-radius: 10px; 
+    color: #2980b9; 
+    margin-top: 15px; 
+    text-align: center;
+    line-height: 1.8;
+}
+
+.booking-card-container .success-icon {
+    font-size: 60px; 
+    display: block;
+    margin: 10px auto;
+}
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.6); 
+    display: flex; justify-content: center; align-items: center;
+    z-index: 9999;
+}
+.modal-box {
+    background: white; padding: 30px; border-radius: 12px;
+    text-align: center; width: 300px;
+}
+.booking-card-container h2 {
+    text-align: center !important;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.booking-card-container .subtitle {
+    text-align: center !important;
+    margin-bottom: 25px;
+    display: block;
+    width: 100%;
+}
+
+input[type="date"]::-webkit-datetime-edit-year-field,
+input[type="date"]::-webkit-datetime-edit-month-field,
+input[type="date"]::-webkit-datetime-edit-day-field,
+input[type="date"]::-webkit-datetime-edit-text {
+    color: transparent !important;
+}
+input[type="date"]:focus {
+    outline: none !important;
+    border: 2px solid #ecf0f1 !important; 
+}
+input[type="date"]:valid::-webkit-datetime-edit-year-field,
+input[type="date"]:valid::-webkit-datetime-edit-month-field,
+input[type="date"]:valid::-webkit-datetime-edit-day-field,
+input[type="date"]:valid::-webkit-datetime-edit-text {
+    color: #2c3e50 !important;
+}
+/*-- نهاية كود ري--*/
+
 
 
 /* -- كود لينا -- */
@@ -749,3 +889,4 @@ body {
 }
 
 /* -- نهاية كود لينا -- */
+
