@@ -634,6 +634,7 @@ h1 {
 }
 
 /* --- نهاية كود بشاير --- */
+<<<<<<< HEAD
 >>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
 
 
@@ -784,3 +785,114 @@ input[type="date"]:valid::-webkit-datetime-edit-text {
     color: #2c3e50 !important;
 }
 /*-- نهاية كود ري--*/
+=======
+
+
+/* -- كود لينا -- */
+
+
+/* إعدادات عامة للهيكل */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7; /* خلفية الصفحة اللي طلبتها الليدر */
+    color: #2c3e50; /* لون النصوص الأساسي */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    direction: rtl; /* اتجاه النصوص من اليمين لليسار */
+}
+
+/* تنسيق الهيدر واللوقو */
+header {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+    max-height: 150px; /* تصغير اللوقو عشان ما يطلع عملاق */
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* حاوية المحتوى الرئيسي */
+.content {
+    background-color: #ffffff;
+    margin-top: 40px;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #ecf0f1; /* حدود النوافذ */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+}
+
+/* العناوين */
+h1 {
+    color: #2980b9; /* الأزرق الملكي للعناوين */
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* النصوص الفرعية */
+.welcome p {
+    color: #7f8c8d; /* لون النصوص الفرعية */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* مجموعة الأزرار */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* تصميم الزر الأساسي */
+.btn {
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* زر تسجيل الدخول (أزرق ملكي) */
+.login {
+    background-color: #2980b9;
+    color: white;
+}
+
+.login:hover {
+    background-color: #1a5276; /* أزرق التفاعل عند مرور الماوس */
+}
+
+/* زر إنشاء حساب (خلفية نجاح هادئة) */
+.signup {
+    background-color: #ebf5fb;
+    color: #2980b9;
+    border: 1px solid #2980b9;
+}
+
+.signup:hover {
+    background-color: #d6eaf8;
+}
+
+/* زر من نحن */
+.about {
+    background-color: transparent;
+    color: #7f8c8d;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+/* -- نهاية كود لينا -- */
+>>>>>>> 36365e2c56e4052a5de6091df47ab78501b7d378
