@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedicalSign</title>
+
+<link rel="stylesheet" href="CSS/style.css"> 
+</head>
+
+<body>
+
+<div class="card">
+<img src="logo.png" class="logo">
+
+  <h1 style="color:var(--primary);">MedicalSign</h1>
+  <p style="color:var(--sub);">نظام تسجيل ودخول المستخدمين</p>
+
+  
+  <div class="tabs">
+    <button class="active" onclick="openTab('register')">تسجيل حساب</button>
+    <button onclick="openTab('login')">تسجيل دخول</button>
+  </div>
+
+  
+  <div id="register" class="tab-content active">
+
+    <form id="form">
+
+      <div class="field">
+        <label>الاسم</label>
+        <input type="text" name="name" required>
+      </div>
+
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" name="email" required>
+      </div>
+
+      <div class="field">
+        <label>كلمة السر</label>
+        <input type="password" name="password" minlength="8" required>
+      </div>
+
+      <div class="field">
+        <label>رقم الهاتف</label>
+        <input type="tel" name="phone" required>
+      </div>
+
+      <div class="field">
+        <label>تاريخ الميلاد</label>
+        <input type="date" required>
+      </div>
+
+      <div class="field">
+        <label>الجنس</label>
+        <select>
+          <option>ذكر</option>
+          <option>أنثى</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>الحالة الصحية</label>
+        <input type="text" placeholder="سكري / ضغط">
+      </div>
+
+      <div class="field">
+        <label>هل يستخدم سماعة؟</label>
+        <select>
+          <option>نعم</option>
+          <option>لا</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>موقع المريض</label>
+        <button type="button" onclick="getLocation()">📍 تحديد الموقع</button>
+
+        <iframe id="map" class="map"
+          src="https://maps.google.com/maps?q=24.7136,46.6753&z=15&output=embed">
+        </iframe>
+      </div>
+
+      <button type="submit">تسجيل</button>
+
+      <div class="success" id="successMsg">
+        ✅ تم حفظ البيانات بنجاح
+      </div>
+
+    </form>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="login" class="tab-content">
+
+    <form id="loginForm">
+
+      <div class="field">
+        <label>البريد الإلكتروني</label>
+        <input type="email" required>
+      </div>
+
+      <div class="field">
+        <label>كلمة السر</label>
+        <input type="password" required>
+      </div>
+
+      <button type="submit">دخول</button>
+
+      <div class="hint">
+        ليس لديك حساب؟ انتقل إلى تسجيل حساب
+      </div>
+
+    </form>
+  </div>
+
+</div>
+
+<script src="JAVA S/script.js"></script>
+
+</body>
+</html>
