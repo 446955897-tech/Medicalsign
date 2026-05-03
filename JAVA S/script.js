@@ -19,45 +19,39 @@ function updateTimes() {
     });
 }
 
-
 function confirmBooking() {
     const clinic = document.getElementById('clinic-type').value;
     const date = document.getElementById('app-date').value;
     const time = document.getElementById('app-time').value;
 
-    
     if (!clinic || !date || !time) {
         showAlert("يرجى اختيار العيادة، التاريخ، والوقت أولاً"); 
         return;
     }
 
-    
     document.getElementById('booking-form').style.display = 'none';
     document.getElementById('confirmation-msg').style.display = 'block';
-    
     
     document.getElementById('final-details').innerHTML = 
     `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
 }
 
-function resetForm() { 
-    location.reload(); 
-}
-
 function showAlert(msg) {
-    document.getElementById('alert-message').innerText = msg;
-    document.getElementById('custom-alert').style.display = 'flex';
+    const alertBox = document.getElementById('custom-alert');
+    if(alertBox) {
+        document.getElementById('alert-message').innerText = msg;
+        alertBox.style.display = 'flex';
+    }
 }
 
 function closeAlert() { 
     document.getElementById('custom-alert').style.display = 'none'; 
 }
-
-
 window.onload = function() {
     updateTimes();
 };
 /* --نهاية تنسيقات صفحة حجز الموعد --*/
+
 =======
 
         const passwordField = document.getElementById('passwordField');
