@@ -534,10 +534,14 @@ select, input[type="date"] {
     border-radius: 10px;
 }
 
-.period-selector 
-
-  
-
+.period-selector {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
 
 
 .btn-main {
@@ -893,4 +897,3 @@ h1 {
 }
 
 /* -- نهاية كود لينا -- */
-
