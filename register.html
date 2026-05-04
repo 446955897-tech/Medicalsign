@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -11,15 +12,13 @@
 
 <body>
 
-
-    
-<div class="card">
-  
 <a href="index.php">
         <img src="images/logo.png" alt="MedicalSign">
     </a>
 
-        <a href="index.html" class="back-home-link">🏠 العودة للرئيسية</a>
+    <div class="card">
+  <a href="index.html" class="back-home-link">🏠 العودة للرئيسية</a>
+
  
 
   <h1 style="color:var(--primary); margin: 5px 0;">MedicalSign</h1>
@@ -159,11 +158,55 @@
   </div>
 </div>
 
+<script>
+  
+// Tabs
+function openTab(tab){
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
 
-<script src="JAVA S/script.js"></script>
+  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+
+  if(tab === 'register'){
+    document.querySelectorAll('.tabs button')[0].classList.add('active');
+  } else {
+    document.querySelectorAll('.tabs button')[1].classList.add('active');
+  }
+}
+
+// GPS
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let lat = pos.coords.latitude;
+      let lon = pos.coords.longitude;
+      document.getElementById("map").src = "https://maps.google.com/maps?q=" + lat + "," + lon + "&z=15&output=embed";
+    });
+  } else {
+    alert("المتصفح لا يدعم GPS");
+  }
+}
+
+// Register submit
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("successMsg").style.display = "block";
+});
+
+// Doctor Register
+document.getElementById("doctorForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("doctorSuccessMsg").style.display = "block";
+});
+
+</script>
 
 </body>
 </html>
+
+
+
+
 
 
 
