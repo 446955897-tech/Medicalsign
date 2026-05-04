@@ -10,20 +10,21 @@ include '../database/db.php';
 </head>
 
 <body class="symptoms-body">
-<div class="logo-top-corner">
+
+<div class="logo-top-container">
     <a href="index.php">
-        <img src="../images/logo.png" alt="MedicalSign">
-    </a>
-</div>
+       <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
+</a>
+   </div>
 
 <div class="symp-container" style="margin-top: 50px;"> 
 
     <div class="header-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 15px; flex-wrap: wrap;">
         <h2 style="margin:0; font-size: 2.2rem; color: #1a508b;">استكشف الأعراض الطبية</h2>
         
-        <a href="index.php" class="symp-btn btn-back" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: #fff !important; border: 1px solid #ddd !important; color: #333 !important; border-radius: 50px;">
-            العودة للرئيسية⬅️ 
-        </a>
+       <a href="../patient/dashboard.html" class="symp-btn btn-back" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px;">
+    رجوع للوحة التحكم ⬅️
+</a>
     </div>
 
     <input type="search" id="searchbar" onkeyup="searchSymptoms()" placeholder="ابحث عن عرض…" style="margin-bottom: 40px; width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
@@ -86,21 +87,21 @@ include '../database/db.php';
     echo '</div>';
     ?>
 
- <script src=".../JAVA S/script.js"></script>
-<script>
-function searchSymptoms() {
-    let input = document.getElementById('searchbar').value.toLowerCase().trim();
-    let cards = document.getElementsByClassName('symp-card');
+ <script>
+    function searchSymptoms() {
+        let input = document.getElementById('searchbar').value.toLowerCase().trim();
+        let cards = document.getElementsByClassName('symp-card');
 
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title') || "";
-        if (title.toLowerCase().includes(input)) {
-            cards[i].style.setProperty('display', 'flex', 'important');
-        } else {
-            cards[i].style.setProperty('display', 'none', 'important');
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getAttribute('data-title') || "";
+            if (title.toLowerCase().includes(input)) {
+                cards[i].style.setProperty('display', 'flex', 'important'); 
+            } else {
+                cards[i].style.setProperty('display', 'none', 'important');
+            }
         }
     }
-}
-</script>
+ </script>
+
 </body>
 </html>

@@ -54,63 +54,10 @@ window.onload = function() {
 
 =======
 
-        const passwordField = document.getElementById('passwordField');
-        const toggleIcon = document.getElementById('toggleIcon');
-
-        toggleIcon.addEventListener('click', function () {
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
-
-// وظيفة البحث عن الأعراض
-
-function searchSymptoms() {
-    let input = document.getElementById('searchbar').value.toLowerCase().trim();
-    let cards = document.getElementsByClassName('symp-card');
-
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title') || "";
-        if (title.toLowerCase().includes(input)) {
-            cards[i].style.setProperty('display', 'flex', 'important'); 
-        } else {
-            cards[i].style.setProperty('display', 'none', 'important');
-        }
-    }
-}
-
-function showAppointments() {
-    document.getElementById('patient-profile').style.display = 'none';
-    document.getElementById('appointments-list').style.display = 'block';
-}
-
-function showProfile() {
-    document.getElementById('appointments-list').style.display = 'none';
-    document.getElementById('patient-profile').style.display = 'block';
-}
-function openEditModal() {
-    document.getElementById('editModal').style.display = 'block';
-}
-
-function closeEditModal() {
-    document.getElementById('editModal').style.display = 'none';
-}
-function closeEditModal() {
-    document.getElementById('editModal').style.display = 'none';
-}
-
-function saveChanges() {
-    let nameValue = document.getElementById('newName').value;
-    let phoneValue = document.getElementById('newPhone').value;
-    let emailValue = document.getElementById('newEmail').value;
+// عرض المواعيد أو الملف الشخصي ليان 
 
 
-    if(nameValue) document.getElementById('patientName').innerText = nameValue;
-    if(phoneValue) document.getElementById('patientPhone').innerText = phoneValue;
-    if(emailValue) document.getElementById('patientEmail').innerText = emailValue;
 
-    closeEditModal();
-}
 //مواعيد
 // تحديث المواعيد بناءً على الفترة
 function updateTimes() {
@@ -131,22 +78,21 @@ function updateTimes() {
     slots.forEach(s => {
         let opt = document.createElement("option");
         opt.value = s; opt.innerHTML = s;
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
+
         timeSelect.appendChild(opt);
     });
 }
 
 
-=======
+
 // حفظ البيانات والانتقال لصفحة التأكيد
 function goToConfirmation() {
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
+
     const clinic = document.getElementById('clinic-type').value;
     const date = document.getElementById('app-date').value;
     const time = document.getElementById('app-time').value;
 
 
-=======
 
 
 // عرض البيانات في صفحة التأكيد عند تحميلها
@@ -206,8 +152,104 @@ function saveData() {
 // ==========================================
 // كود إعدادات الحساب - بشاير (نهاية)
 // ==========================================
+<<<<<<< HEAD
+=======
+ HEAD
+>>>>>>> 18735d8fef74a4a006efb1509d8bf2862add2a0c
 
 
 
 
+<<<<<<< HEAD
+=======
+/*-- بداية كود بيان --*/
+function go(key){
+  localStorage.setItem("lang", lang);
+  window.location.href = "medical.html?case=" + key;
+}
+
+// قراءة اللغة المحفوظة
+let lang = localStorage.getItem("lang") || "ar";
+
+// عند فتح الصفحة
+window.onload = function(){
+  applyLang();
+};
+
+function toggleLang(){
+  lang = (lang === "ar") ? "en" : "ar";
+  localStorage.setItem("lang", lang);
+  applyLang();
+}
+
+function applyLang(){
+  let items = document.querySelectorAll("[data-ar]");
+  let btn = document.getElementById("langToggle");
+
+  if(lang === "en"){
+    items.forEach(el => el.innerText = el.dataset.en);
+
+    let title = document.getElementById("mainTitle");
+    if(title) title.innerText = "Medical Sentences";
+
+    if(btn) btn.innerText = "AR";
+    document.documentElement.dir = "ltr";
+
+  } else {
+    items.forEach(el => el.innerText = el.dataset.ar);
+
+    let title = document.getElementById("mainTitle");
+    if(title) title.innerText = "الجمل الطبية";
+
+    if(btn) btn.innerText = "EN";
+    document.documentElement.dir = "rtl";
+  }
+}
+/*-- نهاية كود بيان --*/
+
+/*-- بداية كود جوري --*/
+
+// Tabs
+function openTab(tab){
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.getElementById(tab).classList.add('active');
+
+  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+
+  if(tab === 'register'){
+    document.querySelectorAll('.tabs button')[0].classList.add('active');
+  } else {
+    document.querySelectorAll('.tabs button')[1].classList.add('active');
+  }
+}
+
+// GPS
+function getLocation(){
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(function(pos){
+      let lat = pos.coords.latitude;
+      let lon = pos.coords.longitude;
+
+      document.getElementById("map").src =
+        "https://maps.google.com/maps?q=" + lat + "," + lon + "&z=15&output=embed";
+    });
+  } else {
+    alert("المتصفح لا يدعم GPS");
+  }
+}
+
+// Register submit
+document.getElementById("form").addEventListener("submit", function(e){
+  e.preventDefault();
+  document.getElementById("successMsg").style.display = "block";
+});
+
+// Login submit
+document.getElementById("loginForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  alert("تم تسجيل الدخول بنجاح ✅");
+});
+
+/*-- نهاية كود جوري --*/
+>>>>>>> 18735d8fef74a4a006efb1509d8bf2862add2a0c
 

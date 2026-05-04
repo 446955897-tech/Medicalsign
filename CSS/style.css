@@ -1,119 +1,4 @@
-/* الإعدادات العامة للجسم */
-.login-body {
-    background: #eef2f7;
-    color: #333;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
 
-/* الشعار في الزاوية العلوية */
-.logo-top-corner {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-}
-
-.logo-top-corner img {
-    width: 120px;
-    height: auto;
-}
-
-/* حاوية تسجيل الدخول */
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-a {
-    display: block;
-    margin-top: 15px; /* لترك مسافة بسيطة بين الزر والرابط */
-    text-align: center; /* لتوسيط النص */
-}
-h2 {
-    color: #2980b9;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* تنسيق النموذج (Form) */
-form {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    width: 320px; /* عرض مناسب وشكل متناسق */
-}
-
-input, select {
-    display: block;
-    margin: 10px auto;
-    padding: 12px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    outline: none;
-    box-sizing: border-box;
-}
-
-input:focus {
-    border-color: #2980b9;
-}
-
-/* تنسيق حاوية كلمة المرور لضبط زر العين */
-.password-box {
-    position: relative; /* هذا يخلي العين "ترتكز" داخل المربع */
-    width: 100%;
-}
-
-.password-box input {
-    padding-left: 45px !important; /* يترك مساحة للعين عشان ما تغطي الكلام */
-}
-
-.toggle-password {
-    position: absolute;
-    left: 12px; /* مكانها من اليسار */
-    top: 50%; /* ينزلها لنص الارتفاع */
-    transform: translateY(-50%); /* يوزنها بالملي في المنتصف */
-    cursor: pointer;
-    z-index: 5;
-}
-
-/* الأزرار والروابط */
-button {
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    background: #2980b9;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-top: 15px;
-    display: block;
-    transition: background 0.3s ease;
-}
-button {
-    width: 100%;
-    display: block; /* يخليه يأخذ سطر كامل */
-    margin-top: 20px;
-}
-
-.register-link {
-    display: block; /* يخليه ينزل سطر جديد تحت الزر */
-    margin-top: 15px;
-    text-align: center;
-    color: #2980b9;
-    text-decoration: none;
-    font-size: 14px;
-}
 
 /* --- قسم تنسيق الأعراض الرئيسي --- */
 
@@ -297,6 +182,7 @@ button {
     font-size: 1.2rem;
 }
 
+
 /* الألوان الأساسية */
 :root {
     --royal-blue: #2980b9;
@@ -309,7 +195,7 @@ button {
     --shadow: rgba(41, 128, 185, 0.1);
 }
 
-body {
+.patient-body {
     background-color: var(--bg-body);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-main);
@@ -317,8 +203,8 @@ body {
     padding: 20px;
 }
 
-.container {
-    max-width: 800px;
+.patient-container {
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -337,7 +223,7 @@ h1, h2 {
 }
 
 /* تصميم البطاقات */
-.card {
+.patient-card {
     background: white;
     padding: 30px;
     border-radius: 20px; /* حسب الطلب */
@@ -360,7 +246,7 @@ h1, h2 {
     margin-top: 25px;
 }
 
-.btn {
+.patient-btn {
     flex: 1;
     padding: 15px;
     border: none;
@@ -450,6 +336,7 @@ h1, h2 {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
+    margin: 0 auto;
 }
 
 /* تنسيق الجدول نفسه */
@@ -497,14 +384,14 @@ h1, h2 {
 }
 
 /*appointments*/
-.body {
+.appointments-body {
     background-color: #f4f7f6;
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
-=======
+
+
     font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-.container {
+.appointments-container {
     background: #ffffff;
     width: 380px;
     padding: 30px;
@@ -534,16 +421,19 @@ select, input[type="date"] {
     border-radius: 10px;
 }
 
-.period-selector 
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
-  
+.period-selector {
+    display: flex;
+    justify-content: space-around;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
 
 
-
-=======
 .btn-main {
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
-=======
+
+
     width: 100%;
     border-radius: 12px;
     font-weight: bold;
@@ -634,7 +524,7 @@ h1 {
 }
 
 /* --- نهاية كود بشاير --- */
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
+
 
 
 
@@ -760,3 +650,414 @@ input[type="date"]:valid::-webkit-datetime-edit-text {
     color: #2c3e50 !important;
 }
 /*-- نهاية كود ري--*/
+
+
+
+/* -- كود لينا -- */
+
+
+/* إعدادات عامة للهيكل */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #eef2f7; /* خلفية الصفحة اللي طلبتها الليدر */
+    color: #2c3e50; /* لون النصوص الأساسي */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    direction: rtl; /* اتجاه النصوص من اليمين لليسار */
+}
+
+/* تنسيق الهيدر واللوقو */
+header {
+    background-color: #ffffff;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+    max-height: 150px; /* تصغير اللوقو عشان ما يطلع عملاق */
+    width: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* حاوية المحتوى الرئيسي */
+.content {
+    background-color: #ffffff;
+    margin-top: 40px;
+    padding: 40px;
+    border-radius: 15px;
+    border: 1px solid #ecf0f1; /* حدود النوافذ */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    text-align: center;
+    width: 90%;
+    max-width: 450px;
+}
+
+/* العناوين */
+h1 {
+    color: #2980b9; /* الأزرق الملكي للعناوين */
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+/* النصوص الفرعية */
+.welcome p {
+    color: #7f8c8d; /* لون النصوص الفرعية */
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* مجموعة الأزرار */
+.buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* تصميم الزر الأساسي */
+.btn {
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+/* زر تسجيل الدخول (أزرق ملكي) */
+.login {
+    background-color: #2980b9;
+    color: white;
+}
+
+.login:hover {
+    background-color: #1a5276; /* أزرق التفاعل عند مرور الماوس */
+}
+
+/* زر إنشاء حساب (خلفية نجاح هادئة) */
+.signup {
+    background-color: #ebf5fb;
+    color: #2980b9;
+    border: 1px solid #2980b9;
+}
+
+.signup:hover {
+    background-color: #d6eaf8;
+}
+
+/* زر من نحن */
+.about {
+    background-color: transparent;
+    color: #7f8c8d;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+/* -- نهاية كود لينا -- */
+
+
+
+/*-- بداية كود بيان --*/
+body {
+  background:#eef2f7;
+  font-family:Arial;
+  animation:fadeIn 0.6s;
+}
+
+.header {
+  text-align:center;
+  background:white;
+  padding:20px;
+  box-shadow:0 2px 10px rgba(41,128,185,0.1);
+  position:relative;
+}
+
+
+
+h1 { color:#2980b9; }
+
+.lang-btn {
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:#2980b9;
+  color:white;
+  border:none;
+  padding:8px 15px;
+  border-radius:10px;
+}
+
+.container {
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.card {
+  background:white;
+  margin:10px;
+  padding:20px;
+  border-radius:20px;
+  width:200px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(41,128,185,0.1);
+  transition:0.3s;
+}
+
+.card:hover { transform:translateY(-5px); }
+
+button {
+  background:#2980b9;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+}
+
+button:hover {
+  background:#1a5276;
+  transform:scale(1.05);
+}
+
+.details-card {
+  width:80%;
+  margin:50px auto;
+  background:white;
+  padding:20px;
+  border-radius:20px;
+}
+
+img { width:200px; border-radius:20px; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+/*-- نهاية كود بيان --*/
+
+
+/*كود جوري *
+:root{
+  --primary:#2980b9;
+  --hover:#1a5276;
+  --bg:#eef2f7;
+  --text:#2c3e50;
+  --border:#ecf0f1;
+  --sub:#7f8c8d;
+  --success:#ebf5fb;
+}
+
+body{
+  margin:0;
+  font-family: Arial;
+  background: var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+.card{
+  width: 430px;
+  background:#fff;
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 10px 30px rgba(41,128,185,0.1);
+  text-align:center;
+}
+
+/* Tabs */
+.tabs{
+  display:flex;
+  margin-bottom:15px;
+  border-radius:10px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+
+.tabs button{
+  flex:1;
+  padding:10px;
+  border:none;
+  cursor:pointer;
+  background:#e4e9f0 !important;
+  color:#2c3e50 !important;
+  font-weight:bold;
+  margin-top:0 !important;  
+  width:auto !important;       }
+
+.tabs button:hover{
+  background:#2980b9 !important;
+  color:#fff !important;
+  transform: translateY(-2px);
+}
+.tabs button.active{
+  background:#2980b9 !important;
+  color:#fff !important;
+}
+
+/* Fields */
+.field{
+  text-align:right;
+  margin:12px 0;
+}
+
+label{
+  font-size:14px;
+  color:var(--text);
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  outline:none;
+}
+
+/* Buttons */
+button{
+  width:100%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:10px;
+  background:var(--primary);
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  background:var(--hover);
+}
+
+/* Map */
+.map{
+  width:100%;
+  height:180px;
+  border-radius:10px;
+  margin-top:10px;
+  border:1px solid var(--border);
+}
+
+/* Success */
+.success{
+  background:var(--success);
+  padding:10px;
+  border-radius:10px;
+  margin-top:10px;
+  display:none;
+}
+
+/* Hide sections */
+.tab-content{
+  display:none;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+.hint{
+  font-size:14px;
+  color:var(--sub);
+  margin-top:10px;
+}
+
+.logo{
+  width:200px;        
+  height:200px;
+  object-fit:contain;
+  margin:0 auto 8px auto;
+  display:block;
+}
+/*end كود جوري */
+
+.main-card {
+    width: 380px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* ظل خفيف جداً للترتيب */
+    overflow: hidden;
+    direction: rtl;
+}
+
+.tabs-header {
+    display: flex;
+    background: #f8f9fa; /* لون رمادي فاتح للخلفية */
+}
+
+.tab-link {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    background: #f8f9fa;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+/* لون التفعيل بالأزرق الخاص بك */
+.tab-link.active {
+    background: #fff;
+    color: #4a90e2; /* درجتك الزرقاء */
+    border-bottom: 3px solid #4a90e2;
+    font-weight: bold;
+}
+
+.tab-pane {
+    display: none;
+    padding: 30px;
+}
+
+.tab-pane.active { display: block; }
+
+.input-box { margin-bottom: 15px; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dce1e6; /* لون حدود رمادي هادئ */
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* زر تسجيل الدخول بنفس لونك في الصورة الأولى */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #5b9bd5; /* نفس لون الزر في صورتك */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.link-text {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #5b9bd5;
+    text-decoration: underline;
+    font-size: 14px;
+}

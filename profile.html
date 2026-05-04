@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-
-=======
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <title>إعدادات الحساب</title>
@@ -16,7 +13,7 @@
         <img src="images/logo.png" width="120">
     </div>
 
-    <h1>إعدادات الحساب</h1>
+    <h1 style="text-align: center;">إعدادات الحساب</h1>
 
     <div class="account-settings">
         <div class="box-description">
@@ -30,10 +27,16 @@
 
         <div class="setting-item">
             <label>تأكيد كلمة المرور</label>
-            <input type="password" id="confirmPassword" placeholder="يرجى إعادة إدخال كلمة المرور">
+            <input type="password" id="confirmPassword" placeholder="يرجى إعادة إدخل كلمة المرور">
         </div>
 
         <button class="btn-save" onclick="saveData()">حفظ التعديلات</button>
+
+        <div style="margin-top: 20px; text-align: center;">
+            <a href="patient/dashboard.html" style="color: #2980b9; text-decoration: none; font-weight: bold; font-size: 14px;">
+                العودة إلى لوحة التحكم
+            </a>
+        </div>
 
         <div class="success-message" id="successMsg">
             تم تحديث بيانات الحساب بنجاح
@@ -44,4 +47,3 @@
 
 </body>
 </html>
->>>>>>> 3fc498d9a4eb7c3244740612b68ad89f0d4d0867
