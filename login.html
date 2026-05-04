@@ -6,47 +6,61 @@
     <link rel="stylesheet" href="CSS/style.css"> 
 </head>
 <body>
-    <div class="split-container">
-        <!-- جهة الدكتور (يمين) -->
-        <div class="split-side doctor-side">
-            <div class="content-box">
-                <i class="fas fa-user-md icon"></i>
-                <h2>دخول الدكتور</h2>
-                <input type="email" placeholder="البريد الإلكتروني للدكتور">
-                <input type="password" placeholder="كلمة المرور">
-                <!-- هنا الزر باسم خاص عشان ما يلخبط -->
-                <button class="login-btn doctor-btn">تسجيل دخول</button> 
-                <div class="links">
-                    <a href="#">إنشاء حساب دكتور</a>
-                </div>
-            </div>
-        </div>
+     <a href="index.php">
+        <img src="images/logo.png" alt="MedicalSign">
+    </a>
 
-        <!-- جهة المريض (يسار) -->
-        <div class="split-side patient-side">
-            <div class="content-box">
-                <i class="fas fa-user-injured icon"></i>
-                <h2>دخول المريض</h2>
-                <input type="email" placeholder="البريد الإلكتروني للمريض">
-                <input type="password" placeholder="كلمة المرور">
-                <!-- هنا الزر باسم خاص عشان ما يلخبط -->
-                <button class="login-btn patient-btn">تسجيل دخول</button>
-                <div class="links">
-                    <a href="#">إنشاء حساب مريض</a>
-                </div>
-            </div>
-        </div>
+   <div class="main-card">
+    <!-- التبويبات بنفس مسمياتك -->
+    <div class="tabs-header">
+        <button class="tab-link active" onclick="toggleTab(event, 'doc-login')">دخول الدكتور</button>
+        <button class="tab-link" onclick="toggleTab(event, 'pat-login')">دخول المريض</button>
     </div>
 
-    <script>
-        const passwordField = document.getElementById('passwordField');
-        const toggleIcon = document.getElementById('toggleIcon');
+    <!-- محتوى الدكتور -->
+    <div id="doc-login" class="tab-pane active">
+        <div class="input-box">
+            <input type="email" placeholder="البريد الإلكتروني للدكتور">
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="كلمة المرور">
+        </div>
+       <a href="doctor/doctor_dashboard.php" class="btn-primary" style="text-align: center; display: block; text-decoration: none;">تسجيل دخول</a>
+        <a href="register.html" class="link-text">إنشاء حساب دكتور</a>
+    </div>
 
-        toggleIcon.addEventListener('click', function () {
-            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordField.setAttribute('type', type);
-            this.textContent = type === 'password' ? '👁️' : '🙈';
-        });
+    <!-- محتوى المريض -->
+    <div id="pat-login" class="tab-pane">
+        <div class="input-box">
+            <input type="email" placeholder="البريد الإلكتروني للمريض">
+        </div>
+        <div class="input-box">
+            <input type="password" placeholder="كلمة المرور">
+        </div>
+        <a href="patient/dashboard.html" class="btn-primary" style="text-align: center; display: block; text-decoration: none;">تسجيل دخول</a>
+        <a href="register.html" class="link-text">إنشاء حساب مريض</a>
+    </div>
+</div>
+
+
+    <script>
+     
+        function toggleTab(evt, tabId) {
+    let i, tabContent, tabLinks;
+    
+    tabContent = document.getElementsByClassName("tab-pane");
+    for (i = 0; i < tabContent.length; i++) {
+        tabContent[i].classList.remove("active");
+    }
+
+    tabLinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tabLinks.length; i++) {
+        tabLinks[i].classList.remove("active");
+    }
+
+    document.getElementById(tabId).classList.add("active");
+    evt.currentTarget.classList.add("active");
+}
     </script>
 </body>
 </html>
