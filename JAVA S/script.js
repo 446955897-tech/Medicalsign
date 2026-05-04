@@ -52,7 +52,6 @@ window.onload = function() {
 };
 /* --نهاية تنسيقات صفحة حجز الموعد --*/
 
-=======
 
 // عرض المواعيد أو الملف الشخصي ليان 
 
@@ -152,16 +151,12 @@ function saveData() {
 // ==========================================
 // كود إعدادات الحساب - بشاير (نهاية)
 // ==========================================
-<<<<<<< HEAD
-=======
- HEAD
->>>>>>> 18735d8fef74a4a006efb1509d8bf2862add2a0c
 
 
 
 
-<<<<<<< HEAD
-=======
+
+
 /*-- بداية كود بيان --*/
 function go(key){
   localStorage.setItem("lang", lang);
@@ -244,12 +239,12 @@ document.getElementById("form").addEventListener("submit", function(e){
   document.getElementById("successMsg").style.display = "block";
 });
 
-// Login submit
-document.getElementById("loginForm").addEventListener("submit", function(e){
+// Doctor Register
+document.getElementById("doctorForm").addEventListener("submit", function(e){
   e.preventDefault();
-  alert("تم تسجيل الدخول بنجاح ✅");
+  document.querySelector("#login .success").style.display = "block";
 });
 
 /*-- نهاية كود جوري --*/
->>>>>>> 18735d8fef74a4a006efb1509d8bf2862add2a0c
+
 

@@ -5,24 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MedicalSign</title>
 
-<link rel="stylesheet" href="CSS/style.css"> 
+<link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body>
 
 <div class="card">
- <a href="index.php">
+
+     <a href="index.php">
         <img src="images/logo.png" alt="MedicalSign">
     </a>
+
 
   <h1 style="color:var(--primary);">MedicalSign</h1>
   <p style="color:var(--sub);">نظام تسجيل ودخول المستخدمين</p>
 
   
   <div class="tabs">
-    <button class="active" onclick="openTab('register')">تسجيل حساب</button>
-    <button onclick="openTab('login')">تسجيل دخول</button>
-  </div>
+    <button type="button" onclick="openTab('register')">إنشاء حساب مريض</button>
+    <button type="button" onclick="openTab('doctor-register')">إنشاء حساب دكتور</button>
+</div>
 
   
   <div id="register" class="tab-content active">
@@ -94,29 +96,69 @@
   </div>
 
   <!-- LOGIN -->
-  <div id="login" class="tab-content">
+  <div id="doctor-register" class="tab-content">
 
-    <form id="loginForm">
+    <form id="doctorForm">
 
-      <div class="field">
-        <label>البريد الإلكتروني</label>
-        <input type="email" required>
+    <div class="field">
+      <label>الاسم الكامل</label>
+      <input type="text" required>
+    </div>
+
+    <div class="field">
+      <label>البريد الإلكتروني</label>
+      <input type="email" required>
+    </div>
+
+    <div class="field">
+      <label>رقم الجوال</label>
+      <div class="phone-group">
+        <select required>
+          <option value="+966">🇸🇦 +966</option>
+          <option value="+20">🇪🇬 +20</option>
+          <option value="+971">🇦🇪 +971</option>
+        </select>
+        <input type="tel" placeholder="5XXXXXXXX" required>
       </div>
+    </div>
 
-      <div class="field">
-        <label>كلمة السر</label>
-        <input type="password" required>
-      </div>
+    <div class="field">
+      <label>كلمة المرور</label>
+      <input type="password" minlength="8" required>
+    </div>
 
-      <button type="submit">دخول</button>
+    <div class="field">
+      <label>التخصص العام</label>
+      <select required>
+        <option>طب عام</option>
+        <option>باطنية</option>
+        <option>جراحة</option>
+        <option>أطفال</option>
+        <option>نساء وولادة</option>
+        <option>عظام</option>
+        <option>جلدية</option>
+        <option>أخرى</option>
+      </select>
+    </div>
 
-      <div class="hint">
-        ليس لديك حساب؟ انتقل إلى تسجيل حساب
-      </div>
+    <div class="field">
+      <label>الدرجة العلمية</label>
+      <select required>
+        <option>بكالوريوس</option>
+        <option>ماجستير</option>
+        <option>دكتوراه</option>
+        <option>بورد تخصصي</option>
+        <option>استشاري</option>
+      </select>
+    </div>
 
-    </form>
-  </div>
+    <button type="submit">إنشاء حساب الدكتور</button>
 
+    <div class="success" id="successMsg">
+      ✅ تم إنشاء حساب الدكتور بنجاح
+    </div>
+
+  </form>
 </div>
 
 <script src="JAVA S/script.js"></script>
