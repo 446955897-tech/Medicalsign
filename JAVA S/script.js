@@ -224,9 +224,7 @@ function getLocation(){
     navigator.geolocation.getCurrentPosition(function(pos){
       let lat = pos.coords.latitude;
       let lon = pos.coords.longitude;
-
-      document.getElementById("map").src =
-        "https://maps.google.com/maps?q=" + lat + "," + lon + "&z=15&output=embed";
+      document.getElementById("map").src = "https://maps.google.com/maps?q=" + lat + "," + lon + "&z=15&output=embed";
     });
   } else {
     alert("المتصفح لا يدعم GPS");
@@ -242,7 +240,7 @@ document.getElementById("form").addEventListener("submit", function(e){
 // Doctor Register
 document.getElementById("doctorForm").addEventListener("submit", function(e){
   e.preventDefault();
-  document.querySelector("#login .success").style.display = "block";
+  document.getElementById("doctorSuccessMsg").style.display = "block";
 });
 
 /*-- نهاية كود جوري --*/

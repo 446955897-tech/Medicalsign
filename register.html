@@ -5,28 +5,33 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MedicalSign</title>
 
+
 <link rel="stylesheet" href="CSS/style.css">
 </head>
 
 <body>
 
-<div class="card">
 
-     <a href="index.php">
+    
+<div class="card">
+  
+<a href="index.php">
         <img src="images/logo.png" alt="MedicalSign">
     </a>
 
+        <a href="index.html" class="back-home-link">🏠 العودة للرئيسية</a>
+ 
 
-  <h1 style="color:var(--primary);">MedicalSign</h1>
-  <p style="color:var(--sub);">نظام تسجيل ودخول المستخدمين</p>
+  <h1 style="color:var(--primary); margin: 5px 0;">MedicalSign</h1>
+  <p style="color:var(--sub); margin-bottom: 20px;">نظام تسجيل ودخول المستخدمين</p>
 
-  
+
   <div class="tabs">
-    <button type="button" onclick="openTab('register')">إنشاء حساب مريض</button>
-    <button type="button" onclick="openTab('doctor-register')">إنشاء حساب دكتور</button>
-</div>
+    <button class="active" onclick="openTab('register')">تسجيل حساب المرضى</button>
+    <button onclick="openTab('login')"> إنشاء حساب الدكتور </button> 
+  </div>
 
-  
+  <!-- REGISTER -->
   <div id="register" class="tab-content active">
 
     <form id="form">
@@ -35,7 +40,7 @@
         <label>الاسم</label>
         <input type="text" name="name" required>
       </div>
-
+      
       <div class="field">
         <label>البريد الإلكتروني</label>
         <input type="email" name="email" required>
@@ -80,88 +85,85 @@
       <div class="field">
         <label>موقع المريض</label>
         <button type="button" onclick="getLocation()">📍 تحديد الموقع</button>
-
-        <iframe id="map" class="map"
-          src="https://maps.google.com/maps?q=24.7136,46.6753&z=15&output=embed">
-        </iframe>
+        <iframe id="map" class="map" src="https://maps.google.com/maps?q=24.7136,46.6753&z=15&output=embed"></iframe>
       </div>
 
       <button type="submit">تسجيل</button>
+      <div class="success" id="successMsg">✅ تم حفظ البيانات بنجاح</div>
 
-      <div class="success" id="successMsg">
-        ✅ تم حفظ البيانات بنجاح
+      <div class="login-link">
+          هل لديك حساب بالفعل؟ <a href="login.html">سجل دخول</a>
       </div>
 
     </form>
   </div>
 
-  <!-- LOGIN -->
-  <div id="doctor-register" class="tab-content">
-
+  <!-- DOCTOR REGISTER -->
+  <div id="login" class="tab-content">
     <form id="doctorForm">
+        <div class="field">
+          <label>الاسم الكامل</label>
+          <input type="text" required>
+        </div>
+        <div class="field">
+          <label>البريد الإلكتروني</label>
+          <input type="email" required>
+        </div>
+        <div class="field">
+          <label>رقم الجوال</label>
+          <div class="phone-group">
+            <select required>
+              <option value="+966">🇸🇦 +966</option>
+              <option value="+20">🇪🇬 +20</option>
+              <option value="+971">🇦🇪 +971</option>
+            </select>
+            <input type="tel" placeholder="5XXXXXXXX" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>كلمة المرور</label>
+          <input type="password" minlength="8" required>
+        </div>
+        <div class="field">
+          <label>التخصص العام</label>
+          <select required>
+            <option>طب عام</option>
+            <option>باطنية</option>
+            <option>جراحة</option>
+            <option>أطفال</option>
+            <option>نساء وولادة</option>
+            <option>عظام</option>
+            <option>جلدية</option>
+            <option>أخرى</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>الدرجة العلمية</label>
+          <select required>
+            <option>بكالوريوس</option>
+            <option>ماجستير</option>
+            <option>دكتوراه</option>
+            <option>بورد تخصصي</option>
+            <option>استشاري</option>
+          </select>
+        </div>
+        <button type="submit">إنشاء حساب الدكتور</button>
+        <div class="success" id="doctorSuccessMsg">✅ تم إنشاء حساب الدكتور بنجاح</div>
 
-    <div class="field">
-      <label>الاسم الكامل</label>
-      <input type="text" required>
-    </div>
-
-    <div class="field">
-      <label>البريد الإلكتروني</label>
-      <input type="email" required>
-    </div>
-
-    <div class="field">
-      <label>رقم الجوال</label>
-      <div class="phone-group">
-        <select required>
-          <option value="+966">🇸🇦 +966</option>
-          <option value="+20">🇪🇬 +20</option>
-          <option value="+971">🇦🇪 +971</option>
-        </select>
-        <input type="tel" placeholder="5XXXXXXXX" required>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>كلمة المرور</label>
-      <input type="password" minlength="8" required>
-    </div>
-
-    <div class="field">
-      <label>التخصص العام</label>
-      <select required>
-        <option>طب عام</option>
-        <option>باطنية</option>
-        <option>جراحة</option>
-        <option>أطفال</option>
-        <option>نساء وولادة</option>
-        <option>عظام</option>
-        <option>جلدية</option>
-        <option>أخرى</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>الدرجة العلمية</label>
-      <select required>
-        <option>بكالوريوس</option>
-        <option>ماجستير</option>
-        <option>دكتوراه</option>
-        <option>بورد تخصصي</option>
-        <option>استشاري</option>
-      </select>
-    </div>
-
-    <button type="submit">إنشاء حساب الدكتور</button>
-
-    <div class="success" id="successMsg">
-      ✅ تم إنشاء حساب الدكتور بنجاح
-    </div>
-
-  </form>
+        <div class="login-link">
+            هل لديك حساب دكتور؟ <a href="login-doctor.html">سجل دخول</a>
+            
+        </div>
+      
+    </form>
+  </div>
 </div>
+
 
 <script src="JAVA S/script.js"></script>
 
 </body>
 </html>
+
+
+

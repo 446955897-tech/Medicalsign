@@ -846,8 +846,7 @@ img { width:200px; border-radius:20px; }
 }
 /*-- نهاية كود بيان --*/
 
-
-/*كود جوري */
+/* كود جوري */
 :root{
   --primary:#2980b9;
   --hover:#1a5276;
@@ -875,9 +874,36 @@ body{
   padding:25px;
   box-shadow:0 10px 30px rgba(41,128,185,0.1);
   text-align:center;
+  position: relative;
 }
 
-/* Tabs */
+.back-home-link {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: var(--sub);
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+.back-home-link:hover {
+    color: var(--primary);
+}
+
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--sub);
+}
+.login-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 .tabs{
   display:flex;
   margin-bottom:15px;
@@ -895,7 +921,8 @@ body{
   color:#2c3e50 !important;
   font-weight:bold;
   margin-top:0 !important;  
-  width:auto !important;       }
+  width:auto !important;
+}
 
 .tabs button:hover{
   background:#2980b9 !important;
@@ -907,7 +934,6 @@ body{
   color:#fff !important;
 }
 
-/* Fields */
 .field{
   text-align:right;
   margin:12px 0;
@@ -927,7 +953,6 @@ input, select{
   outline:none;
 }
 
-/* Buttons */
 button{
   width:100%;
   padding:12px;
@@ -945,7 +970,6 @@ button:hover{
   background:var(--hover);
 }
 
-/* Map */
 .map{
   width:100%;
   height:180px;
@@ -954,7 +978,6 @@ button:hover{
   border:1px solid var(--border);
 }
 
-/* Success */
 .success{
   background:var(--success);
   padding:10px;
@@ -963,7 +986,6 @@ button:hover{
   display:none;
 }
 
-/* Hide sections */
 .tab-content{
   display:none;
 }
@@ -979,12 +1001,18 @@ button:hover{
 }
 
 .logo{
-  width:200px;        
-  height:200px;
+  width:150px;        
+  height:150px;
   object-fit:contain;
   margin:0 auto 8px auto;
   display:block;
 }
+
+.phone-group {
+    display: flex;
+    gap: 5px;
+}
+.phone-group select { width: 35%; }
 /*end كود جوري */
 
 .main-card {
