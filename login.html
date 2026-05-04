@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="CSS/style.css"> 
+</head>
+<body>
+    <div class="split-container">
+        <!-- جهة الدكتور (يمين) -->
+        <div class="split-side doctor-side">
+            <div class="content-box">
+                <i class="fas fa-user-md icon"></i>
+                <h2>دخول الدكتور</h2>
+                <input type="email" placeholder="البريد الإلكتروني للدكتور">
+                <input type="password" placeholder="كلمة المرور">
+                <!-- هنا الزر باسم خاص عشان ما يلخبط -->
+                <button class="login-btn doctor-btn">تسجيل دخول</button> 
+                <div class="links">
+                    <a href="#">إنشاء حساب دكتور</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- جهة المريض (يسار) -->
+        <div class="split-side patient-side">
+            <div class="content-box">
+                <i class="fas fa-user-injured icon"></i>
+                <h2>دخول المريض</h2>
+                <input type="email" placeholder="البريد الإلكتروني للمريض">
+                <input type="password" placeholder="كلمة المرور">
+                <!-- هنا الزر باسم خاص عشان ما يلخبط -->
+                <button class="login-btn patient-btn">تسجيل دخول</button>
+                <div class="links">
+                    <a href="#">إنشاء حساب مريض</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const passwordField = document.getElementById('passwordField');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        toggleIcon.addEventListener('click', function () {
+            const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordField.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+    </script>
+</body>
+</html>
