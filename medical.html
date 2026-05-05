@@ -194,7 +194,13 @@
         function goBack() { 
             window.location.href = "patient_dashboard.html"; 
         }
+}
 
+        function toggleLang(){
+            currentLang = (currentLang === "ar") ? "en" : "ar";
+            localStorage.setItem("lang", currentLang);
+            render();
+        }
         }
 
         window.onload = render;
