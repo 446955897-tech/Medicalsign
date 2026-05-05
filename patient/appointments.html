@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedicalSign - مواعيدي</title>
-<link rel="stylesheet" href="../CSS/style.css">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body class="fade-in">
-    <div class="container">
-        <div class="header">
-            <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
-            <h2>قائمة المواعيد المحجوزة</h2>
-        </div>
+<body class="patient-body fade-in">
+    <div class="patient-container">
+        <div class="patient-card table-card">
+            <div class="header">
+                <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
+                <h2>قائمة المواعيد المحجوزة</h2>
+            </div>
 
-        <div class="card table-card">
             <table class="appointments-table">
                 <thead>
                     <tr>
@@ -32,7 +32,10 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn secondary-btn" onclick="location.href='dashboard.html'">العودة للملف الشخصي</button>
+            
+            <button class="btn secondary-btn" onclick="location.href='dashboard.html'" style="margin-top: 20px;">
+                العودة للملف الشخصي
+            </button>
         </div>
     </div>
 </body>

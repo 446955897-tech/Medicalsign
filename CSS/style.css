@@ -1,121 +1,4 @@
-/* الإعدادات العامة للجسم */
-.login-body {
-    background: #eef2f7;
-    color: #333;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
 
-/* الشعار في الزاوية العلوية */
-.logo-top-corner {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 100;
-}
-
-.logo-top-corner img {
-    width: 120px;
-    height: auto;
-}
-
-/* حاوية تسجيل الدخول */
-
-
-.login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-a {
-    display: block;
-    margin-top: 15px; /* لترك مسافة بسيطة بين الزر والرابط */
-    text-align: center; /* لتوسيط النص */
-}
-h2 {
-    color: #2980b9;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-/* تنسيق النموذج (Form) */
-form {
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    width: 320px; /* عرض مناسب وشكل متناسق */
-}
-
-input, select {
-    display: block;
-    margin: 10px auto;
-    padding: 12px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    outline: none;
-    box-sizing: border-box;
-}
-
-input:focus {
-    border-color: #2980b9;
-}
-
-/* تنسيق حاوية كلمة المرور لضبط زر العين */
-.password-box {
-    position: relative; /* هذا يخلي العين "ترتكز" داخل المربع */
-    width: 100%;
-}
-
-.password-box input {
-    padding-left: 45px !important; /* يترك مساحة للعين عشان ما تغطي الكلام */
-}
-
-.toggle-password {
-    position: absolute;
-    left: 12px; /* مكانها من اليسار */
-    top: 50%; /* ينزلها لنص الارتفاع */
-    transform: translateY(-50%); /* يوزنها بالملي في المنتصف */
-    cursor: pointer;
-    z-index: 5;
-}
-
-/* الأزرار والروابط */
-button {
-    width: 100%;
-    padding: 12px;
-    cursor: pointer;
-    background: #2980b9;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    margin-top: 15px;
-    display: block;
-    transition: background 0.3s ease;
-}
-button {
-    width: 100%;
-    display: block; /* يخليه يأخذ سطر كامل */
-    margin-top: 20px;
-}
-
-.register-link {
-    display: block; /* يخليه ينزل سطر جديد تحت الزر */
-    margin-top: 15px;
-    text-align: center;
-    color: #2980b9;
-    text-decoration: none;
-    font-size: 14px;
-}
 
 /* --- قسم تنسيق الأعراض الرئيسي --- */
 
@@ -299,6 +182,7 @@ button {
     font-size: 1.2rem;
 }
 
+
 /* الألوان الأساسية */
 :root {
     --royal-blue: #2980b9;
@@ -311,7 +195,7 @@ button {
     --shadow: rgba(41, 128, 185, 0.1);
 }
 
-body {
+.patient-body {
     background-color: var(--bg-body);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text-main);
@@ -319,8 +203,8 @@ body {
     padding: 20px;
 }
 
-.container {
-    max-width: 800px;
+.patient-container {
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -339,7 +223,7 @@ h1, h2 {
 }
 
 /* تصميم البطاقات */
-.card {
+.patient-card {
     background: white;
     padding: 30px;
     border-radius: 20px; /* حسب الطلب */
@@ -362,7 +246,7 @@ h1, h2 {
     margin-top: 25px;
 }
 
-.btn {
+.patient-btn {
     flex: 1;
     padding: 15px;
     border: none;
@@ -452,6 +336,7 @@ h1, h2 {
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-top: 20px;
+    margin: 0 auto;
 }
 
 /* تنسيق الجدول نفسه */
@@ -499,14 +384,14 @@ h1, h2 {
 }
 
 /*appointments*/
-.body {
+.appointments-body {
     background-color: #f4f7f6;
 
 
     font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
-.container {
+.appointments-container {
     background: #ffffff;
     width: 380px;
     padding: 30px;
@@ -729,10 +614,6 @@ h1 {
     height: auto;
 }
 
-#confirmation-msg {
-    text-align: center !important;
-}
-
 .booking-card-container .success-box { 
     background-color: #ebf5fb; 
     padding: 20px; 
@@ -743,11 +624,6 @@ h1 {
     line-height: 1.8;
 }
 
-.booking-card-container .success-icon {
-    font-size: 60px; 
-    display: block;
-    margin: 10px auto;
-}
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -755,21 +631,10 @@ h1 {
     display: flex; justify-content: center; align-items: center;
     z-index: 9999;
 }
+
 .modal-box {
     background: white; padding: 30px; border-radius: 12px;
     text-align: center; width: 300px;
-}
-.booking-card-container h2 {
-    text-align: center !important;
-    margin-bottom: 5px;
-    width: 100%;
-}
-
-.booking-card-container .subtitle {
-    text-align: center !important;
-    margin-bottom: 25px;
-    display: block;
-    width: 100%;
 }
 
 input[type="date"]::-webkit-datetime-edit-year-field,
@@ -777,10 +642,6 @@ input[type="date"]::-webkit-datetime-edit-month-field,
 input[type="date"]::-webkit-datetime-edit-day-field,
 input[type="date"]::-webkit-datetime-edit-text {
     color: transparent !important;
-}
-input[type="date"]:focus {
-    outline: none !important;
-    border: 2px solid #ecf0f1 !important; 
 }
 input[type="date"]:valid::-webkit-datetime-edit-year-field,
 input[type="date"]:valid::-webkit-datetime-edit-month-field,
@@ -981,8 +842,7 @@ img { width:200px; border-radius:20px; }
 }
 /*-- نهاية كود بيان --*/
 
-
-/*كود جوري *
+/* كود جوري */
 :root{
   --primary:#2980b9;
   --hover:#1a5276;
@@ -1010,9 +870,36 @@ body{
   padding:25px;
   box-shadow:0 10px 30px rgba(41,128,185,0.1);
   text-align:center;
+  position: relative;
 }
 
-/* Tabs */
+.back-home-link {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: var(--sub);
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+.back-home-link:hover {
+    color: var(--primary);
+}
+
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--sub);
+}
+.login-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 .tabs{
   display:flex;
   margin-bottom:15px;
@@ -1030,7 +917,8 @@ body{
   color:#2c3e50 !important;
   font-weight:bold;
   margin-top:0 !important;  
-  width:auto !important;       }
+  width:auto !important;
+}
 
 .tabs button:hover{
   background:#2980b9 !important;
@@ -1042,7 +930,6 @@ body{
   color:#fff !important;
 }
 
-/* Fields */
 .field{
   text-align:right;
   margin:12px 0;
@@ -1062,7 +949,6 @@ input, select{
   outline:none;
 }
 
-/* Buttons */
 button{
   width:100%;
   padding:12px;
@@ -1080,7 +966,6 @@ button:hover{
   background:var(--hover);
 }
 
-/* Map */
 .map{
   width:100%;
   height:180px;
@@ -1089,7 +974,6 @@ button:hover{
   border:1px solid var(--border);
 }
 
-/* Success */
 .success{
   background:var(--success);
   padding:10px;
@@ -1098,7 +982,6 @@ button:hover{
   display:none;
 }
 
-/* Hide sections */
 .tab-content{
   display:none;
 }
@@ -1114,10 +997,91 @@ button:hover{
 }
 
 .logo{
-  width:200px;        
-  height:200px;
+  width:150px;        
+  height:150px;
   object-fit:contain;
   margin:0 auto 8px auto;
   display:block;
 }
+
+.phone-group {
+    display: flex;
+    gap: 5px;
+}
+.phone-group select { width: 35%; }
 /*end كود جوري */
+
+.main-card {
+    width: 380px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08); /* ظل خفيف جداً للترتيب */
+    overflow: hidden;
+    direction: rtl;
+}
+
+.tabs-header {
+    display: flex;
+    background: #f8f9fa; /* لون رمادي فاتح للخلفية */
+}
+
+.tab-link {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #555;
+    background: #f8f9fa;
+    border-bottom: 2px solid transparent;
+    transition: 0.3s;
+}
+
+/* لون التفعيل بالأزرق الخاص بك */
+.tab-link.active {
+    background: #fff;
+    color: #4a90e2; /* درجتك الزرقاء */
+    border-bottom: 3px solid #4a90e2;
+    font-weight: bold;
+}
+
+.tab-pane {
+    display: none;
+    padding: 30px;
+}
+
+.tab-pane.active { display: block; }
+
+.input-box { margin-bottom: 15px; }
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dce1e6; /* لون حدود رمادي هادئ */
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* زر تسجيل الدخول بنفس لونك في الصورة الأولى */
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    background-color: #5b9bd5; /* نفس لون الزر في صورتك */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.link-text {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #5b9bd5;
+    text-decoration: underline;
+    font-size: 14px;
+}

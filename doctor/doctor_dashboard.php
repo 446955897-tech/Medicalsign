@@ -195,7 +195,9 @@
     <div class="container">
 
         <div class="top-brand">
-            <img src="logo.png" alt="Medical Sign Logo">
+            <a href="index.php">
+        <img src="../images/logo.png" alt="MedicalSign">
+    </a>
             <h1>Medical Sign</h1>
             <p>Doctor Appointments</p>
         </div>

@@ -19,45 +19,39 @@ function updateTimes() {
     });
 }
 
-
 function confirmBooking() {
     const clinic = document.getElementById('clinic-type').value;
     const date = document.getElementById('app-date').value;
     const time = document.getElementById('app-time').value;
 
-    
     if (!clinic || !date || !time) {
         showAlert("يرجى اختيار العيادة، التاريخ، والوقت أولاً"); 
         return;
     }
 
-    
     document.getElementById('booking-form').style.display = 'none';
     document.getElementById('confirmation-msg').style.display = 'block';
-    
     
     document.getElementById('final-details').innerHTML = 
     `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
 }
 
-function resetForm() { 
-    location.reload(); 
-}
-
 function showAlert(msg) {
-    document.getElementById('alert-message').innerText = msg;
-    document.getElementById('custom-alert').style.display = 'flex';
+    const alertBox = document.getElementById('custom-alert');
+    if(alertBox) {
+        document.getElementById('alert-message').innerText = msg;
+        alertBox.style.display = 'flex';
+    }
 }
 
 function closeAlert() { 
     document.getElementById('custom-alert').style.display = 'none'; 
 }
-
-
 window.onload = function() {
     updateTimes();
 };
 /* --نهاية تنسيقات صفحة حجز الموعد --*/
+
 
 // عرض المواعيد أو الملف الشخصي ليان 
 
@@ -157,7 +151,8 @@ function saveData() {
 // ==========================================
 // كود إعدادات الحساب - بشاير (نهاية)
 // ==========================================
- HEAD
+
+
 
 
 
@@ -206,49 +201,4 @@ function applyLang(){
   }
 }
 /*-- نهاية كود بيان --*/
-
-/*-- بداية كود جوري --*/
-
-// Tabs
-function openTab(tab){
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.getElementById(tab).classList.add('active');
-
-  document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
-
-  if(tab === 'register'){
-    document.querySelectorAll('.tabs button')[0].classList.add('active');
-  } else {
-    document.querySelectorAll('.tabs button')[1].classList.add('active');
-  }
-}
-
-// GPS
-function getLocation(){
-  if(navigator.geolocation){
-    navigator.geolocation.getCurrentPosition(function(pos){
-      let lat = pos.coords.latitude;
-      let lon = pos.coords.longitude;
-
-      document.getElementById("map").src =
-        "https://maps.google.com/maps?q=" + lat + "," + lon + "&z=15&output=embed";
-    });
-  } else {
-    alert("المتصفح لا يدعم GPS");
-  }
-}
-
-// Register submit
-document.getElementById("form").addEventListener("submit", function(e){
-  e.preventDefault();
-  document.getElementById("successMsg").style.display = "block";
-});
-
-// Login submit
-document.getElementById("loginForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  alert("تم تسجيل الدخول بنجاح ✅");
-});
-
-/*-- نهاية كود جوري --*/
 

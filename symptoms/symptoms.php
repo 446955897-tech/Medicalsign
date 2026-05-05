@@ -10,11 +10,12 @@ include '../database/db.php';
 </head>
 
 <body class="symptoms-body">
-<div class="logo-top-corner">
+
+<div class="logo-top-container">
     <a href="index.php">
-        <img src="../images/logo.png" alt="MedicalSign">
-    </a>
-</div>
+       <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
+</a>
+   </div>
 
 <div class="symp-container" style="margin-top: 50px;"> 
 
