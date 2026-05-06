@@ -755,6 +755,44 @@ body {
     text-decoration: underline;
 }
 
+/* الشريط العلوي لينا2 */
+
+/* تنسيق المنيو العلوي */
+.top-nav {
+    background-color: #2980b9; /* اللون الأزرق الملكي حق الثيم */
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: fixed; /* يبقى ثابت فوق حتى لو نزلتِ تحت */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center; /* يخلي المنيو في النص */
+    gap: 30px; /* مسافة بين الروابط */
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    color: #f1c40f; /* يتغير لونه للأصفر الهادي عند التمرير عليه */
+    text-decoration: underline;
+}
+
+/* تعديل بسيط عشان المحتوى الأصلي ما يختفي تحت المنيو */
+body {
+    padding-top: 70px; 
+}
+
 /* -- نهاية كود لينا -- */
 
 
