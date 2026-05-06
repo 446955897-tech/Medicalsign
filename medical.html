@@ -192,17 +192,25 @@ const medicalData = {
 };
 
 function render() {
-    currentLang = localStorage.getItem"ar";
+    // جلب المفتاح المخزن من localStorage (تأكدي أن صفحة index.b.html تخزن هذا المفتاح)
+    let caseKey = localStorage.getItem("selectedCategory") || "welcome";
     let data = medicalData[caseKey];
+
     if (data) {
+        // تحديث مسار الصورة بناءً على اسم الحالة (يجب أن تكون الصور داخل مجلد icon)
         document.getElementById("img_element").src = "icon/" + caseKey + ".jpeg";
-        document.getElementById("title_element").innerText = data[currentLang].title;
-        document.getElementById("content_element").innerText = data[currentLang].tips;
-        document.getElementById("back_btn").innerText = data[currentLang].btn;
         
-        // ضبط الاتجاه بناءً على اللغة
-        document.dir = (currentLang === "ar") ? "rtl" : "ltr";
-        document.getElementById("content_element").style.textAlign = (currentLang === "ar") ? "right" : "left";
+        // عرض العنوان والتعليمات بالعربي مباشرة
+        document.getElementById("title_element").innerText = data.title;
+        document.getElementById("content_element").innerText = data.tips;
+        
+        // تحديث نص زر العودة
+        document.getElementById("back_btn").innerText = "العودة للرئيسية";
+        
+        // ضبط اتجاه الصفحة للعربية دائماً
+        document.documentElement.dir = "rtl";
+        document.getElementById("content_element").parentElement.style.textAlign = "right";
+        document.getElementById("content_element").parentElement.style.borderRight = "6px solid #3182ce";
     }
 }
 window.onload = function(){
