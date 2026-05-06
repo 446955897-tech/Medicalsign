@@ -141,10 +141,6 @@ function toggleLang(){
     lang = "ar";
   }
 
-  localStorage.setItem("selectedCategory", key); 
-  applyLang();
-}
-
 function applyLang(){
   let items = document.querySelectorAll("[data-ar]");
   let btn = document.getElementById("langToggle");
