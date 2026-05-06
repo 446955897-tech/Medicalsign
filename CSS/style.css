@@ -882,7 +882,7 @@ button:hover {
 }
 .details-card img {
     width: 100%; /* عشان تاخذ مساحة البطاقة */
-    max-width: 500px; /* حجم كبير وواضح للغة الإشارة */
+    max-width: 650px; /* حجم كبير وواضح للغة الإشارة */
     height: auto;
     border-radius: 15px;
 }
