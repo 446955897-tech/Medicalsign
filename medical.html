@@ -1,224 +1,100 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>Details - MedicaSign</title>
-<style>
-   .logo-container{
-  position: fixed;   
-  top: -10px;
-  left: -40px;        
-}
-
-.logo-container img{
-  width: 225px;     
-  height: auto;
-}
-body { 
-    background: #f0f4f8; 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    text-align: center; 
-    margin: 0; 
-    padding: 20px; 
-}
-
-.card {
-    background: #fff; 
-    width: 400px; 
-    margin: 30px auto; 
-    padding: 30px;
-    border-radius: 24px; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-img { 
-    width: 100%; 
-    height: auto;
-    max-height: 300px;
-    border-radius: 16px; 
-    margin-bottom: 20px;
-    object-fit: contain;
-}
-
-.title-text { 
-    font-size: 24px; 
-    color: #1a365d; 
-    font-weight: 700; 
-    margin: 10px 0;
-}
-
-/* بوكس الإرشادات - تحسين الخط والوضوح */
-.info-box {
-    background: #f8fafc; 
-    padding: 22px; 
-    border-radius: 18px;
-    text-align: right; 
-    width: 100%;
-    box-sizing: border-box;
-    border-right: 6px solid #3182ce; 
-    color: #1a202c; /* لون داكن جداً ليكون واضحاً */
-    font-size: 18px; /* حجم خط أكبر */
-    font-weight: 600; /* خط أعرض قليلاً */
-    line-height: 1.8;
-    margin: 20px 0;
-}
-
-.back-btn {
-    background: #3182ce;
-    color: #fff;
-    border: none;
-    padding: 14px 30px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 17px;
-    font-weight: 600;
-    width: 100%;
-    transition: 0.3s;
-}
-
-.back-btn:hover {
-    background: #2c5282;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل الحالة - MedicaSign</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0;
+        }
+        .card {
+            width: 90%; max-width: 450px;
+            background: white; border-radius: 25px; padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;
+        }
+        .main-img {
+            width: 100%; height: auto; border-radius: 20px;
+            margin-bottom: 20px; border: 2px solid #e0e0e0;
+        }
+        h2 { color: #2c3e50; margin-bottom: 15px; }
+        p { color: #555; line-height: 1.8; font-size: 1.1rem; white-space: pre-line; }
+        .back-btn {
+            margin-top: 25px; padding: 12px 30px;
+            background-color: #3498db; color: white;
+            border: none; border-radius: 50px; cursor: pointer;
+            font-size: 1rem; transition: background 0.3s;
+        }
+    </style>
 </head>
 <body>
-<div class="logo-container">
-  <img src="logo.png" class="logo">
-</div>
-<div class="card">
-    <img id="img_element">
-    <p id="title_element" class="title-text"></p>
-    <div class="info-box">
-        <div id="content_element"></div>
-    </div>
-    <button id="back_btn" class="back-btn" onclick="goBack()"></button>
-</div>
 
-<script>
-let params = new URLSearchParams(window.location.search);
-let caseKey = params.get("case");
-
-const medicalData = {
-    welcome: { 
-        ar: { title: "الاستقبال", tips: "أهلاً بك، أنا هنا للعناية بك اليوم.\nأخبرني من فضلك، كيف يمكنني مساعدتك؟", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Reception", tips: "Welcome, I am here to take care of you today.\nPlease tell me, how can I help you?", btn: "⬅ Back to Home" }
-    },
-    duration: { 
-        ar: { title: "مدة التعب", tips: "منذ متى بدأت تشعر بهذا التعب؟\nأحتاج منك تحديد الوقت بدقة لنتمكن من متابعة حالتك.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Duration", tips: "Since when have you been feeling tired?\nI need you to specify the time accurately so we can follow up.", btn: "⬅ Back to Home" }
-    },
-    location: { 
-        ar: { title: "موقع الألم", tips: "من فضلك، أشر لي إلى مكان الألم الذي تشعر به.\nوهل ينتقل هذا الألم إلى أي منطقة أخرى؟", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Pain Location", tips: "Please, point to where exactly you feel the pain.\nDoes this pain move to any other area?", btn: "⬅ Back to Home" }
-    },
-    headache: { 
-        ar: { title: "الصداع", tips: "هل تشعر بنبض أو ضغط شديد في رأسك؟\nأنصحك بالبقاء في مكان هادئ وبعيد عن الضوء القوي.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Headache", tips: "Do you feel a pulse or heavy pressure in your head?\nI advise you to stay in a quiet place away from strong light.", btn: "⬅ Back to Home" }
-    },
-    dizzy: { 
-        ar: { title: "الدوار", tips: "هل تشعر بعدم الاتزان أو أن المكان يدور من حولك؟\nمن فضلك اجلس الآن بهدوء لتجنب أي سقوط مفاجئ.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Dizziness", tips: "Do you feel unbalanced or like the place is spinning?\nPlease sit down calmly now to avoid any sudden fall.", btn: "⬅ Back to Home" }
-    },
-    allergy: { 
-        ar: { title: "الحساسية", tips: "هل تعاني من حساسية تجاه أدوية أو أطعمة معينة؟\nأخبرني إذا لاحظت ظهور أي طفح جلدي مؤخراً.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Allergy", tips: "Do you have any allergies to certain medications or foods?\nTell me if you have noticed any recent skin rashes.", btn: "⬅ Back to Home" }
-    },
-    chronic: {ar: { title: "الأمراض المزمنة", tips: "هل تم تشخيصك مسبقاً بأمراض مثل السكري أو الضغط؟\nمن فضلك أخبرني إذا كنت تتابع مع طبيب مختص.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Chronic Diseases", tips: "Have you been previously diagnosed with diseases like diabetes or blood pressure?\nPlease tell me if you are following up with a specialist.", btn: "⬅ Back to Home" }
-    },
-    meds: { 
-        ar: { title: "الأدوية الحالية", tips: "هل تتناول أي أدوية بانتظام في الوقت الحالي؟\nأريدك أن تريني علب الأدوية أو تخبرني بأسمائها.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Current Medications", tips: "Are you taking any medications regularly at the moment?\nI want you to show me the medicine boxes or tell me their names.", btn: "⬅ Back to Home" }
-    },
-    nausea: { 
-        ar: { title: "الغثيان", tips: "هل تشعر برغبة في التقيؤ أو ألم في المعدة؟\nيفضل أن تشرب الماء برشفات صغيرة جداً ومتكررة.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Nausea", tips: "Do you feel an urge to vomit or have stomach pain?\nIt is preferred to drink water in very small and frequent sips.", btn: "⬅ Back to Home" }
-    },
-    sit: { 
-        ar: { title: "الاستراحة", tips: "من فضلك اجلس وخذ قسطاً من الراحة الآن.\nحاول أن تسترخي تماماً حتى تهدأ أعراضك.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Resting", tips: "Please sit down and take a break now.\nTry to relax completely until your symptoms subside.", btn: "⬅ Back to Home" }
-    },
-    breath: { 
-        ar: { title: "التنفس", tips: "خذ نفساً عميقاً من الأنف وأخرجه ببطء من الفم.\nكرر العملية بهدوء لنساعد جسمك على الاسترخاء.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Breathing", tips: "Take a deep breath in through the nose and exhale slowly through the mouth.\nRepeat calmly to help your body relax.", btn: "⬅ Back to Home" }
-    },
-    temp: { 
-        ar: { title: "قياس الحرارة", tips: "سأقوم الآن بقياس درجة حرارتك.\nيرجى البقاء ثابتاً تماماً حتى ينتهي الفحص.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Temperature", tips: "I will now measure your temperature.\nPlease stay completely still until the examination is finished.", btn: "⬅ Back to Home" }
-    },
-    pressure: { 
-        ar: { title: "قياس الضغط", tips: "سأقيس ضغطك الآن، ارخِ ذراعك تماماً.\nحاول ألا تتحدث أو تتحرك حتى يكتمل القياس.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Blood Pressure", tips: "I will measure your blood pressure now, relax your arm completely.\nTry not to speak or move until the measurement is complete.", btn: "⬅ Back to Home" }
-    },
-    mouth: { 
-        ar: { title: "فحص الفم", tips: "من فضلك افتح فمك لأتمكن من فحص الحلق.\nسأستخدم إضاءة بسيطة للتأكد من سلامة اللوزتين.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Oral Exam", tips: "Please open your mouth so I can examine the throat.\nI will use a simple light to check the health of the tonsils.", btn: "⬅ Back to Home" }
-    },
-    bed: { 
-        ar: { title: "الفحص السريري", tips: "أريدك أن تستلقي على السرير لبدء الفحص السريري.\nحاول إرخاء عضلات بطنك قدر الإمكان.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Clinical Exam", tips: "I want you to lie down on the bed to start the clinical exam.\nTry to relax your abdominal muscles as much as possible.", btn: "⬅ Back to Home" }
-    },
-    dose: { 
-        ar: { title: "الجرعة الدوائية", tips: "يجب عليك تناول هذا الدواء مرتين يومياً.\nاحرص على الالتزام بالمواعيد لضمان مفعول العلاج.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Medication Dose", tips: "You must take this medicine twice a day.\nMake sure to stick to the schedule to ensure effectiveness.", btn: "⬅ Back to Home" }
-    },
-    before_food: { 
-        ar: { title: "توقيت العلاج", tips: "هذا العلاج يجب تناوله قبل الأكل بـ 30 دقيقة.\nتجنب الأكل مباشرة بعد أخذ الجرعة.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Treatment Timing", tips: "This treatment should be taken 30 minutes before eating.\nAvoid eating immediately after taking the dose.", btn: "⬅ Back to Home" }
-    },
-    rest: { 
-        ar: { title: "الراحة التامة", tips: "أنت بحاجة إلى راحة تامة في المنزل لمدة يومين.\nتجنب القيام بأي مجهود بدني شاق حالياً.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Total Rest", tips: "You need total rest at home for two days.\nAvoid doing any strenuous physical effort currently.", btn: "⬅ Back to Home" }
-    },
-    water: { 
-        ar: { title: "شرب السوائل", tips: "يجب عليك شرب كميات كافية من الماء يومياً.\nالسوائل ستساعد جسمك على التعافي بشكل أسرع.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Drink Fluids", tips: "You must drink enough water daily.\nFluids will help your body recover faster.", btn: "⬅ Back to Home" }
-    },
-    food_avoid: { 
-        ar: { title: "النظام الغذائي", tips: "أنصحك بتجنب الأطعمة الدسمة والمقليات حالياً.\nركز على الأكل المسلوق والخضروات لراحة معدتك.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Dietary Plan", tips: "I advise you to avoid greasy and fried foods currently.\nFocus on boiled food and vegetables for your stomach comfort.", btn: "⬅ Back to Home" }
-    },
-    hospital: { 
-        ar: { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Hospital", tips: "I see that your condition requires more accurate tests at the hospital.\nYou must go to the emergency department immediately.", btn: "⬅ Back to Home" }
-    },
-    question: { 
-        ar: { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", btn: "⬅ العودة للرئيسية" },
-        en: { title: "Inquiries", tips: "Do you have any other questions you want to ask me?\nI am here to answer everything that concerns you clearly.", btn: "⬅ Back to Home" }
-    }
-};
-
-function render() {
-    // جلب اسم الحالة من الذاكرة (الذي أرسلته صفحة index)
-    let caseKey = localStorage.getItem("selectedCategory") || "welcome";
-    
-    // تحديد اللغة العربية دائماً لأننا حذفنا زر التبديل
-    let currentLang = "ar"; 
-    
-    let data = medicalData[caseKey];
-
-    if (data) {
-        // ربط الصورة: سيذهب لمجلد icon ويبحث عن صورة بنفس اسم الحالة (مثلاً headache.jpeg)
-        document.getElementById("img_element").src = "icon/" + caseKey + ".jpeg";
+    <div class="card">
+        <h2 id="title-text">تحميل...</h2>
+        <img id="status-image" src="" alt="Sign Language Image" class="main-img">
         
-        // عرض النصوص من القسم العربي [ar] الموجود في مصفوفتك
-        document.getElementById("title_element").innerText = data[currentLang].title;
-        document.getElementById("content_element").innerText = data[currentLang].tips;
-        document.getElementById("back_btn").innerText = data[currentLang].btn;
+        <div id="description-box">
+            <p id="medical-info"></p>
+        </div>
 
-        // ضبط اتجاه الصفحة للعربية
-        document.documentElement.dir = "rtl";
-    }
-}
-}
-window.onload = function(){
-render();
-};
-function goBack() { window.location.href = "index.b.html"; }
-}
-</script>
+        <button class="back-btn" onclick="window.location.href='index.b.html'">⬅ العودة للرئيسية</button>
+    </div>
+
+    <script>
+        // مصفوفة البيانات مرتبة من الاستقبال إلى النهاية
+        const medicalData = {
+            // 1. البداية والتشخيص الأولي
+            "Welcome": { title: "الاستقبال", tips: "أهلاً بك، أنا هنا للعناية بك اليوم.\nأخبرني من فضلك، كيف يمكنني مساعدتك؟", img: "welcome.jpeg" },
+            "duration": { title: "مدة التعب", tips: "منذ متى بدأت تشعر بهذا التعب؟\nأحتاج منك تحديد الوقت بدقة لنتمكن من متابعة حالتك.", img: "duration.jpeg" },
+            "location": { title: "موقع الألم", tips: "من فضلك، أشر لي إلى مكان الألم الذي تشعر به.\nوهل ينتقل هذا الألم إلى أي منطقة أخرى؟", img: "location.jpeg" },
+            
+            // 2. الأعراض الشائعة
+            "headache": { title: "الصداع", tips: "هل تشعر بنبض أو ضغط شديد في رأسك؟\nأنصحك بالبقاء في مكان هادئ وبعيد عن الضوء القوي.", img: "headache.jpeg" },
+            "dizzy": { title: "الدوار", tips: "هل تشعر بعدم الاتزان أو أن المكان يدور من حولك؟\nمن فضلك اجلس الآن بهدوء لتجنب أي سقوط مفاجئ.", img: "dizzy.jpeg" },
+            "nausea": { title: "الغثيان", tips: "هل تشعر برغبة في التقيؤ أو ألم في المعدة؟\nيفضل أن تشرب الماء برشفات صغيرة جداً ومتكررة.", img: "nausea.jpeg" },
+            
+            // 3. التاريخ الطبي والفحوصات
+            "allergy": { title: "الحساسية", tips: "هل تعاني من حساسية تجاه أدوية أو أطعمة معينة؟\nأخبرني إذا لاحظت ظهور أي طفح جلدي مؤخراً.", img: "allergy.jpeg" },
+            "chronic": { title: "الأمراض المزمنة", tips: "هل تم تشخيصك مسبقاً بأمراض مثل السكري أو الضغط؟\nمن فضلك أخبرني إذا كنت تتابع مع طبيب مختص.", img: "chronic.jpeg" },
+            "meds": { title: "الأدوية الحالية", tips: "هل تتناول أي أدوية بانتظام في الوقت الحالي؟\nأريدك أن تريني علب الأدوية أو تخبرني بأسمائها.", img: "meds.jpeg" },
+            "pressure": { title: "قياس الضغط", tips: "سأقيس ضغطك الآن، ارخِ ذراعك تماماً.\nحاول ألا تتحدث أو تتحرك حتى يكتمل القياس.", img: "pressure.jpeg" },
+            "temp": { title: "قياس الحرارة", tips: "سأقوم الآن بقياس درجة حرارتك.\nيرجى البقاء ثابتاً تماماً حتى ينتهي الفحص.", img: "temp.jpeg" },
+            "mouth": { title: "فحص الفم", tips: "من فضلك افتح فمك لأتمكن من فحص الحلق.\nسأستخدم إضاءة بسيطة للتأكد من سلامة اللوزتين.", img: "mouth.jpeg" },
+            "bed": { title: "الفحص السريري", tips: "أريدك أن تستلقي على السرير لبدء الفحص السريري.\nحاول إرخاء عضلات بطنك قدر الإمكان.", img: "bed.jpeg" },
+
+            // 4. التعليمات والعلاج
+            "dose": { title: "الجرعة الدوائية", tips: "يجب عليك تناول هذا الدواء مرتين يومياً.\nاحرص على الالتزام بالمواعيد لضمان مفعول العلاج.", img: "dose.jpeg" },
+            "before_food": { title: "توقيت العلاج", tips: "هذا العلاج يجب تناوله قبل الأكل بـ 30 دقيقة.\nتجنب الأكل مباشرة بعد أخذ الجرعة.", img: "before_food.jpeg" },
+            "rest": { title: "الراحة التامة", tips: "أنت بحاجة إلى راحة تامة في المنزل لمدة يومين.\nتجنب القيام بأي مجهود بدني شاق حالياً.", img: "rest.jpeg" },
+            "sit": { title: "الاستراحة", tips: "من فضلك اجلس وخذ قسطاً من الراحة الآن.\nحاول أن تسترخي تماماً حتى تهدأ أعراضك.", img: "rest.jpeg" },
+            "water": { title: "شرب السوائل", tips: "يجب عليك شرب كميات كافية من الماء يومياً.\nالسوائل ستساعد جسمك على التعافي بشكل أسرع.", img: "water.jpeg" },
+            "food_avoid": { title: "النظام الغذائي", tips: "أنصحك بتجنب الأطعمة الدسمة والمقليات حالياً.\nركز على الأكل المسلوق والخضروات لراحة معدتك.", img: "food_avoid.jpeg" },
+            "breath": { title: "التنفس", tips: "خذ نفساً عميقاً من الأنف وأخرجه ببطء من الفم.\nكرر العملية بهدوء لنساعد جسمك على الاسترخاء.", img: "breath.jpeg" },
+
+            // 5. حالات الطوارئ والخاتمة
+            "hospital": { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", img: "hospital.jpeg" },
+            "question": { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", img: "question.jpeg" }
+        };
+
+        window.onload = function() {
+            const selected = localStorage.getItem("selectedCategory");
+            const data = medicalData[selected];
+
+            if (data) {
+                document.getElementById("title-text").innerText = data.title;
+                document.getElementById("medical-info").innerText = data.tips;
+                
+                const imageElement = document.getElementById("status-image");
+                imageElement.src = "./icon/" + data.img; 
+
+                imageElement.onerror = function() {
+                    this.alt = "الصورة غير موجودة في مجلد icon";
+                };
+            }
+        };
+    </script>
 </body>
 </html>
