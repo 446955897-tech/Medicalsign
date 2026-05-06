@@ -800,103 +800,93 @@ body {
 
 
 /*-- بداية كود بيان --*/
+
+
 body {
-  background:#eef2f7;
-  font-family:Arial;
-  animation:fadeIn 0.6s;
+    background-color: #eef2f7; /* لون الخلفية الأصلي */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    direction: rtl; /* لضمان تنسيق النصوص العربية */
 }
 
-.header {
-  text-align:center;
-  background:white;
-  padding:20px;
-  box-shadow:0 2px 10px rgba(41,128,185,0.1);
-  position:relative;
-}
-
-
-
-h1 { color:#2980b9; }
+/* --- تنسيق الصفحة الرئيسية (index) --- */
 
 .container {
-    display:grid;
-    grid-template-columns: repeat(5, 1fr); /* لعمل 5 أعمدة */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* يعيد الـ 5 أعمدة كما كانت */
     gap: 20px;
     padding: 20px;
     justify-items: center; /* لتوسيط البطاقات */
 }
 
-
 .card {
-  background:white;
-  margin:10px;
-  padding:20px;
-  border-radius:20px;
-  width:auto;
-  text-align:center;
-  box-shadow:0 4px 10px rgba(41,128,185,0.1);
-  transition:0.3s;
+    background: white;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 20px; /* حواف منحنية أنيقة */
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.1); /* ظل خفيف أزرق */
+    transition: 0.3s;
+    width: auto;
 }
 
-.card:hover { transform:translateY(-5px); }
-
-button {
-  background:#2980b9;
-  color:white;
-  border:none;
-  padding:10px;
-  border-radius:10px;
+.card:hover {
+    transform: translateY(-5px); /* حركة بسيطة عند التمرير */
 }
 
-button:hover {
-  background:#1a5276;
-  transform:scale(1.05);
-}
-
-.details-card {
-  width:80%;
-  margin:50px auto;
-  background:white;
-  padding:20px;
-  border-radius:20px;
-}
-
+/* الأيقونات الصغيرة في الصفحة الرئيسية */
 .card img {
     width: 60px; /* حجم الأيقونة المناسب للبطاقة */
     height: auto;
     margin-bottom: 15px;
 }
+
+/* --- تنسيق صفحة التفاصيل (Details) --- */
+
 .details-card {
-    width: 90%; /* نزيد العرض قليلاً ليناسب الشاشة */
-    max-width: 800px; /* نضع حداً أقصى للعرض لكي لا تتمدد كثيراً */
+    width: 90%; /* تجعل البطاقة تأخذ أغلب عرض الشاشة */
+    max-width: 1000px; /* نكبر الحد الأقصى لتكون الـ "واجهة" راهية */
     margin: 50px auto;
     background: white;
-    padding: 30px;
+    padding: 40px;
     border-radius: 25px;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex; /* نستخدم flex لترتيب المحتوى عمودياً */
+    display: flex; /* لترتيب المحتوى عمودياً */
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-}
-.details-card img {
-    width: 100%; /* عشان تاخذ مساحة البطاقة */
-    max-width: 850px; /* حجم كبير وواضح للغة الإشارة */
-    height: auto;
-    border-radius: 15px;
-    display:block; 
+    gap: 25px;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-  }
+/* تكبير صورة لغة الإشارة في صفحة التفاصيل */
+.details-card img {
+    width: 100%; /* تتمدد لتملأ مساحة البطاقة */
+    max-width: 850px; /* هذا الرقم يضمن أن الصورة ستكون كبيرة جداً وواضحة */
+    height: auto;
+    border-radius: 15px;
+    display: block;
+    margin: 20px auto;
 }
+
+/* --- تنسيق الأزرار العام --- */
+
+button {
+    background-color: #2980b9;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1a5276;
+    transform: scale(1.05); /* تكبير بسيط للزر عند اللمس */
+}
+
 /*-- نهاية كود بيان --*/
 
 /* كود جوري */
