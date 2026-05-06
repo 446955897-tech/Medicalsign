@@ -27,6 +27,7 @@
             font-family: Arial, sans-serif;
             background-color: var(--page-bg);
             color: var(--text-main);
+            line-height: 1.6;
         }
 
         @keyframes fadeUp {
@@ -85,11 +86,6 @@
             font-size: 28px;
         }
 
-        .dashboard-header p {
-            color: var(--text-sub);
-            font-size: 15px;
-        }
-
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -106,10 +102,6 @@
             transition: 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-        }
-
         .card h3 {
             color: var(--primary-blue);
             font-size: 20px;
@@ -117,7 +109,7 @@
         }
 
         .card .value {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: bold;
             color: var(--text-main);
             margin-bottom: 6px;
@@ -147,28 +139,6 @@
             border-bottom: none;
         }
 
-        .appointment-item h4 {
-            color: var(--text-main);
-            font-size: 17px;
-            margin-bottom: 6px;
-        }
-
-        .appointment-item p {
-            color: var(--text-sub);
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-
-        .status-box {
-            display: inline-block;
-            padding: 8px 14px;
-            border-radius: 10px;
-            background-color: var(--success-bg);
-            color: var(--primary-blue);
-            font-size: 14px;
-            margin-top: 8px;
-        }
-
         .quick-actions {
             display: flex;
             flex-direction: column;
@@ -183,12 +153,23 @@
             padding: 14px;
             border-radius: 10px;
             transition: 0.3s ease;
-            font-size: 15px;
+            font-weight: bold;
         }
 
         .action-btn:hover {
             background-color: var(--hover-blue);
-            transform: scale(1.05);
+            transform: scale(1.02);
+        }
+
+        .status-box {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 10px;
+            background-color: var(--success-bg);
+            color: var(--primary-blue);
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
         }
 
         @media (max-width: 900px) {
@@ -203,7 +184,7 @@
     <div class="container">
 
         <div class="top-brand">
-            <img src="../images/logo.png" alt="شعار Medical Sign">
+            <img src="../images/logo.png" alt="Medical Sign Logo">
             <h1>Medical Sign</h1>
             <p>لوحة تحكم الطبيب</p>
         </div>
@@ -259,9 +240,9 @@
                 <div class="quick-actions">
                     <a href="appointments.html" class="action-btn">عرض كافة المواعيد</a>
                     <a href="#" class="action-btn">عرض ملاحظات المريض</a>
-                    <a href="../index.html" class="action-btn">الرجوع للرئيسية</a>
+                    <a href="../index.html" class="action-btn" style="background-color: #7f8c8d;">الرجوع للرئيسية</a>
                 </div>
-                <div class="status-box">الحالة الحالية: نشط</div>
+                <div class="status-box">الحالة الحالية: نشط ✅</div>
             </div>
         </div>
 
