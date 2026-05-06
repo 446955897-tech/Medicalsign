@@ -885,6 +885,7 @@ button:hover {
     max-width: 650px; /* حجم كبير وواضح للغة الإشارة */
     height: auto;
     border-radius: 15px;
+    display:block; 
 }
 
 @keyframes fadeIn {
