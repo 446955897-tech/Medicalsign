@@ -818,18 +818,8 @@ body {
 
 h1 { color:#2980b9; }
 
-.lang-btn {
-  position:absolute;
-  right:20px;
-  top:20px;
-  background:#2980b9;
-  color:white;
-  border:none;
-  padding:8px 15px;
-  border-radius:10px;
-}
 .container {
-    display: grid;
+    display:grid;
     grid-template-columns: repeat(5, 1fr); /* لعمل 5 أعمدة */
     gap: 20px;
     padding: 20px;
