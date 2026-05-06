@@ -141,12 +141,13 @@
     <script>
         // دالة التوجيه لصفحة التفاصيل مع المعطى المختار
         function go(key) {
-              const previewURL = "https://htmlpreview.github.io/?https://github.com/446955897-tech/Medicalsign/blob/symptoms-task2/medical.html";
+            // 1. الرابط الذي يفتح صفحة الميديكال كواجهة
+    const previewURL = "https://htmlpreview.github.io/?https://github.com/446955897-tech/Medicalsign/blob/symptoms-task2/medical.html";
     
-    // تخزين الفئة المختارة لكي تعرف صفحة الميديكال ماذا تعرض
-    localStorage.setItem("selectedCategory", category);
+    // 2. تخزين المفتاح (key) لكي تعرف الصفحة التالية ماذا تعرض
+    localStorage.setItem("selectedCategory", key);
     
-    // الانتقال للرابط
+    // 3. الانتقال للرابط
     window.location.href = previewURL;
 }
             // تأكدي أن الصفحة السابقة محفوظة باسم medical.html في نفس المجلد
