@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Details - MedicaSign</title>
-    <!-- ربط ملف الـ CSS الخارجي (تأكدي من وجود الملف في هذا المسار) -->
     <link rel="stylesheet" href="CSS/style.css">
     
     <style>
-        /* تنسيقات خاصة بصفحة بيان فقط لضمان عدم التضارب */
         body { 
             background: #f0f4f8; 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
@@ -29,7 +27,6 @@
             height: auto;
         }
 
-        /* تغيير اسم الكلاس من .card لمنع التضارب مع شغل الزميلات */
         .medica-details-card {
             background: #fff; 
             width: 90%;
@@ -97,6 +94,7 @@
         .top-nav {
             text-align: right;
             margin-bottom: 10px;
+            width: 100%;
         }
         
         .top-nav a {
@@ -109,7 +107,6 @@
 <body>
 
     <div class="logo-container">
-        <!-- تأكدي أن ملف logo.png موجود في نفس مجلد الـ HTML -->
         <img src="logo.png" alt="MedicaSign Logo">
     </div>
 
@@ -127,81 +124,90 @@
         </div>
 
         <button id="back_btn" class="back-btn" onclick="goBack()"></button>
-        
-        <!-- زر اختياري لتبديل اللغة للتأكد من عمل الـ Script -->
-       <script>
-        // البيانات الطبية (تم إصلاح خطأ الأقواس في كود الحساسية)
+    </div>
+
+    <script>
         const medicalData = {
             welcome: { 
-              "I will now measure your temperature.\nPlease stay completely still until the examination is finished.", btn: "⬅ Back to Home" } 
-   }, 
-   pressure: {  
-       ar: { title: "قياس الضغط", tips: "سأقيس ضغطك الآن، ارخِ ذراعك تماماً.\nحاول ألا تتحدث أو تتحرك حتى يكتمل القياس.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Blood Pressure", tips: "I will measure your blood pressure now, relax your arm completely.\nTry not to speak or move until the measurement is complete.", btn: "⬅ Back to Home" } 
-   }, 
-   mouth: {  
-       ar: { title: "فحص الفم", tips: "من فضلك افتح فمك لأتمكن من فحص الحلق.\nسأستخدم إضاءة بسيطة للتأكد من سلامة اللوزتين.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Oral Exam", tips: "Please open your mouth so I can examine the throat.\nI will use a simple light to check the health of the tonsils.", btn: "⬅ Back to Home" } 
-   }, 
-   bed: {  
-       ar: { title: "الفحص السريري", tips: "أريدك أن تستلقي على السرير لبدء الفحص السريري.\nحاول إرخاء عضلات بطنك قدر الإمكان.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Clinical Exam", tips: "I want you to lie down on the bed to start the clinical exam.\nTry to relax your abdominal muscles as much as possible.", btn: "⬅ Back to Home" } 
-   }, 
-   dose: {  
-       ar: { title: "الجرعة الدوائية", tips: "يجب عليك تناول هذا الدواء مرتين يومياً.\nاحرص على الالتزام بالمواعيد لضمان مفعول العلاج.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Medication Dose", tips: "You must take this medicine twice a day.\nMake sure to stick to the schedule to ensure effectiveness.", btn: "⬅ Back to Home" } 
-   }, 
-   before_food: {  
-       ar: { title: "توقيت العلاج", tips: "هذا العلاج يجب تناوله قبل الأكل بـ 30 دقيقة.\nتجنب الأكل مباشرة بعد أخذ الجرعة.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Treatment Timing", tips: "This treatment should be taken 30 minutes before eating.\nAvoid eating immediately after taking the dose.", btn: "⬅ Back to Home" } 
-   }, 
-   rest: {  
-       ar: { title: "الراحة التامة", tips: "أنت بحاجة إلى راحة تامة في المنزل لمدة يومين.\nتجنب القيام بأي مجهود بدني شاق حالياً.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Total Rest", tips: "You need total rest at home for two days.\nAvoid doing any strenuous physical effort currently.", btn: "⬅ Back to Home" } 
-   }, 
-   water: {  
-       ar: { title: "شرب السوائل", tips: "يجب عليك شرب كميات كافية من الماء يومياً.\nالسوائل ستساعد جسمك على التعافي بشكل أسرع.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Drink Fluids", tips: "You must drink enough water daily.\nFluids will help your body recover faster.", btn: "⬅ Back to Home" } 
-   }, 
-   food_avoid: {  
-       ar: { title: "النظام الغذائي", tips: "أنصحك بتجنب الأطعمة الدسمة والمقليات حالياً.\nركز على الأكل المسلوق والخضروات لراحة معدتك.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Dietary Plan", tips: "I advise you to avoid greasy and fried foods currently.\nFocus on boiled food and vegetables for your stomach comfort.", btn: "⬅ Back to Home" } 
-   }, 
-   hospital: {  
-       ar: { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Hospital", tips: "I see that your condition requires more accurate tests at the hospital.\nYou must go to the emergency department immediately.", btn: "⬅ Back to Home" } 
-   }, 
-   question: {  
-       ar: { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", btn: "⬅ العودة للرئيسية" }, 
-       en: { title: "Inquiries", tips: "Do you have any other questions you want to ask me?\nI am here to answer everything that concerns you clearly.", btn: "⬅ Back to Home" } 
-   }
+                ar: { title: "مرحباً بك", tips: "سأقوم الآن بقياس درجة حرارتك.\nيرجى البقاء ثابتاً تماماً حتى ينتهي الفحص.", btn: "⬅ العودة للرئيسية" },
+                en: { title: "Welcome", tips: "I will now measure your temperature.\nPlease stay completely still until the examination is finished.", btn: "⬅ Back to Home" } 
+            }, 
+            pressure: {  
+                ar: { title: "قياس الضغط", tips: "سأقيس ضغطك الآن، ارخِ ذراعك تماماً.\nحاول ألا تتحدث أو تتحرك حتى يكتمل القياس.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Blood Pressure", tips: "I will measure your blood pressure now, relax your arm completely.\nTry not to speak or move until the measurement is complete.", btn: "⬅ Back to Home" } 
+            }, 
+            mouth: {ar: { title: "فحص الفم", tips: "من فضلك افتح فمك لأتمكن من فحص الحلق.\nسأستخدم إضاءة بسيطة للتأكد من سلامة اللوزتين.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Oral Exam", tips: "Please open your mouth so I can examine the throat.\nI will use a simple light to check the health of the tonsils.", btn: "⬅ Back to Home" } 
+            }, 
+            bed: {  
+                ar: { title: "الفحص السريري", tips: "أريدك أن تستلقي على السرير لبدء الفحص السريري.\nحاول إرخاء عضلات بطنك قدر الإمكان.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Clinical Exam", tips: "I want you to lie down on the bed to start the clinical exam.\nTry to relax your abdominal muscles as much as possible.", btn: "⬅ Back to Home" } 
+            }, 
+            dose: {  
+                ar: { title: "الجرعة الدوائية", tips: "يجب عليك تناول هذا الدواء مرتين يومياً.\nاحرص على الالتزام بالمواعيد لضمان مفعول العلاج.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Medication Dose", tips: "You must take this medicine twice a day.\nMake sure to stick to the schedule to ensure effectiveness.", btn: "⬅ Back to Home" } 
+            }, 
+            before_food: {  
+                ar: { title: "توقيت العلاج", tips: "هذا العلاج يجب تناوله قبل الأكل بـ 30 دقيقة.\nتجنب الأكل مباشرة بعد أخذ الجرعة.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Treatment Timing", tips: "This treatment should be taken 30 minutes before eating.\nAvoid eating immediately after taking the dose.", btn: "⬅ Back to Home" } 
+            }, 
+            rest: {  
+                ar: { title: "الراحة التامة", tips: "أنت بحاجة إلى راحة تامة في المنزل لمدة يومين.\nتجنب القيام بأي مجهود بدني شاق حالياً.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Total Rest", tips: "You need total rest at home for two days.\nAvoid doing any strenuous physical effort currently.", btn: "⬅ Back to Home" } 
+            }, 
+            water: {  
+                ar: { title: "شرب السوائل", tips: "يجب عليك شرب كميات كافية من الماء يومياً.\nالسوائل ستساعد جسمك على التعافي بشكل أسرع.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Drink Fluids", tips: "You must drink enough water daily.\nFluids will help your body recover faster.", btn: "⬅ Back to Home" } 
+            }, 
+            food_avoid: {  
+                ar: { title: "النظام الغذائي", tips: "أنصحك بتجنب الأطعمة الدسمة والمقليات حالياً.\nركز على الأكل المسلوق والخضروات لراحة معدتك.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Dietary Plan", tips: "I advise you to avoid greasy and fried foods currently.\nFocus on boiled food and vegetables for your stomach comfort.", btn: "⬅ Back to Home" } 
+            }, 
+            hospital: {  
+                ar: { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Hospital", tips: "I see that your condition requires more accurate tests at the hospital.\nYou must go to the emergency department immediately.", btn: "⬅ Back to Home" } 
+            }, 
+            question: {  
+                ar: { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", btn: "⬅ العودة للرئيسية" }, 
+                en: { title: "Inquiries", tips: "Do you have any other questions you want to ask me?\nI am here to answer everything that concerns you clearly.", btn: "⬅ Back to Home" } 
+            }
         };
 
-        let params = new URLSearchParams(window.location.search);
-        let caseKey = localStorage.getItem("selectedCategory") || "welcome";
-        let currentLang = localStorage.getItem("lang") || "ar";
-
         function render() {
+            let caseKey = localStorage.getItem("selectedCategory") || "welcome";
+            let currentLang = localStorage.getItem("lang") || "ar";
             let data = medicalData[caseKey];
+
             if (data) {
-                // تأكدي من وجود مجلد باسم icon وبداخله صور بصيغة jpeg
+                // تحديث الصورة بناءً على مفتاح الحالة
                 document.getElementById("img_element").src = "icon/" + caseKey + ".jpeg";
-                document.getElementById("title_element").innerText = data[currentLang].title;
-                document.getElementById("content_element").innerText = data[currentLang].tips;
-                document.getElementById("back_btn").innerText = data[currentLang].btn;// ضبط الاتجاه بناءً على اللغة
+                
+                // تحديث النصوص بناءً على اللغة
+                document.getElementById("title_element").innerText = data[currentLang].title;document.getElementById("content_element").innerText = data[currentLang].tips;
+                document.getElementById("back_btn").innerText = data[currentLang].btn;
+
+                // ضبط التنسيقات والاتجاهات
                 document.documentElement.dir = (currentLang === "ar") ? "rtl" : "ltr";
                 document.documentElement.lang = currentLang;
-                document.getElementById("content_element").parentElement.style.textAlign = (currentLang === "ar") ? "right" : "left";
-                document.getElementById("content_element").parentElement.style.borderRight = (currentLang === "ar") ? "6px solid #3182ce" : "none";
-                document.getElementById("content_element").parentElement.style.borderLeft = (currentLang === "en") ? "6px solid #3182ce" : "none";
+                
+                let infoBox = document.getElementById("content_element").parentElement;
+                if (currentLang === "ar") {
+                    infoBox.style.textAlign = "right";
+                    infoBox.style.borderRight = "6px solid #3182ce";
+                    infoBox.style.borderLeft = "none";
+                } else {
+                    infoBox.style.textAlign = "left";
+                    infoBox.style.borderLeft = "6px solid #3182ce";
+                    infoBox.style.borderRight = "none";
+                }
             }
         }
 
         function goBack() { 
-          window.location.href = "index.b.html"; 
-       }
+            window.location.href = "patient_dashboard.html"; 
+        }
 
-     window.onload = render;
+        window.onload = render;
     </script>
 </body>
 </html>
