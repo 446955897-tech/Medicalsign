@@ -3,152 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedicaSign - الجمل الطبية</title>
+    <title>MedicaSign - الرئيسية</title>
     <style>
-        /* التنسيقات الأساسية */
-        body {
-            background: #f0f4f8;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* حاوية الشعار */
-        .medica-logo-main {
-            position: absolute;
-            top: 10px;    
-            left: 10px;   
-            width: 150px;  
-            height: auto;
-            z-index: 100;
-        }
-
-        /* الهيدر المحسن */
-        .medica-header {
-            background: #fff;
-            padding: 60px 20px 30px 20px; 
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(49, 130, 206, 0.1);
-            position: relative; 
-        }
-
-        .medica-header h1 {
-            color: #2c5282;
-            margin: 0;
-            font-size: 28px;
-        }
-
-        /* حاوية البطاقات */
-        .medica-main-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 30px;
-            gap: 20px;
-        }
-
-        /* البطاقة المنفصلة بتسمية فريدة لمنع التضارب */
-        .medica-item-card {
-            background: #fff;
-            padding: 25px;
-            border-radius: 24px;
-            width: 220px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 1px solid #edf2f7;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .medica-item-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(49, 130, 206, 0.15);
-            border-color: #3182ce;
-        }
-
-        .medica-emoji {
-            font-size: 50px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .medica-item-card p {
-            color: #2d3748;
-            font-weight: 600;
-            font-size: 17px;
-            margin: 10px 0 20px 0;
-            min-height: 40px;
-            line-height: 1.4;
-        }
-
-        /* الأزرار المحسنة */
-        .medica-view-btn {
-            background: #3182ce;
-            color: #fff;
-            border: none;
-            padding: 12px;
-            border-radius: 14px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 16px;
-            width: 100%;
-            transition: background 0.3s;
-        }
-
-        .medica-view-btn:hover {
-            background: #2c5282;
-        }
+        body { background: #f0f4f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        .medica-header { background: #fff; padding: 50px 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; position: relative; }
+        .medica-logo-main { position: absolute; top: 15px; left: 20px; width: 120px; }
+        .medica-main-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; padding: 30px; max-width: 1200px; margin: 0 auto; }
+        .medica-item-card { background: #fff; padding: 20px; border-radius: 24px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.05); transition: 0.3s; cursor: pointer; border: 1px solid #edf2f7; display: flex; flex-direction: column; justify-content: space-between; }
+        .medica-item-card:hover { transform: translateY(-10px); border-color: #3182ce; }
+        .medica-emoji { font-size: 45px; display: block; margin-bottom: 10px; }
+        .medica-item-card p { color: #2d3748; font-weight: 600; font-size: 16px; margin: 10px 0; min-height: 40px; line-height: 1.4; }
+        .medica-view-btn { background: #3182ce; color: #fff; border: none; padding: 10px; border-radius: 12px; width: 100%; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .medica-view-btn:hover { background: #2c5282; }
     </style>
 </head>
-
 <body>
 
     <header class="medica-header">
-        <!-- تأكدي من مسار شعار MedicaSign -->
-        <img src="logo.png" class="medica-logo-main" alt="MedicaSign Logo"> 
-        <h1>🩺 الجمل الطبية</h1>
+        <img src="logo.png" class="medica-logo-main" alt="Logo"> 
+        <h1>🩺 MedicaSign</h1>
+        <p>اختر الحالة الطبية لعرض التعليمات</p>
     </header>
 
     <main class="medica-main-container">
-
-        <!-- البطاقات مع تحديث الكلاسات ودالة الانتقال -->
-        <div class="medica-item-card"><span class="medica-emoji">👋</span><p>مرحباً كيف أساعدك؟</p><button class="medica-view-btn" onclick="go('welcome')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">⏱️</span><p>منذ متى وأنت متعب؟</p><button class="medica-view-btn" onclick="go('duration')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">📍</span><p>أين مكان الألم؟</p><button class="medica-view-btn" onclick="go('location')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🤕</span><p>هل لديك صداع؟</p><button class="medica-view-btn" onclick="go('headache')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">😵</span><p>هل تشعر بدوار؟</p><button class="medica-view-btn" onclick="go('dizzy')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🤧</span><p>هل لديك حساسية؟</p><button class="medica-view-btn" onclick="go('allergy')">عرض</button></div><div class="medica-item-card"><span class="medica-emoji">🧬</span><p>هل لديك أمراض مزمنة؟</p><button class="medica-view-btn" onclick="go('chronic')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">💊</span><p>هل تأخذ أدوية؟</p><button class="medica-view-btn" onclick="go('meds')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🤢</span><p>هل تشعر بغثيان؟</p><button class="medica-view-btn" onclick="go('nausea')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🪑</span><p>اجلس واسترح</p><button class="medica-view-btn" onclick="go('sit')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🫁</span><p>خذ نفس عميق</p><button class="medica-view-btn" onclick="go('breath')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🌡️</span><p>سأقيس الحرارة</p><button class="medica-view-btn" onclick="go('temp')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🩸</span><p>سأقيس الضغط</p><button class="medica-view-btn" onclick="go('pressure')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">👄</span><p>افتح فمك</p><button class="medica-view-btn" onclick="go('mouth')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🛏️</span><p>استلقِ على السرير</p><button class="medica-view-btn" onclick="go('bed')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">💊</span><p>خذ الدواء مرتين يومياً</p><button class="medica-view-btn" onclick="go('dose')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">⏰</span><p>خذ الدواء قبل الأكل</p><button class="medica-view-btn" onclick="go('before_food')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">😴</span><p>راحة</p><button class="medica-view-btn" onclick="go('rest')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">💧</span><p>اشرب ماء</p><button class="medica-view-btn" onclick="go('water')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🍔</span><p>تجنب الدهون</p><button class="medica-view-btn" onclick="go('food_avoid')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">🏥</span><p>راجع المستشفى</p><button class="medica-view-btn" onclick="go('hospital')">عرض</button></div>
-        <div class="medica-item-card"><span class="medica-emoji">❓</span><p>هل لديك سؤال؟</p><button class="medica-view-btn" onclick="go('question')">عرض</button></div>
-
+        <!-- البطاقات -->
+        <div class="medica-item-card" onclick="go('welcome')"><span class="medica-emoji">👋</span><p>مرحباً كيف أساعدك؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('duration')"><span class="medica-emoji">⏱️</span><p>منذ متى وأنت متعب؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('location')"><span class="medica-emoji">📍</span><p>أين مكان الألم؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('headache')"><span class="medica-emoji">🤕</span><p>هل لديك صداع؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('dizzy')"><span class="medica-emoji">😵</span><p>هل تشعر بدوار؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('allergy')"><span class="medica-emoji">🤧</span><p>هل لديك حساسية؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('chronic')"><span class="medica-emoji">🧬</span><p>هل لديك أمراض مزمنة؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('meds')"><span class="medica-emoji">💊</span><p>هل تأخذ أدوية؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('nausea')"><span class="medica-emoji">🤢</span><p>هل تشعر بغثيان؟</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('sit')"><span class="medica-emoji">🪑</span><p>اجلس واسترح</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('pressure')"><span class="medica-emoji">🩸</span><p>سأقيس الضغط</p><button class="medica-view-btn">عرض</button></div>
+        <div class="medica-item-card" onclick="go('water')"><span class="medica-emoji">💧</span><p>اشرب ماء</p><button class="medica-view-btn">عرض</button></div>
     </main>
 
     <script>
-         function go(key) {
-    // 1. تخزين القسم المختار
-    localStorage.setItem("selectedCategory", key);
-    
-    // 2. الرابط اللي يفتح صفحة الميديكال كواجهة
-    const previewURL = "https://htmlpreview.github.io/?https://github.com/446955897-tech/Medicalsign/blob/symptoms-task2/medical.html";
-    
-    // 3. الانتقال للرابط
-    window.location.href = previewURL;
-}   
+        function go(key) {
+            // تخزين الحالة المختارة في المتصفح
+            localStorage.setItem("selectedCategory", key);
+            // الانتقال لصفحة التفاصيل
+            window.location.href = "medical.html";
+        }
     </script>
 
 </body>
