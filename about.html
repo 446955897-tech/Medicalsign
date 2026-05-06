@@ -4,34 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>من نحن - MedicalSign</title>
-    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+        body {
+            background-color: #eef2f7; /* نفس خلفية الرئيسية */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+            direction: rtl;
+        }
+
+        /* تنسيق اللوقو بالمنتصف */
+        .logo-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .logo-container img {
+            width: 180px; /* حجم مناسب لصفحة فرعية */
+            height: auto;
+        }
+
+        /* عنوان "من نحن" خارج البوكس كما طلبتِ */
+        .page-title {
+            color: #2980b9;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* البوكس الأبيض المرتب */
+        .about-box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            max-width: 800px;
+            width: 100%;
+            line-height: 1.8;
+        }
+
+        /* تنسيق العناوين الجانبية (المشكلة، الحل، الخ) */
+        .section-title {
+            color: #2980b9;
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #ebf5fb;
+            display: inline-block;
+        }
+
+        p {
+            color: #2c3e50;
+            font-size: 17px;
+            margin-bottom: 20px;
+            text-align: justify; /* لجعل النص مرتباً من الطرفين */
+        }
+
+        /* زر العودة للرئيسية */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 30px;
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #1a5276;
+            transform: translateY(-2px);
+        }
+    </style>
 </head>
 <body>
 
-    <a href="index.php">
-        <img src="images/logo.png" alt="MedicalSign">
-    </a>
+    <!-- اللوقو في الأعلى -->
+    <div class="logo-container">
+        <a href="index.html">
+            <img src="images/logo.png" alt="MedicalSign">
+        </a>
+    </div>
 
-    <main class="content" style="max-width: 700px;">
-        <h1>من نحن - MedicalSign</h1>
+    <!-- العنوان خارج البوكس -->
+    <div class="page-title">من نحن - MedicalSign</div>
+
+    <!-- البوكس الأبيض المحتوي على الكلام -->
+    <main class="about-box">
         
-        <div class="about-section" style="text-align: right;">
-            <h2 style="color: #2980b9;">المشكلة</h2>
-            <p>تواجه فئة الصم والبكم تحديات كبيرة عند زيارة المنشآت الطبية، حيث يشكل "حاجز اللغة" عائقاً أمام فهم الطبيب لمكان الألم بدقة، أو فهم المريض لتعليمات العلاج، خاصة في ظل ندرة وجود مترجم لغة إشارة متاح بشكل دائم في كل العيادات.</p>
+        <div class="section-title">المشكلة</div>
+        <p>
+            تواجه فئة الصم والبكم تحديات كبيرة عند زيارة المنشآت الطبية، حيث يشكل "حاجز اللغة" عائقاً أمام فهم الطبيب لمكان الألم بدقة، أو فهم المريض لتعليمات العلاج، خاصة في ظل ندرة وجود مترجم لغة إشارة متاح بشكل دائم في كل العيادات.
+        </p>
 
-            <h2 style="color: #2980b9;">الحل</h2>
-            <p>مشروع <strong>MedicalSign</strong> هو حلقة وصل رقمية، يوفر واجهة تفاعلية بسيطة تعتمد على "الأيقونات الطبية" المألوفة. من خلال التطبيق، يمكن للمريض التعبير عن أعراضه (مثل الصداع أو الدوخة) بلمسة زر، ليتحول اختياره إلى لغة إشارة مرئية يفهمها هو، أو نص طبي واضح يظهر للطبيب، مما يضمن دقة التشخيص وسلامة التواصل.</p>
+        <div class="section-title">الحل</div>
+        <p>
+            مشروع MedicalSign هو حلقة وصل رقمية، يوفر واجهة تفاعلية بسيطة تعتمد على "الأيقونات الطبية" المألوفة. من خلال التطبيق، يمكن للمريض التعبير عن أعراضه (مثل الصداع أو الدوخة) بلمسة زر، ليتحول اختياره إلى لغة إشارة مرئية يفهمها هو، أو نص طبي واضح يظهر للطبيب، مما يضمن دقة التشخيص وسلامة التواصل.
+        </p>
 
-            <h2 style="color: #2980b9;">هدف المشروع</h2>
-            <p>نهدف إلى تمكين ذوي الهمم من الصم والبكم صحياً، ومنحهم الاستقلالية الكاملة في التعبير عن آلامهم دون الحاجة لوسيط، مع توظيف تقنيات الويب لتحسين جودة الرعاية الطبية المقدمة لهم.</p>
+        <div class="section-title">هدف المشروع</div>
+        <p>
+            نهدف إلى تمكين ذوي الهمم من الصم والبكم صحياً، ومنحهم الاستقلالية الكاملة في التعبير عن آلامهم دون الحاجة لوسيط، مع توظيف تقنيات الويب لتحسين جودة الرعاية الطبية المقدمة لهم.
+        </p>
 
-            <h2 style="color: #2980b9;">الفريق</h2>
-            <p>تم تطوير هذا المشروع بواسطة طالبات قسم علوم الحاسب كجزء من مشروع التخرج، سعياً للمساهمة في بناء مجتمع تقني شامل يخدم كافة الفئات.</p>
+        <div class="section-title">الفريق</div>
+        <p>
+            تم تطوير هذا المشروع بواسطة طالبات قسم علوم الحاسب كجزء من مشروع التخرج، سعياً للمساهمة في بناء مجتمع تقني شامل يخدم كافة الفئات.
+        </p>
+
+        <div style="text-align: center;">
+            <a href="index.html" class="back-btn">العودة للرئيسية</a>
         </div>
 
-        <div class="buttons" style="margin-top: 30px;">
-            <button class="btn login" onclick="location.href='index.html'">العودة للرئيسية</button>
-        </div>
     </main>
 
 </body>

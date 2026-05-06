@@ -1,29 +1,48 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <link rel="stylesheet" href="CSS/style.css">
 <meta charset="UTF-8">
 <title>Medical Sign</title>
 
 <style>
-.logo{
-  position:absolute;
-  top:-10px;    
-  left:-15px;   
-  width:200px;  
-  height:auto;
+  .header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
-/* مهم */
+.logo{
+  position: absolute;
+  left: 5px;
+  top: -20px;
+  width: 200px;
+}
+
+body{background:#eef2f7;font-family:Arial;margin:0}
+
+
 .header{
   background:#fff;
-  padding:40px 20px 20px 20px; 
+  padding:20px;
   text-align:center;
   box-shadow:0 2px 10px rgba(41,128,185,0.1);
-  position:relative; 
+  position:relative;
 }
-h1{
-  color:#2980b9;
-  margin:0;
+h1{color:#2980b9;margin:0}
+
+
+.lang-btn{
+  position:absolute;
+  left:20px;
+  top:20px;
+  background:#2980b9;
+  color:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:10px;
+  cursor:pointer;
 }
 
 
@@ -44,14 +63,9 @@ h1{
   box-shadow:0 4px 10px rgba(41,128,185,0.1);
   transition:0.3s;
 }
+.card:hover{transform:translateY(-5px)}
 
-.card:hover{
-  transform:translateY(-5px);
-}
-
-.emoji{
-  font-size:45px;
-}
+.emoji{font-size:45px}
 
 button{
   background:#2980b9;
@@ -62,7 +76,6 @@ button{
   margin-top:10px;
   cursor:pointer;
 }
-
 button:hover{
   background:#1a5276;
   transform:scale(1.05);
@@ -71,49 +84,82 @@ button:hover{
 </head>
 
 <body>
-
+  <div class="logo-container">
+ </div>
 <div class="header">
-
-  <img src="logo.png" class="logo"> 
-
-  <h1>
-    🩺 الجمل الطبية
-  </h1>
+<img src="logo.png" class="logo">
+<h1 id="title">
+  <span class="icon">🩺</span>
+  <span id="title-text">الجمل الطبية</span>
+</h1>
 
 </div>
 
 <div class="container">
 
-<div class="card"><div class="emoji">👋</div><p>مرحباً كيف أساعدك؟</p><button onclick="go('welcome')">عرض</button></div>
-<div class="card"><div class="emoji">⏱️</div><p>منذ متى وأنت متعب؟</p><button onclick="go('duration')">عرض</button></div>
-<div class="card"><div class="emoji">📍</div><p>أين مكان الألم؟</p><button onclick="go('location')">عرض</button></div>
-<div class="card"><div class="emoji">🤕</div><p>هل لديك صداع؟</p><button onclick="go('headache')">عرض</button></div>
-<div class="card"><div class="emoji">😵</div><p>هل تشعر بدوار؟</p><button onclick="go('dizzy')">عرض</button></div>
-<div class="card"><div class="emoji">🤧</div><p>هل لديك حساسية؟</p><button onclick="go('allergy')">عرض</button></div>
-<div class="card"><div class="emoji">🧬</div><p>هل لديك أمراض مزمنة؟</p><button onclick="go('chronic')">عرض</button></div>
-<div class="card"><div class="emoji">💊</div><p>هل تأخذ أدوية؟</p><button onclick="go('meds')">عرض</button></div>
-<div class="card"><div class="emoji">🤢</div><p>هل تشعر بغثيان؟</p><button onclick="go('nausea')">عرض</button></div>
-<div class="card"><div class="emoji">🪑</div><p>اجلس واسترح</p><button onclick="go('sit')">عرض</button></div>
-<div class="card"><div class="emoji">🫁</div><p>خذ نفس عميق</p><button onclick="go('breath')">عرض</button></div>
-<div class="card"><div class="emoji">🌡️</div><p>سأقيس الحرارة</p><button onclick="go('temp')">عرض</button></div>
-<div class="card"><div class="emoji">🩸</div><p>سأقيس الضغط</p><button onclick="go('pressure')">عرض</button></div>
-<div class="card"><div class="emoji">👄</div><p>افتح فمك</p><button onclick="go('mouth')">عرض</button></div>
-<div class="card"><div class="emoji">🛏️</div><p>استلقِ على السرير</p><button onclick="go('bed')">عرض</button></div>
-<div class="card"><div class="emoji">💊</div><p>خذ الدواء مرتين يومياً</p><button onclick="go('dose')">عرض</button></div>
-<div class="card"><div class="emoji">⏰</div><p>خذ الدواء قبل الأكل</p><button onclick="go('before_food')">عرض</button></div>
-<div class="card"><div class="emoji">😴</div><p>راحة</p><button onclick="go('rest')">عرض</button></div>
-<div class="card"><div class="emoji">💧</div><p>اشرب ماء</p><button onclick="go('water')">عرض</button></div>
-<div class="card"><div class="emoji">🍔</div><p>تجنب الدهون</p><button onclick="go('food_avoid')">عرض</button></div>
-<div class="card"><div class="emoji">🏥</div><p>راجع المستشفى</p><button onclick="go('hospital')">عرض</button></div>
-<div class="card"><div class="emoji">❓</div><p>هل لديك سؤال؟</p><button onclick="go('question')">عرض</button></div>
+
+
+<div class="card"><div class="emoji">👋</div><p data-ar="مرحباً كيف أساعدك؟" data-en="Hello how can I help you?">مرحباً كيف أساعدك؟</p><button onclick="go('welcome')">عرض</button></div>
+<div class="card"><div class="emoji">⏱️</div><p data-ar="منذ متى وأنت متعب؟" data-en="How long have you been tired?">منذ متى وأنت متعب؟</p><button onclick="go('duration')">عرض</button></div>
+<div class="card"><div class="emoji">📍</div><p data-ar="أين مكان الألم؟" data-en="Where is the pain?">أين مكان الألم؟</p><button onclick="go('location')">عرض</button></div>
+<div class="card"><div class="emoji">🤕</div><p data-ar="هل لديك صداع؟" data-en="Do you have a headache?">هل لديك صداع؟</p><button onclick="go('headache')">عرض</button></div>
+<div class="card"><div class="emoji">😵</div><p data-ar="هل تشعر بدوار؟" data-en="Do you feel dizzy?">هل تشعر بدوار؟</p><button onclick="go('dizzy')">عرض</button></div>
+<div class="card"><div class="emoji">🤧</div><p data-ar="هل لديك حساسية؟" data-en="Do you have allergies?">هل لديك حساسية؟</p><button onclick="go('allergy')">عرض</button></div>
+<div class="card"><div class="emoji">🧬</div><p data-ar="هل لديك أمراض مزمنة؟" data-en="Do you have chronic diseases?">هل لديك أمراض مزمنة؟</p><button onclick="go('chronic')">عرض</button></div>
+<div class="card"><div class="emoji">💊</div><p data-ar="هل تأخذ أدوية؟" data-en="Do you take medication?">هل تأخذ أدوية؟</p><button onclick="go('meds')">عرض</button></div>
+<div class="card"><div class="emoji">🤢</div><p data-ar="هل تشعر بغثيان؟" data-en="Do you feel nauseous?">هل تشعر بغثيان؟</p><button onclick="go('nausea')">عرض</button></div>
+<div class="card"><div class="emoji">🪑</div><p data-ar="اجلس واسترح" data-en="Sit and relax">اجلس واسترح</p><button onclick="go('sit')">عرض</button></div>
+<div class="card"><div class="emoji">🫁</div><p data-ar="خذ نفس عميق" data-en="Take a deep breath">خذ نفس عميق</p><button onclick="go('breath')">عرض</button></div>
+<div class="card"><div class="emoji">🌡️</div><p data-ar="سأقيس الحرارة" data-en="I will measure temperature">سأقيس الحرارة</p><button onclick="go('temp')">عرض</button></div>
+<div class="card"><div class="emoji">🩸</div><p data-ar="سأقيس الضغط" data-en="I will measure blood pressure">سأقيس الضغط</p><button onclick="go('pressure')">عرض</button></div>
+<div class="card"><div class="emoji">👄</div><p data-ar="افتح فمك" data-en="Open your mouth">افتح فمك</p><button onclick="go('mouth')">عرض</button></div>
+<div class="card"><div class="emoji">🛏️</div><p data-ar="استلقِ على السرير" data-en="Lie on the bed">استلقِ على السرير</p><button onclick="go('bed')">عرض</button></div>
+<div class="card"><div class="emoji">💊</div><p data-ar="خذ الدواء مرتين يومياً" data-en="Take medicine twice daily">خذ الدواء مرتين يومياً</p><button onclick="go('dose')">عرض</button></div><div class="card"><div class="emoji">⏰</div><p data-ar="خذ الدواء قبل الأكل" data-en="Take medicine before food">خذ الدواء قبل الأكل</p><button onclick="go('before_food')">عرض</button></div>
+<div class="card"><div class="emoji">😴</div><p data-ar="راحة" data-en="Rest">راحة</p><button onclick="go('rest')">عرض</button></div>
+<div class="card"><div class="emoji">💧</div><p data-ar="اشرب ماء" data-en="Drink water">اشرب ماء</p><button onclick="go('water')">عرض</button></div>
+<div class="card"><div class="emoji">🍔</div><p data-ar="تجنب الدهون" data-en="Avoid fatty food">تجنب الدهون</p><button onclick="go('food_avoid')">عرض</button></div>
+<div class="card"><div class="emoji">🏥</div><p data-ar="راجع المستشفى" data-en="Go to hospital">راجع المستشفى</p><button onclick="go('hospital')">عرض</button></div>
+<div class="card"><div class="emoji">❓</div><p data-ar="هل لديك سؤال؟" data-en="Any questions?">هل لديك سؤال؟</p><button onclick="go('question')">عرض</button></div>
 
 </div>
-
 <script>
-function go(key){
-  window.location.href = "medical.html?case=" + key;
-}
-</script>
 
+function go(key){
+ localStorage.setItem("selectedCategory", key); 
+  window.location.href="medical.html";
+}
+
+let lang = localStorage.getItem("lang") || "ar";
+
+window.onload = function(){
+  applyLang();
+};
+
+function toggleLang(){
+  if(lang === "ar"){
+    lang = "en";
+  }else{
+    lang = "ar";
+  }
+
+function applyLang(){
+  let items = document.querySelectorAll("[data-ar]");
+  let btn = document.getElementById("langToggle");
+
+  if(lang === "en"){
+    items.forEach(e => e.innerText = e.dataset.en);
+    document.getElementById("title-text").innerText = "Medical Sentences";
+    if(btn) btn.innerText = "AR";
+    document.documentElement.dir = "ltr";
+  }else{
+    items.forEach(e => e.innerText = e.dataset.ar);
+    document.getElementById("title-text").innerText = "الجمل الطبية";
+    if(btn) btn.innerText = "EN";
+    document.documentElement.dir = "rtl";
+  }
+}
+
+</script>
+ <script src="JAVA%20S/script.js"></script>
 </body>
-</html
+</html>

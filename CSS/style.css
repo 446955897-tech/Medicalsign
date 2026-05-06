@@ -18,7 +18,7 @@
 /* تنسيق اللوجو - تم ضبط العرض ليكون تلقائياً لمنع الانضغاط */
 .logo-top-corner {
     position: absolute;
-    top: 15px;
+    top: 25px;
     right: 25px;
     z-index: 1000;
 }
@@ -29,6 +29,8 @@
     filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.1));
     transition: transform 0.3s ease;
     cursor: pointer;
+    display: block;
+    margin: 10px auto;
 }
 
 .logo-top-corner img:hover {
@@ -38,8 +40,8 @@
 /* الحاوية الرئيسية للمحتوى */
 .symp-container {
     max-width: 1100px !important;
-    margin: 150px auto 0 auto !important; /* الرقم 150 سيجبره على النزول مسافة كبيرة */
-    padding: 20px !important;
+    margin: 20px auto 0 auto !important; /* الرقم 150 سيجبره على النزول مسافة كبيرة */
+    padding: 10px !important;
     display: block !important;
     position: relative !important;
     clear: both !important;
@@ -50,8 +52,8 @@
     color: #2c3e50;
     text-align: center;
     font-weight: 700;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* خانة البحث الاحترافية */
@@ -659,26 +661,25 @@ input[type="date"]:valid::-webkit-datetime-edit-text {
 /* إعدادات عامة للهيكل */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #eef2f7; /* خلفية الصفحة اللي طلبتها الليدر */
-    color: #2c3e50; /* لون النصوص الأساسي */
+    background-color: #eef2f7; /* خلفية الصفحة المطلوبة */
+    color: #2c3e50;
     margin: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    direction: rtl; /* اتجاه النصوص من اليمين لليسار */
+    justify-content: center; /* لتوسيط المحتوى عمودياً */
+    min-height: 100vh;
+    direction: rtl;
 }
 
-/* تنسيق الهيدر واللوقو */
-header {
-    background-color: #ffffff;
-    width: 100%;
-    padding: 20px 0;
+/* تنسيق اللوقو الجديد (بالنص وكبير) */
+.logo-container {
+    margin-bottom: 20px;
     text-align: center;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.logo {
-    max-height: 150px; /* تصغير اللوقو عشان ما يطلع عملاق */
+.logo-container img {
+    max-height: 220px; /* تكبير اللوقو كما طلبتِ */
     width: auto;
     display: block;
     margin: 0 auto;
@@ -687,76 +688,111 @@ header {
 /* حاوية المحتوى الرئيسي */
 .content {
     background-color: #ffffff;
-    margin-top: 40px;
-    padding: 40px;
-    border-radius: 15px;
-    border: 1px solid #ecf0f1; /* حدود النوافذ */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    padding: 50px; /* زيادة التباعد الداخلي */
+    border-radius: 20px; /* حواف أنعم */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
     text-align: center;
-    width: 90%;
-    max-width: 450px;
+    width: 95%;
+    max-width: 550px; /* تعريض الحاوية قليلاً */
 }
 
-/* العناوين */
-h1 {
-    color: #2980b9; /* الأزرق الملكي للعناوين */
-    font-size: 26px;
-    margin-bottom: 10px;
+/* نص الترحيب البارز (بدل تعريف بالموقع) */
+.welcome-text {
+    color: #2980b9; /* لونك الأزرق الملكي */
+    font-size: 28px; /* حجم أكبر وأبرز */
+    font-weight: bold;
+    margin-bottom: 40px;
+    line-height: 1.4;
 }
 
-/* النصوص الفرعية */
-.welcome p {
-    color: #7f8c8d; /* لون النصوص الفرعية */
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-/* مجموعة الأزرار */
+/* مجموعة الأزرار (أعرض وأكبر) */
 .buttons {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    margin-top: 30px;
+    gap: 20px; /* مسافة أكبر بين الأزرار */
 }
 
-/* تصميم الزر الأساسي */
 .btn {
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 16px;
+    padding: 18px; /* جعل الأزرار أضخم */
+    border-radius: 12px;
+    font-size: 18px; /* خط الأزرار أكبر */
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
+    width: 100%; /* تأخذ كامل عرض الحاوية */
 }
 
-/* زر تسجيل الدخول (أزرق ملكي) */
+/* زر تسجيل الدخول */
 .login {
     background-color: #2980b9;
     color: white;
 }
 
 .login:hover {
-    background-color: #1a5276; /* أزرق التفاعل عند مرور الماوس */
+    background-color: #1a5276;
+    transform: translateY(-2px); /* تأثير حركة بسيط */
 }
 
-/* زر إنشاء حساب (خلفية نجاح هادئة) */
+/* زر إنشاء حساب */
 .signup {
     background-color: #ebf5fb;
     color: #2980b9;
-    border: 1px solid #2980b9;
+    border: 2px solid #2980b9; /* حدود أوضح */
 }
 
 .signup:hover {
     background-color: #d6eaf8;
 }
 
-/* زر من نحن */
+/* رابط من نحن */
 .about {
-    background-color: transparent;
+    margin-top: 20px;
     color: #7f8c8d;
+    text-decoration: none;
+    font-size: 15px;
+    display: inline-block;
+}
+.about:hover {
     text-decoration: underline;
-    font-size: 14px;
+}
+
+/* الشريط العلوي لينا2 */
+
+/* تنسيق المنيو العلوي */
+.top-nav {
+    background-color: #2980b9; /* اللون الأزرق الملكي حق الثيم */
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: fixed; /* يبقى ثابت فوق حتى لو نزلتِ تحت */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center; /* يخلي المنيو في النص */
+    gap: 30px; /* مسافة بين الروابط */
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    color: #f1c40f; /* يتغير لونه للأصفر الهادي عند التمرير عليه */
+    text-decoration: underline;
+}
+
+/* تعديل بسيط عشان المحتوى الأصلي ما يختفي تحت المنيو */
+body {
+    padding-top: 70px; 
 }
 
 /* -- نهاية كود لينا -- */
@@ -764,6 +800,7 @@ h1 {
 
 
 /*-- بداية كود بيان --*/
+
 body {
   background:#eef2f7;
   font-family:Arial;
@@ -781,17 +818,6 @@ body {
 
 
 h1 { color:#2980b9; }
-
-.lang-btn {
-  position:absolute;
-  right:20px;
-  top:20px;
-  background:#2980b9;
-  color:white;
-  border:none;
-  padding:8px 15px;
-  border-radius:10px;
-}
 
 .container {
   display:flex;
@@ -846,8 +872,7 @@ img { width:200px; border-radius:20px; }
 }
 /*-- نهاية كود بيان --*/
 
-
-/*كود جوري *
+/* كود جوري */
 :root{
   --primary:#2980b9;
   --hover:#1a5276;
@@ -875,9 +900,36 @@ body{
   padding:25px;
   box-shadow:0 10px 30px rgba(41,128,185,0.1);
   text-align:center;
+  position: relative;
 }
 
-/* Tabs */
+.back-home-link {
+    display: block;
+    text-align: right;
+    text-decoration: none;
+    color: var(--sub);
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+.back-home-link:hover {
+    color: var(--primary);
+}
+
+.login-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--sub);
+}
+.login-link a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: bold;
+}
+.login-link a:hover {
+    text-decoration: underline;
+}
+
 .tabs{
   display:flex;
   margin-bottom:15px;
@@ -895,7 +947,8 @@ body{
   color:#2c3e50 !important;
   font-weight:bold;
   margin-top:0 !important;  
-  width:auto !important;       }
+  width:auto !important;
+}
 
 .tabs button:hover{
   background:#2980b9 !important;
@@ -907,7 +960,6 @@ body{
   color:#fff !important;
 }
 
-/* Fields */
 .field{
   text-align:right;
   margin:12px 0;
@@ -927,7 +979,6 @@ input, select{
   outline:none;
 }
 
-/* Buttons */
 button{
   width:100%;
   padding:12px;
@@ -945,7 +996,6 @@ button:hover{
   background:var(--hover);
 }
 
-/* Map */
 .map{
   width:100%;
   height:180px;
@@ -954,7 +1004,6 @@ button:hover{
   border:1px solid var(--border);
 }
 
-/* Success */
 .success{
   background:var(--success);
   padding:10px;
@@ -963,7 +1012,6 @@ button:hover{
   display:none;
 }
 
-/* Hide sections */
 .tab-content{
   display:none;
 }
@@ -979,12 +1027,18 @@ button:hover{
 }
 
 .logo{
-  width:200px;        
-  height:200px;
+  width:150px;        
+  height:150px;
   object-fit:contain;
   margin:0 auto 8px auto;
   display:block;
 }
+
+.phone-group {
+    display: flex;
+    gap: 5px;
+}
+.phone-group select { width: 35%; }
 /*end كود جوري */
 
 .main-card {
