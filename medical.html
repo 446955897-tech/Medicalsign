@@ -172,7 +172,7 @@
         };
 
         let params = new URLSearchParams(window.location.search);
-        let caseKey = params.get("case") || "welcome"; // افتراضياً نفتح الترحيب
+        let caseKey = localStorage.getItem("selectedCategory") || "welcome";
         let currentLang = localStorage.getItem("lang") || "ar";
 
         function render() {
