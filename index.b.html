@@ -125,7 +125,7 @@ button:hover{
 
 function go(key){
   localStorage.setItem("lang", lang);
-  window.location.href="medical.html?case="+key;
+  window.location.href="medical.html";
 }
 
 let lang = localStorage.getItem("lang") || "ar";
@@ -141,7 +141,7 @@ function toggleLang(){
     lang = "ar";
   }
 
-  localStorage.setItem("lang", lang);
+  localStorage.setItem("selectedCategory", key); 
   applyLang();
 }
 
