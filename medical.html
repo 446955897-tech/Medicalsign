@@ -1,18 +1,18 @@
-         <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تفاصيل الحالة - MedicaSign</title>
     <style>
-        body { background: #f0f4f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .medica-details-card { background: #fff; width: 100%; max-width: 450px; padding: 30px; border-radius: 28px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; }
-        .image-wrapper { width: 100%; height: 230px; background: #f8fafc; border-radius: 20px; margin-bottom: 20px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid #e2e8f0; }
+        body { background: #f0f4f8; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .medica-details-card { background: #fff; width: 100%; max-width: 420px; padding: 25px; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); text-align: center; }
+        .image-wrapper { width: 100%; height: 220px; background: #f8fafc; border-radius: 18px; margin-bottom: 20px; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid #eef2f7; }
         .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .title-text { font-size: 26px; color: #1a365d; font-weight: 800; margin-bottom: 15px; }
-        .info-box { background: #f1f5f9; padding: 25px; border-radius: 20px; text-align: right; color: #334155; font-size: 19px; font-weight: 600; line-height: 1.8; border-right: 6px solid #3182ce; margin-bottom: 25px; white-space: pre-line; }
-        .back-btn { background: #3182ce; color: #fff; border: none; padding: 16px; border-radius: 15px; cursor: pointer; font-size: 18px; font-weight: 700; width: 100%; transition: 0.3s; box-shadow: 0 4px 12px rgba(49, 130, 206, 0.2); }
-        .back-btn:hover { background: #2c5282; transform: translateY(-2px); }
+        .title-text { font-size: 24px; color: #1a365d; font-weight: 800; margin-bottom: 12px; }
+        .info-box { background: #f1f5f9; padding: 20px; border-radius: 18px; text-align: right; color: #334155; font-size: 18px; font-weight: 600; line-height: 1.7; border-right: 5px solid #3182ce; margin-bottom: 25px; white-space: pre-line; min-height: 80px; }
+        .back-btn { background: #3182ce; color: #fff; border: none; padding: 15px; border-radius: 14px; cursor: pointer; font-size: 17px; font-weight: 700; width: 100%; transition: 0.3s; }
+        .back-btn:hover { background: #2c5282; }
     </style>
 </head>
 <body>
@@ -21,52 +21,48 @@
         <div class="image-wrapper">
             <img id="img_element" src="" alt="جاري التحميل...">
         </div>
-        <h1 id="title_element" class="title-text">...</h1>
-        <div class="info-box" id="content_element">...</div>
-        <!-- الزر يعود لملفك الرئيسي المسمى index.b.html -->
-        <button class="back-btn" onclick="goBack()">⬅ عودة للرئيسية</button>
+        <h1 id="title_element" class="title-text">تحميل...</h1>
+        <div class="info-box" id="content_element">جاري جلب البيانات...</div>
+        <button class="back-btn" onclick="window.location.href='index.b.html'">⬅ عودة للرئيسية</button>
     </div>
 
     <script>
         const medicalData = {
-            welcome: { title: "الاستقبال", text: "أهلاً بك في MedicaSign.\nكيف يمكنني مساعدتك اليوم؟" },
-            duration: { title: "مدة التعب", text: "منذ متى تشعر بهذا التعب؟\nأحتاج لتحديد المدة لنتابع حالتك." },
-            location: { title: "موقع الألم", text: "من فضلك أشر لي إلى مكان الألم.\nوهل ينتقل لمكان آخر؟" },
+            welcome: { title: "الاستقبال", text: "مرحباً بك في MedicaSign.\nكيف يمكنني مساعدتك اليوم؟" },
+            duration: { title: "مدة التعب", text: "منذ متى وأنت تشعر بهذا التعب؟\nأحتاج لمعرفة المدة بدقة." },
+            location: { title: "موقع الألم", text: "أشر بيدك إلى مكان الألم من فضلك.\nهل ينتقل الألم لمكان آخر؟" },
             headache: { title: "الصداع", text: "هل تشعر بنبض في رأسك؟\nابقَ في مكان هادئ وبعيد عن الضوء." },
             dizzy: { title: "الدوار", text: "هل تشعر بعدم الاتزان؟\nاجلس الآن لتجنب أي سقوط مفاجئ." },
-            allergy: { title: "الحساسية", text: "هل تعاني من حساسية تجاه أدوية معينة؟\nأخبرني إذا ظهر طفح جلدي." },
-            chronic: { title: "الأمراض المزمنة", text: "هل تم تشخيصك بالسكري أو الضغط؟\nأخبرني إذا كنت تتابع مع طبيب." },
+            allergy: { title: "الحساسية", text: "هل لديك حساسية من أدوية معينة؟\nأخبرني إذا ظهر أي طفح جلدي." },
+            chronic: { title: "أمراض مزمنة", text: "هل تعاني من السكري أو الضغط؟\nأخبرني إذا كنت تأخذ أدوية منتظمة." },
             meds: { title: "الأدوية الحالية", text: "هل تتناول أدوية بانتظام؟\nأرني علب الأدوية إن كانت معك." },
             nausea: { title: "الغثيان", text: "هل تشعر برغبة في التقيؤ؟\nاشرب الماء برشفات صغيرة جداً." },
-            sit: { title: "استراحة", text: "تفضل بالجلوس والاستراحة هنا.\nلا تقلق، سأكون معك." },
+            sit: { title: "استراحة", text: "تفضل بالجلوس والاستراحة هنا.\nسأكون معك بعد قليل." },
             pressure: { title: "قياس الضغط", text: "سأقيس ضغط الدم الآن.\nارخِ يدك تماماً ولا تتحرك." },
             water: { title: "شرب الماء", text: "يجب أن تشرب كمية كافية من الماء.\nهذا ضروري جداً لصحتك." }
         };
 
         function render() {
-            const caseKey = localStorage.getItem("selectedCategory") || "welcome";
+            // محاولة جلب المفتاح من الرابط أولاً ثم من التخزين
+            const urlParams = new URLSearchParams(window.location.search);
+            let caseKey = urlParams.get('case')  localStorage.getItem("selectedCategory")  "welcome";
+            
             const data = medicalData[caseKey];
 
             if (data) {
                 document.getElementById("title_element").innerText = data.title;
                 document.getElementById("content_element").innerText = data.text;
-                // التأكد من تحميل الصورة من مجلد icon بصيغة jpeg
                 document.getElementById("img_element").src = "icon/" + caseKey + ".jpeg";
                 
-                // حل بديل في حال فقدان الصورة
                 document.getElementById("img_element").onerror = function() {
-                    this.src = "https://via.placeholder.com/400x250?text=" + data.title;
+                    this.src = "https://ui-avatars.com/api/?name=" + encodeURIComponent(data.title) + "&background=ebf8ff&color=3182ce&size=400";
                 };
+            } else {
+                document.getElementById("content_element").innerText = "خطأ: لم يتم العثور على بيانات لهذه الحالة.";
             }
-        }
-
-        function goBack() {
-            // التوجيه لاسم ملفك المخصص
-            window.location.href = "index.b.html";
         }
 
         window.onload = render;
     </script>
-
 </body>
 </html>
