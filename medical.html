@@ -192,7 +192,7 @@ const medicalData = {
 };
 
 function render() {
-    currentLang = localStorage.getItem("lang") || "ar";
+    currentLang = localStorage.getItem"ar";
     let data = medicalData[caseKey];
     if (data) {
         document.getElementById("img_element").src = "icon/" + caseKey + ".jpeg";
@@ -209,10 +209,6 @@ window.onload = function(){
 render();
 };
 function goBack() { window.location.href = "index.b.html"; }
-function toggleLang(){
-    currentLang = (currentLang === "ar") ? "en" : "ar";
-    localStorage.setItem("lang", currentLang);
-    render();
 }
 </script>
 </body>
