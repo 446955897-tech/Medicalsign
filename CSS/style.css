@@ -800,93 +800,115 @@ body {
 
 
 /*-- بداية كود بيان --*/
-
-
 body {
-    background-color: #eef2f7; /* لون الخلفية الأصلي */
-    font-family: Arial, sans-serif;
+    background-color: #f0f4f8; /* لون خلفية هادئ ومريح */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    direction: rtl; /* لضمان تنسيق النصوص العربية */
+    direction: rtl;
 }
 
-/* --- تنسيق الصفحة الرئيسية (index) --- */
+/* --- تنسيق الهيدر (العنوان العلوي) --- */
+.header {
+    text-align: center;
+    padding: 30px;
+    background-color: transparent;
+}
 
+.header h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* --- تنسيق الحاوية والبطاقات (نفس الصورة تماماً) --- */
 .container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr); /* يعيد الـ 5 أعمدة كما كانت */
-    gap: 20px;
-    padding: 20px;
-    justify-items: center; /* لتوسيط البطاقات */
+    grid-template-columns: repeat(5, 1fr); /* 5 أعمدة كما في الصورة */
+    gap: 25px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .card {
     background: white;
-    margin: 10px;
-    padding: 20px;
-    border-radius: 20px; /* حواف منحنية أنيقة */
+    border-radius: 30px; /* حواف منحنية بشكل كبير كما في الصورة */
+    padding: 30px 20px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(41, 128, 185, 0.1); /* ظل خفيف أزرق */
-    transition: 0.3s;
-    width: auto;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05); /* ظل ناعم جداً */
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 250px;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* حركة بسيطة عند التمرير */
+    transform: translateY(-10px);
 }
 
-/* الأيقونات الصغيرة في الصفحة الرئيسية */
+/* تنسيق الصور (الأيقونات) في الصفحة الرئيسية */
 .card img {
-    width: 60px; /* حجم الأيقونة المناسب للبطاقة */
-    height: auto;
-    margin-bottom: 15px;
+    width: 80px !important; /* حجم الأيقونة كما يظهر في الصورة */
+    height: 80px !important;
+    object-fit: contain;
+    margin-bottom: 20px;
+    display: block !important;
 }
 
-/* --- تنسيق صفحة التفاصيل (Details) --- */
-
-.details-card {
-    width: 90%; /* تجعل البطاقة تأخذ أغلب عرض الشاشة */
-    max-width: 1000px; /* نكبر الحد الأقصى لتكون الـ "واجهة" راهية */
-    margin: 50px auto;
-    background: white;
-    padding: 40px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex; /* لترتيب المحتوى عمودياً */
-    flex-direction: column;
-    align-items: center;
-    gap: 25px;
+.card p {
+    font-size: 1.1rem;
+    color: #34495e;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
-/* تكبير صورة لغة الإشارة في صفحة التفاصيل */
-.details-card img {
-    width: 100%; /* تتمدد لتملأ مساحة البطاقة */
-    max-width: 850px; /* هذا الرقم يضمن أن الصورة ستكون كبيرة جداً وواضحة */
-    height: auto;
-    border-radius: 15px;
-    display: block;
-    margin: 20px auto;
-}
-
-/* --- تنسيق الأزرار العام --- */
-
-button {
+/* زر "عرض" في الصفحة الرئيسية */
+.card button {
     background-color: #2980b9;
     color: white;
     border: none;
-    padding: 10px 25px;
-    border-radius: 10px;
+    padding: 8px 30px;
+    border-radius: 15px;
     cursor: pointer;
-    font-size: 16px;
-    transition: 0.3s;
+    font-size: 0.9rem;
 }
 
-button:hover {
-    background-color: #1a5276;
-    transform: scale(1.05); /* تكبير بسيط للزر عند اللمس */
+/* --- تنسيق صفحة التفاصيل (لضمان كبر الصورة) --- */
+.details-card {
+    width: 90%;
+    max-width: 900px;
+    margin: 50px auto;
+    background: white;
+    padding: 50px;
+    border-radius: 40px;
+    text-align: center;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
 }
 
+/* صورة لغة الإشارة الكبيرة */
+.details-card img {
+    width: 100% !important;
+    max-width: 750px !important; /* حجم كبير جداً وواضح */
+    height: auto !important;
+    border-radius: 20px;
+    margin: 30px auto;
+    display: block !important;
+}
+
+/* أزرار صفحة التفاصيل */
+.details-card button {
+    background-color: #2980b9;
+    padding: 12px 40px;
+    border-radius: 20px;
+    font-size: 1.1rem;
+    margin-top: 20px;
+}
 /*-- نهاية كود بيان --*/
 
 /* كود جوري */
