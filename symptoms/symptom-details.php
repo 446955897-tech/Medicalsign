@@ -27,11 +27,11 @@ $video = trim((string)($data['video_url'] ?? ''));
 </head>
 <body class="symptoms-body">
 
-    <div class="logo-top-corner">
-        <a href="index.php">
-            <img src="../images/logo.png" alt="MedicalSign">
-        </a>
-    </div>
+   <div class="logo-top-container">
+    <a href="index.php">
+       <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
+</a>
+   </div>
 
     <div class="symp-container" style="margin-top: 100px;">
         <article class="symp-card" style="max-width: 800px; margin: 0 auto; min-height: auto; padding: 40px; display: flex; flex-direction: column; align-items: center;">

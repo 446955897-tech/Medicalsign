@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+  <link rel="stylesheet" href="CSS/style.css">
+<title>Medical Sign</title>
+
+<style>
+.logo{
+  position:absolute;
+  top:-10px;    
+  left:-15px;   
+  width:200px;  
+  height:auto;
+}
+
+/* مهم */
+.header{
+  background:#fff;
+  padding:40px 20px 20px 20px; 
+  text-align:center;
+  box-shadow:0 2px 10px rgba(41,128,185,0.1);
+  position:relative; 
+}
+h1{
+  color:#2980b9;
+  margin:0;
+}
+
+
+.container{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:20px;
+}
+
+.card{
+  background:#fff;
+  margin:10px;
+  padding:20px;
+  border-radius:20px;
+  width:200px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(41,128,185,0.1);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+}
+
+.emoji{
+  font-size:45px;
+}
+
+button{
+  background:#2980b9;
+  color:#fff;
+  border:none;
+  padding:8px;
+  border-radius:10px;
+  margin-top:10px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#1a5276;
+  transform:scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<  
+      
+  <div class="logo-top-container">
+    <a href="index.php">
+       <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
+</a>
+
+        
+   </div>
+   <div style="margin-top: 20px; text-align: center;">
+            <a href="patient/dashboard.html" style="color: #2980b9; text-decoration: none; font-weight: bold; font-size: 14px;">
+                العودة إلى لوحة التحكم
+            </a>
+        </div>
+</div>
+  <h1>
+    🩺 الجمل الطبية
+  </h1>
+
+</div>
+
+<div class="container">
+
+<div class="card"><div class="emoji">👋</div><p>مرحباً كيف أساعدك؟</p><button onclick="go('welcome')">عرض</button></div>
+<div class="card"><div class="emoji">⏱️</div><p>منذ متى وأنت متعب؟</p><button onclick="go('duration')">عرض</button></div>
+<div class="card"><div class="emoji">📍</div><p>أين مكان الألم؟</p><button onclick="go('location')">عرض</button></div>
+<div class="card"><div class="emoji">🤕</div><p>هل لديك صداع؟</p><button onclick="go('headache')">عرض</button></div>
+<div class="card"><div class="emoji">😵</div><p>هل تشعر بدوار؟</p><button onclick="go('dizzy')">عرض</button></div>
+<div class="card"><div class="emoji">🤧</div><p>هل لديك حساسية؟</p><button onclick="go('allergy')">عرض</button></div>
+<div class="card"><div class="emoji">🧬</div><p>هل لديك أمراض مزمنة؟</p><button onclick="go('chronic')">عرض</button></div>
+<div class="card"><div class="emoji">💊</div><p>هل تأخذ أدوية؟</p><button onclick="go('meds')">عرض</button></div>
+<div class="card"><div class="emoji">🤢</div><p>هل تشعر بغثيان؟</p><button onclick="go('nausea')">عرض</button></div>
+<div class="card"><div class="emoji">🪑</div><p>اجلس واسترح</p><button onclick="go('sit')">عرض</button></div>
+<div class="card"><div class="emoji">🫁</div><p>خذ نفس عميق</p><button onclick="go('breath')">عرض</button></div>
+<div class="card"><div class="emoji">🌡️</div><p>سأقيس الحرارة</p><button onclick="go('temp')">عرض</button></div>
+<div class="card"><div class="emoji">🩸</div><p>سأقيس الضغط</p><button onclick="go('pressure')">عرض</button></div>
+<div class="card"><div class="emoji">👄</div><p>افتح فمك</p><button onclick="go('mouth')">عرض</button></div>
+<div class="card"><div class="emoji">🛏️</div><p>استلقِ على السرير</p><button onclick="go('bed')">عرض</button></div>
+<div class="card"><div class="emoji">💊</div><p>خذ الدواء مرتين يومياً</p><button onclick="go('dose')">عرض</button></div>
+<div class="card"><div class="emoji">⏰</div><p>خذ الدواء قبل الأكل</p><button onclick="go('before_food')">عرض</button></div>
+<div class="card"><div class="emoji">😴</div><p>راحة</p><button onclick="go('rest')">عرض</button></div>
+<div class="card"><div class="emoji">💧</div><p>اشرب ماء</p><button onclick="go('water')">عرض</button></div>
+<div class="card"><div class="emoji">🍔</div><p>تجنب الدهون</p><button onclick="go('food_avoid')">عرض</button></div>
+<div class="card"><div class="emoji">🏥</div><p>راجع المستشفى</p><button onclick="go('hospital')">عرض</button></div>
+<div class="card"><div class="emoji">❓</div><p>هل لديك سؤال؟</p><button onclick="go('question')">عرض</button></div>
+
+</div>
+
+<script>
+function go(key){
+  window.location.href = "medical.html?case=" + key;
+}
+</script>
+<script src="JS/script.js"></script>
+</body>
+</html

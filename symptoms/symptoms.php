@@ -10,20 +10,26 @@ include '../database/db.php';
 </head>
 
 <body class="symptoms-body">
-<div class="logo-top-corner">
+
+<div class="logo-top-container" style="text-align: center; padding-top: 10px;">
     <a href="index.php">
-        <img src="../images/logo.png" alt="MedicalSign">
-    </a>
-</div>
+       <img src="../images/logo.png" alt="MedicalSign Logo" style="height: 100px;">
+</a>
+   </div>
 
-<div class="symp-container" style="margin-top: 50px;"> 
-
-    <div class="header-actions" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 15px; flex-wrap: wrap;">
-        <h2 style="margin:0; font-size: 2.2rem; color: #1a508b;">استكشف الأعراض الطبية</h2>
+<div class="symp-container" style="margin-top: 5px !important;"> <div class="header-actions" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+        <h2 style="margin: 10px 0; font-size: 2.2rem; color: #1a508b;">استكشف الأعراض الطبية</h2>
         
-        <a href="index.php" class="symp-btn btn-back" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; background: #fff !important; border: 1px solid #ddd !important; color: #333 !important; border-radius: 50px;">
-            العودة للرئيسية⬅️ 
-        </a>
+        <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
+            <div style="margin-right: auto; padding-left: 20px;">
+                <a href="../patient/dashboard.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 220px; padding: 10px; border-radius: 25px; margin-bottom: 8px;">
+                    رجوع للوحة التحكم ⬅️
+                </a>
+                <a href="../index.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 220px; padding: 10px; border-radius: 25px;">
+                    رجوع للصفحة الرئيسية ⬅️
+                </a>
+            </div>
+        </div>
     </div>
 
     <input type="search" id="searchbar" onkeyup="searchSymptoms()" placeholder="ابحث عن عرض…" style="margin-bottom: 40px; width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
@@ -86,21 +92,21 @@ include '../database/db.php';
     echo '</div>';
     ?>
 
- <script src=".../JAVA S/script.js"></script>
-<script>
-function searchSymptoms() {
-    let input = document.getElementById('searchbar').value.toLowerCase().trim();
-    let cards = document.getElementsByClassName('symp-card');
+ <script>
+    function searchSymptoms() {
+        let input = document.getElementById('searchbar').value.toLowerCase().trim();
+        let cards = document.getElementsByClassName('symp-card');
 
-    for (let i = 0; i < cards.length; i++) {
-        let title = cards[i].getAttribute('data-title') || "";
-        if (title.toLowerCase().includes(input)) {
-            cards[i].style.setProperty('display', 'flex', 'important');
-        } else {
-            cards[i].style.setProperty('display', 'none', 'important');
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getAttribute('data-title') || "";
+            if (title.toLowerCase().includes(input)) {
+                cards[i].style.setProperty('display', 'flex', 'important'); 
+            } else {
+                cards[i].style.setProperty('display', 'none', 'important');
+            }
         }
     }
-}
-</script>
+ </script>
+
 </body>
 </html>
