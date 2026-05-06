@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>FAQ</title>
+    <title>الأسئلة الشائعة</title>
 
     <style>
         :root {
@@ -78,7 +78,6 @@
             border-radius: 10px;
             margin-bottom: 10px;
             overflow: hidden;
-            background: var(--white);
         }
 
         .faq-question {
@@ -86,7 +85,7 @@
             padding: 15px;
             background: none;
             border: none;
-            text-align: left;
+            text-align: right;
             cursor: pointer;
             font-weight: bold;
             color: var(--text-main);
@@ -106,55 +105,49 @@
 </head>
 <body>
 
+<div class="container">
+    <img src="logo.png" class="logo">
 
-     
-<div class="logo-top-corner">
-    <a href="index.php">
-        <img src="../images/logo.png" alt="MedicalSign">
-    </a>
-</div>
-
-
-    <h1 class="page-title">FAQ</h1>
-    <p class="page-subtitle">Frequently Asked Questions</p>
+    <h1 class="page-title">الأسئلة الشائعة</h1>
+    <p class="page-subtitle">إجابات على أكثر الأسئلة شيوعًا</p>
 
     <div class="card">
+
         <div class="faq-item">
-            <button class="faq-question">How do I book an appointment?</button>
+            <button class="faq-question">كيف يمكنني حجز موعد؟</button>
             <div class="faq-answer">
-                Choose the service, select the date and time, then confirm your booking.
+                قم باختيار الخدمة، ثم حدد التاريخ والوقت المناسب، وبعدها أكد الحجز.
             </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-question">How do I use the sign language translator?</button>
+            <button class="faq-question">كيف أستخدم مترجم لغة الإشارة؟</button>
             <div class="faq-answer">
-                Open the translator page, enter your text, and the system will show the sign language translation.
+                ادخل إلى صفحة المترجم، واكتب النص أو اختر الخيار المناسب، وسيتم عرض الترجمة بلغة الإشارة.
             </div>
         </div>
 
         <div class="faq-item">
-            <button class="faq-question">Can I edit my booking?</button>
+            <button class="faq-question">هل يمكنني تعديل الموعد بعد الحجز؟</button>
             <div class="faq-answer">
-                Yes, you can edit your booking from the appointments page if the appointment is still available for editing.
+                نعم، يمكنك تعديل الموعد من صفحة المواعيد الخاصة بك إذا كان التعديل متاح.
             </div>
         </div>
+
     </div>
 </div>
 
 <script>
     const questions = document.querySelectorAll(".faq-question");
 
-    questions.forEach(function(q) {
-        q.addEventListener("click", function() {
+    questions.forEach(q => {
+        q.addEventListener("click", () => {
             const answer = q.nextElementSibling;
 
-            if (answer.style.display === "block") {
+            if(answer.style.display === "block"){
                 answer.style.display = "none";
             } else {
-                document.querySelectorAll(".faq-answer").forEach(function(a) {
-                    a.style.display = "none";
-                });
+                document.querySelectorAll(".faq-answer").forEach(a => a.style.display = "none");
                 answer.style.display = "block";
             }
         });
