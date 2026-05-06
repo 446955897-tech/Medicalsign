@@ -18,7 +18,7 @@
 /* تنسيق اللوجو - تم ضبط العرض ليكون تلقائياً لمنع الانضغاط */
 .logo-top-corner {
     position: absolute;
-    top: 15px;
+    top: 25px;
     right: 25px;
     z-index: 1000;
 }
@@ -29,6 +29,8 @@
     filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.1));
     transition: transform 0.3s ease;
     cursor: pointer;
+    display: block;
+    margin: 10px auto;
 }
 
 .logo-top-corner img:hover {
@@ -38,8 +40,8 @@
 /* الحاوية الرئيسية للمحتوى */
 .symp-container {
     max-width: 1100px !important;
-    margin: 150px auto 0 auto !important; /* الرقم 150 سيجبره على النزول مسافة كبيرة */
-    padding: 20px !important;
+    margin: 20px auto 0 auto !important; /* الرقم 150 سيجبره على النزول مسافة كبيرة */
+    padding: 10px !important;
     display: block !important;
     position: relative !important;
     clear: both !important;
@@ -50,8 +52,8 @@
     color: #2c3e50;
     text-align: center;
     font-weight: 700;
-    margin-top: 50px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 /* خانة البحث الاحترافية */
@@ -753,6 +755,44 @@ body {
 }
 .about:hover {
     text-decoration: underline;
+}
+
+/* الشريط العلوي لينا2 */
+
+/* تنسيق المنيو العلوي */
+.top-nav {
+    background-color: #2980b9; /* اللون الأزرق الملكي حق الثيم */
+    width: 100%;
+    padding: 15px 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    position: fixed; /* يبقى ثابت فوق حتى لو نزلتِ تحت */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center; /* يخلي المنيو في النص */
+    gap: 30px; /* مسافة بين الروابط */
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.nav-item:hover {
+    color: #f1c40f; /* يتغير لونه للأصفر الهادي عند التمرير عليه */
+    text-decoration: underline;
+}
+
+/* تعديل بسيط عشان المحتوى الأصلي ما يختفي تحت المنيو */
+body {
+    padding-top: 70px; 
 }
 
 /* -- نهاية كود لينا -- */
