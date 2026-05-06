@@ -159,46 +159,35 @@ function saveData() {
 
 /*-- بداية كود بيان --*/
 function go(key){
-  localStorage.setItem("lang", lang);
-  window.location.href = "medical.html?case=" + key;
-}
-
-// قراءة اللغة المحفوظة
-let lang = localStorage.getItem("lang") || "ar";
-
-// عند فتح الصفحة
-window.onload = function(){
-  applyLang();
+ localStorage.setItem("selectedCategory", key);
+    // الانتقال لصفحة التفاصيل
+    window.location.href = "medical.html";
+    const medicalData = {
+    "Welcome": {
+        title: "الاستقبال",
+        tips: "أهلاً بك في MedicaSign. نحن هنا لمساعدتك.",
+        img: "welcome.jpeg"
+    },
+    "duration": {
+        title: "مدة التعب",
+        tips: "منذ متى تشعر بهذه الأعراض؟",
+        img: "duration.jpeg"
+    },
+    "headache": {
+        title: "الصداع",
+        tips: "هل الصداع مستمر أم يذهب ويأتي؟",
+        img: "headache.jpeg"
+    },
+    "dizzy": {
+        title: "الدوار",
+        tips: "حاول الجلوس والراحة حتى يزول الدوار.",
+        img: "dizzy.jpeg"
+    },
+    "questions": {
+        title: "الاستفسارات",
+        tips: "هل هناك أي استفسار آخر تود طرحه؟",
+        img: "questions.jpeg"
+    }
 };
-
-function toggleLang(){
-  lang = (lang === "ar") ? "en" : "ar";
-  localStorage.setItem("lang", lang);
-  applyLang();
-}
-
-function applyLang(){
-  let items = document.querySelectorAll("[data-ar]");
-  let btn = document.getElementById("langToggle");
-
-  if(lang === "en"){
-    items.forEach(el => el.innerText = el.dataset.en);
-
-    let title = document.getElementById("mainTitle");
-    if(title) title.innerText = "Medical Sentences";
-
-    if(btn) btn.innerText = "AR";
-    document.documentElement.dir = "ltr";
-
-  } else {
-    items.forEach(el => el.innerText = el.dataset.ar);
-
-    let title = document.getElementById("mainTitle");
-    if(title) title.innerText = "الجمل الطبية";
-
-    if(btn) btn.innerText = "EN";
-    document.documentElement.dir = "rtl";
-  }
-}
 /*-- نهاية كود بيان --*/
 
