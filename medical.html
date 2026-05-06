@@ -129,10 +129,7 @@
         <button id="back_btn" class="back-btn" onclick="goBack()"></button>
         
         <!-- زر اختياري لتبديل اللغة للتأكد من عمل الـ Script -->
-        <button onclick="toggleLang()" style="margin-top:15px; background:none; border:none; color:#718096; cursor:pointer; font-size:14px;">تغيير اللغة / Change Language</button>
-    </div>
-
-    <script>
+       <script>
         // البيانات الطبية (تم إصلاح خطأ الأقواس في كود الحساسية)
         const medicalData = {
             welcome: { 
@@ -195,16 +192,10 @@
         }
 
         function goBack() { 
-            window.location.href = "patient_dashboard.html"; 
-        }
+          window.location.href = "index.b.html"; 
+       }
 
-        function toggleLang(){
-            currentLang = (currentLang === "ar") ? "en" : "ar";
-            localStorage.setItem("lang", currentLang);
-            render();
-        }
-
-        window.onload = render;
+     window.onload = render;
     </script>
 </body>
 </html>
