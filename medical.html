@@ -192,26 +192,27 @@ const medicalData = {
 };
 
 function render() {
-    // جلب المفتاح المخزن من localStorage (تأكدي أن صفحة index.b.html تخزن هذا المفتاح)
+    // جلب اسم الحالة من الذاكرة (الذي أرسلته صفحة index)
     let caseKey = localStorage.getItem("selectedCategory") || "welcome";
+    
+    // تحديد اللغة العربية دائماً لأننا حذفنا زر التبديل
+    let currentLang = "ar"; 
+    
     let data = medicalData[caseKey];
 
     if (data) {
-        // تحديث مسار الصورة بناءً على اسم الحالة (يجب أن تكون الصور داخل مجلد icon)
+        // ربط الصورة: سيذهب لمجلد icon ويبحث عن صورة بنفس اسم الحالة (مثلاً headache.jpeg)
         document.getElementById("img_element").src = "icon/" + caseKey + ".jpeg";
         
-        // عرض العنوان والتعليمات بالعربي مباشرة
-        document.getElementById("title_element").innerText = data.title;
-        document.getElementById("content_element").innerText = data.tips;
-        
-        // تحديث نص زر العودة
-        document.getElementById("back_btn").innerText = "العودة للرئيسية";
-        
-        // ضبط اتجاه الصفحة للعربية دائماً
+        // عرض النصوص من القسم العربي [ar] الموجود في مصفوفتك
+        document.getElementById("title_element").innerText = data[currentLang].title;
+        document.getElementById("content_element").innerText = data[currentLang].tips;
+        document.getElementById("back_btn").innerText = data[currentLang].btn;
+
+        // ضبط اتجاه الصفحة للعربية
         document.documentElement.dir = "rtl";
-        document.getElementById("content_element").parentElement.style.textAlign = "right";
-        document.getElementById("content_element").parentElement.style.borderRight = "6px solid #3182ce";
     }
+}
 }
 window.onload = function(){
 render();
