@@ -15,6 +15,7 @@
             --border-light: #ecf0f1;
             --shadow-blue: rgba(41, 128, 185, 0.1);
             --white: #ffffff;
+            --logout-bg: #34495e;
         }
 
         * {
@@ -102,6 +103,10 @@
             transition: 0.3s ease;
         }
 
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
         .card h3 {
             color: var(--primary-blue);
             font-size: 20px;
@@ -109,7 +114,7 @@
         }
 
         .card .value {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: var(--text-main);
             margin-bottom: 6px;
@@ -139,6 +144,28 @@
             border-bottom: none;
         }
 
+        .appointment-item h4 {
+            color: var(--text-main);
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .appointment-item p {
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .status-box {
+            display: inline-block;
+            padding: 8px 14px;
+            border-radius: 10px;
+            background-color: var(--success-bg);
+            color: var(--primary-blue);
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
         .quick-actions {
             display: flex;
             flex-direction: column;
@@ -153,23 +180,21 @@
             padding: 14px;
             border-radius: 10px;
             transition: 0.3s ease;
+            font-size: 15px;
             font-weight: bold;
         }
 
         .action-btn:hover {
             background-color: var(--hover-blue);
-            transform: scale(1.02);
+            transform: scale(1.03);
         }
 
-        .status-box {
-            display: inline-block;
-            padding: 8px 14px;
-            border-radius: 10px;
-            background-color: var(--success-bg);
-            color: var(--primary-blue);
-            font-size: 14px;
-            margin-top: 15px;
-            text-align: center;
+        .logout-btn {
+            background-color: var(--logout-bg);
+        }
+
+        .logout-btn:hover {
+            background-color: #c0392b;
         }
 
         @media (max-width: 900px) {
@@ -184,17 +209,7 @@
     <div class="container">
 
         <div class="top-brand">
-<<<<<<< HEAD
-            <img src="../images/logo.png" alt="Medical Sign Logo">
-=======
-<<<<<<< HEAD:doctor/Untitled-1.html
-             <a href="index.php">
-        <img src="../images/logo.png" alt="MedicalSign">
-    </a>
-=======
             <img src="logo.png" alt="شعار Medical Sign">
->>>>>>> 71f0af53a6f0bb02d75a58880ded13dd14ce4966:doctor/doctor_dashboard.html
->>>>>>> 2769e95eff7c5f40deedeeebf8e72b3057a0276f
             <h1>Medical Sign</h1>
             <p>لوحة تحكم الطبيب</p>
         </div>
@@ -250,7 +265,7 @@
                 <div class="quick-actions">
                     <a href="appointments.html" class="action-btn">عرض كافة المواعيد</a>
                     <a href="#" class="action-btn">عرض ملاحظات المريض</a>
-                    <a href="../index.html" class="action-btn" style="background-color: #7f8c8d;">الرجوع للرئيسية</a>
+                    <a href="../login.php" class="action-btn logout-btn">تسجيل الخروج</a>
                 </div>
                 <div class="status-box">الحالة الحالية: نشط ✅</div>
             </div>
@@ -259,4 +274,4 @@
     </div>
 
 </body>
-</html>
+</html>ٍ
