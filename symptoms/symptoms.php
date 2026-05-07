@@ -17,22 +17,26 @@ include '../database/db.php';
 </a>
    </div>
 
-<div class="symp-container" style="margin-top: 5px !important;"> <div class="header-actions" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+<div class="symp-container" style="margin-top: 5px !important;"> <div class="header-actions" style="display: flex; flex-direction: column;
+ align-items: center; margin-bottom: 20px;">
         <h2 style="margin: 10px 0; font-size: 2.2rem; color: #1a508b;">استكشف الأعراض الطبية</h2>
         
         <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
             <div style="margin-right: auto; padding-left: 20px;">
-                <a href="../patient/dashboard.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 220px; padding: 10px; border-radius: 25px; margin-bottom: 8px;">
+                <a href="../patient/dashboard.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; 
+                justify-content: center; width: 220px; padding: 10px; border-radius: 25px; margin-bottom: 8px;">
                     رجوع للوحة التحكم ⬅️
                 </a>
-                <a href="../index.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 220px; padding: 10px; border-radius: 25px;">
+                <a href="../index.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; justify-content: center; 
+                width: 220px; padding: 10px; border-radius: 25px;">
                     رجوع للصفحة الرئيسية ⬅️
                 </a>
             </div>
         </div>
     </div>
 
-    <input type="search" id="searchbar" onkeyup="searchSymptoms()" placeholder="ابحث عن عرض…" style="margin-bottom: 40px; width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+    <input type="search" id="searchbar" onkeyup="searchSymptoms()" placeholder="ابحث عن عرض…" style="margin-bottom: 40px; 
+    width: 100%; padding: 15px; border-radius: 12px; border: 1px solid #e0e0e0; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
     <?php
     echo '<div class="symp_grid" id="cards" aria-live="polite">';
     echo '<div class="symp_grid" id="cards" aria-live="polite">';
@@ -41,7 +45,8 @@ include '../database/db.php';
     $res = mysqli_query($conn, "SELECT id, name_ar, description_ar, icon, video_url FROM symptoms ORDER BY created_at DESC, id DESC");
 
     if (!$res) {
-        die('<pre style="direction:ltr;background:#fee;border:1px solid #fbb;padding:10px">SQL ERROR: ' . htmlspecialchars(mysqli_error($conn), ENT_QUOTES, 'UTF-8') . '</pre>');
+        die('<pre style="direction:ltr;background:#fee;border:1px solid #fbb;padding:10px">SQL ERROR: ' . htmlspecialchars(mysqli_error($conn),
+         ENT_QUOTES, 'UTF-8') . '</pre>');
     }
 
     if (mysqli_num_rows($res) === 0) {
@@ -74,7 +79,8 @@ include '../database/db.php';
             echo '<article class="symp-card" data-title="'. htmlspecialchars($title) .'">';
                 echo '<div class="status-tag" '.$statusStyle.'>'.$statusText.'</div>';
                 
-                echo '<div class="card-img" style="display:flex; align-items:center; justify-content:center; font-size:45px; background:#f0f7ff; margin: 0 auto 15px; width:90px; height:90px; border-radius:50%;">';
+                echo '<div class="card-img" style="display:flex; align-items:center; justify-content:center; font-size:45px; background:#f0f7ff;
+                 margin: 0 auto 15px; width:90px; height:90px; border-radius:50%;">';
                 echo $emoji;
                 echo '</div>';
 
