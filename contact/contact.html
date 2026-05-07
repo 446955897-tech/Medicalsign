@@ -2,16 +2,13 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>اتصل بنا</title>
-
+    <title>تواصل معنا</title>
     <style>
         :root {
             --primary-blue: #2980b9;
             --hover-blue: #1a5276;
             --page-bg: #eef2f7;
             --text-main: #2c3e50;
-            --text-sub: #7f8c8d;
-            --success-bg: #ebf5fb;
             --border-light: #ecf0f1;
             --shadow-blue: rgba(41, 128, 185, 0.1);
             --white: #ffffff;
@@ -45,6 +42,7 @@
             max-width: 800px;
             margin: 50px auto;
             animation: fadeUp 0.8s ease;
+            text-align: center;
         }
 
         .logo {
@@ -54,114 +52,87 @@
         }
 
         .page-title {
-            text-align: center;
             color: var(--primary-blue);
-            margin-bottom: 10px;
-        }
-
-        .page-subtitle {
-            text-align: center;
-            color: var(--text-sub);
             margin-bottom: 30px;
+            font-size: 2.5rem;
         }
 
         .card {
             background: var(--white);
-            padding: 30px;
+            padding: 40px;
             border-radius: 20px;
             box-shadow: 0 8px 20px var(--shadow-blue);
             border-top: 5px solid var(--primary-blue);
-        }
-
-        .form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .form input,
-        .form textarea {
-            padding: 12px;
-            border: 1px solid var(--border-light);
-            border-radius: 10px;
-            outline: none;
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            margin: 5px 0;
         }
 
-        .form textarea {
-            min-height: 140px;
-            resize: none;
+        .social-links {
+            display: flex;
+            gap: 30px;
+            margin-top: 10px;
+            border-top: 1px solid var(--border-light);
+            padding-top: 20px;
+            width: 100%;
+            justify-content: center;
         }
 
-        .form input:focus,
-        .form textarea:focus {
-            border-color: var(--primary-blue);
-        }
-
-        .btn {
+        .back-btn {
+            margin-top: 30px;
+            display: inline-block;
             background: var(--primary-blue);
             color: white;
-            padding: 12px;
-            border: none;
+            padding: 12px 30px;
+            text-decoration: none;
             border-radius: 10px;
-            cursor: pointer;
             transition: 0.3s;
+            font-weight: bold;
         }
 
-        .btn:hover {
+        .back-btn:hover {
             background: var(--hover-blue);
             transform: scale(1.05);
-        }
-
-        .success {
-            display: none;
-            margin-top: 10px;
-            padding: 10px;
-            background: var(--success-bg);
-            border-radius: 10px;
-            color: var(--primary-blue);
-            text-align: center;
         }
     </style>
 </head>
 <body>
-<<<<<<< HEAD
-<div class="logo-top-container">
-    <a href="index.php">
-       <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
-</a>
-   </div>
-  
-    <h1 class="page-title">Contact Us</h1>
-    <p class="page-subtitle">Send us your message</p>
-=======
-
-<div class="container">
-    <img src="logo.png" class="logo">
-
-    <h1 class="page-title">اتصل بنا</h1>
-    <p class="page-subtitle">أرسل لنا رسالتك وسنقوم بالرد عليك</p>
->>>>>>> 71f0af53a6f0bb02d75a58880ded13dd14ce4966
-
-    <div class="card">
-        <form class="form" id="contactForm">
-            <input type="text" placeholder="الاسم" required>
-            <textarea placeholder="اكتب رسالتك هنا" required></textarea>
-            <button class="btn">إرسال</button>
-        </form>
-
-        <div class="success" id="successMessage">
-            تم إرسال رسالتك بنجاح
+    <div class="container">
+        <img src="../images/logo.png" alt="MedicalSign Logo" class="main-logo" style="width: 150px; height: auto;">
+        <h1 class="page-title">تواصل معنا</h1>
+        <div class="card">
+            <div class="contact-item">
+                <span>📩</span>
+                <strong>الايميل:</strong>
+                <span>Medical.Sign@gmail.com</span>
+            </div>
+            <div class="contact-item">
+                <span>📞</span>
+                <strong>للاتصال:</strong>
+                <span dir="ltr">0500777455</span>
+            </div>
+            <div class="social-links">
+                <div class="contact-item">
+                    <strong>تويتر:</strong>
+                    <span>@Medical_Sign</span>
+                </div>
+                <div class="contact-item">
+                    <strong>انستقرام:</strong>
+                    <span>@Medical_Sign</span>
+                </div>
+            </div>
         </div>
+        <a href="../index.html" class="back-btn">العودة للصفحة الرئيسية</a>
     </div>
-</div>
-
-<script>
-    document.getElementById("contactForm").addEventListener("submit", function(e){
-        e.preventDefault();
-        document.getElementById("successMessage").style.display = "block";
-        this.reset();
-    });
-</script>
-
 </body>
 </html>

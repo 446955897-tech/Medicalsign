@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>الأسئلة الشائعة</title>
-
     <style>
         :root {
             --primary-blue: #2980b9;
@@ -11,7 +10,6 @@
             --page-bg: #eef2f7;
             --text-main: #2c3e50;
             --text-sub: #7f8c8d;
-            --success-bg: #ebf5fb;
             --border-light: #ecf0f1;
             --shadow-blue: rgba(41, 128, 185, 0.1);
             --white: #ffffff;
@@ -45,6 +43,7 @@
             max-width: 800px;
             margin: 50px auto;
             animation: fadeUp 0.8s ease;
+            text-align: center;
         }
 
         .logo {
@@ -54,13 +53,11 @@
         }
 
         .page-title {
-            text-align: center;
             color: var(--primary-blue);
             margin-bottom: 10px;
         }
 
         .page-subtitle {
-            text-align: center;
             color: var(--text-sub);
             margin-bottom: 30px;
         }
@@ -71,6 +68,7 @@
             border-radius: 20px;
             box-shadow: 0 8px 20px var(--shadow-blue);
             border-top: 5px solid var(--primary-blue);
+            text-align: right;
         }
 
         .faq-item {
@@ -89,81 +87,81 @@
             cursor: pointer;
             font-weight: bold;
             color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
         }
 
-        .faq-question:hover {
+        .faq-question::after {
+            content: '+';
             color: var(--primary-blue);
         }
 
         .faq-answer {
             display: none;
-            padding: 10px 15px 15px;
+            padding: 15px;
             color: var(--text-sub);
             border-top: 1px solid var(--border-light);
+            line-height: 1.6;
+            background-color: #fafafa;
+        }
+
+        .back-btn {
+            margin-top: 30px;
+            display: inline-block;
+            background: var(--primary-blue);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .back-btn:hover {
+            background: var(--hover-blue);
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <img src="logo.png" class="logo">
-
-<<<<<<< HEAD
-  <div class="logo-top-container">
-    <a href="index.php">
-       <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
-</a>
-   </div>
-
-    <h1 class="page-title">FAQ</h1>
-    <p class="page-subtitle">Frequently Asked Questions</p>
-=======
-    <h1 class="page-title">الأسئلة الشائعة</h1>
-    <p class="page-subtitle">إجابات على أكثر الأسئلة شيوعًا</p>
->>>>>>> 71f0af53a6f0bb02d75a58880ded13dd14ce4966
-
-    <div class="card">
-
-        <div class="faq-item">
-            <button class="faq-question">كيف يمكنني حجز موعد؟</button>
-            <div class="faq-answer">
-                قم باختيار الخدمة، ثم حدد التاريخ والوقت المناسب، وبعدها أكد الحجز.
+    <div class="container">
+               <img src="../images/logo.png" alt="MedicalSign Logo" class="main-logo" style="width: 150px; height: auto;">
+        <h1 class="page-title">الأسئلة الشائعة</h1>
+        <p class="page-subtitle">كل ما تود معرفته عن مشروع Medical Sign</p>
+        <div class="card">
+            <div class="faq-item">
+                <button class="faq-question">ما هو نظام Medical Sign؟</button>
+                <div class="faq-answer">هو نظام ترجمة فورية يهدف لتسهيل التواصل بين الطبيب والمريض الأصم داخل العيادات والمستشفيات باستخدام لغة الإشارة.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">كيف تتم عملية الترجمة للمريض؟</button>
+                <div class="faq-answer">يقوم المريض بفتح الكاميرا واستخدام لغة الإشارة، وسيقوم النظام فوراً بتحويل الإشارات إلى نص وعرض مرئي يظهر للطبيب.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">كيف يتواصل الطبيب مع المريض؟</button>
+                <div class="faq-answer">يوفر النظام قائمة من العبارات والأسئلة الطبية الجاهزة التي يرسلها الطبيب، وتظهر للمريض على شكل مقاطع فيديو قصيرة بلغة الإشارة.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">هل يدعم النظام لغة الإشارة المحلية؟</button>
+                <div class="faq-answer">نعم، يركز المشروع بشكل أساسي على دعم لغات الإشارة العربية المحلية لضمان دقة التواصل في المنطقة.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">هل يحافظ النظام على خصوصية المريض؟</button>
+                <div class="faq-answer">بالتأكيد، من أهم أهداف المنصة هي حماية خصوصية المرضى وتوفير تواصل مستقل دون الحاجة لمترجم بشري.</div>
             </div>
         </div>
-
-        <div class="faq-item">
-            <button class="faq-question">كيف أستخدم مترجم لغة الإشارة؟</button>
-            <div class="faq-answer">
-                ادخل إلى صفحة المترجم، واكتب النص أو اختر الخيار المناسب، وسيتم عرض الترجمة بلغة الإشارة.
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">هل يمكنني تعديل الموعد بعد الحجز؟</button>
-            <div class="faq-answer">
-                نعم، يمكنك تعديل الموعد من صفحة المواعيد الخاصة بك إذا كان التعديل متاح.
-            </div>
-        </div>
-
+        <a href="../index.html" class="back-btn">العودة للصفحة الرئيسية</a>
     </div>
-</div>
-
-<script>
-    const questions = document.querySelectorAll(".faq-question");
-
-    questions.forEach(q => {
-        q.addEventListener("click", () => {
-            const answer = q.nextElementSibling;
-
-            if(answer.style.display === "block"){
-                answer.style.display = "none";
-            } else {
+    <script>
+        const questions = document.querySelectorAll(".faq-question");
+        questions.forEach(q => {
+            q.addEventListener("click", () => {
+                const answer = q.nextElementSibling;
+                const isOpen = answer.style.display === "block";
                 document.querySelectorAll(".faq-answer").forEach(a => a.style.display = "none");
-                answer.style.display = "block";
-            }
+                answer.style.display = isOpen ? "none" : "block";
+            });
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>
