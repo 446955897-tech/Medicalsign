@@ -18,35 +18,66 @@ function updateTimes() {
         timeSelect.appendChild(opt);
     });
 }
+function confirmBooking(event) {
+    
+    event.preventDefault(); 
 
-function confirmBooking() {
-    const clinic = document.getElementById('clinic-type').value;
-    const date = document.getElementById('app-date').value;
-    const time = document.getElementById('app-time').value;
+    const clinicInput = document.getElementById('clinic-type');
+    const dateInput = document.getElementById('app-date');
+    const timeInput = document.getElementById('app-time');
 
-    if (!clinic || !date || !time) {
-        showAlert("يرجى اختيار العيادة، التاريخ، والوقت أولاً"); 
+    if (!clinicInput || !dateInput || !timeInput) {
+        console.error("فشل العثور على حقول الإدخال في الـ HTML. تأكدي من الـ IDs.");
         return;
     }
 
-    document.getElementById('booking-form').style.display = 'none';
-    document.getElementById('confirmation-msg').style.display = 'block';
-    
-    document.getElementById('final-details').innerHTML = 
-    `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
-}
+    const clinic = clinicInput.value;
+    const date = dateInput.value;
+    const time = timeInput.value;
 
+    if (!clinic || !date || !time) {
+        showAlert("يرجى اختيار العيادة، التاريخ، والوقت أولاً"); 
+        return; 
+    }
+
+
+    const bookingForm = document.getElementById('booking-form');
+    const formData = new FormData(bookingForm);
+
+    fetch('save_appointment.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+    
+        document.getElementById('booking-form').style.display = 'none';
+        document.getElementById('confirmation-msg').style.display = 'block';
+        
+        document.getElementById('final-details').innerHTML = 
+        `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
+
+        console.log("Response from PHP:", data); 
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("فشل الاتصال بقاعدة البيانات. تأكدي من تشغيل XAMPP.");
+    });
+}
 function showAlert(msg) {
     const alertBox = document.getElementById('custom-alert');
     if(alertBox) {
         document.getElementById('alert-message').innerText = msg;
         alertBox.style.display = 'flex';
+    } else {
+        alert(msg); 
     }
 }
-
 function closeAlert() { 
-    document.getElementById('custom-alert').style.display = 'none'; 
+    const alertBox = document.getElementById('custom-alert');
+    if(alertBox) alertBox.style.display = 'none'; 
 }
+
 window.onload = function() {
     updateTimes();
 };

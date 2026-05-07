@@ -10,12 +10,12 @@
     <div class="booking-card-container fade-in"> 
         <img src="../images/logo.png" alt="MedicalSign Logo" class="main-logo">
         
-        <div id="booking-form">
+        <form id="booking-form" action="save_appointment.php" method="POST">
            <h2 style="text-align: center; width: 100%;">📅 حجز موعد</h2>
            <p class="subtitle" style="text-align: center; width: 100%;">يرجى تحديد تفاصيل موعدك</p>
             
            <label>نوع العيادة:</label>
-           <select id="clinic-type">
+           <select id="clinic-type" name="clinic_type" required>
                <option value="" disabled selected>اختر العيادة المناسبة</option>
                <option value="السمعيات">عيادة السمعيات</option>
                <option value="الأسنان">عيادة الأسنان</option>
@@ -31,7 +31,7 @@
           </select>
 
             <label>اختيار التاريخ:</label>
-            <input type="date" id="app-date" required>
+            <input type="date" id="app-date" name="appointment_date" required>
             
             <label>فترة الموعد:</label>
             <div class="period-selector">
@@ -46,17 +46,19 @@
             </div>
 
             <label>المواعيد المتاحة:</label>
-            <select id="app-time"></select>
-            
-            <button onclick="confirmBooking()" class="btn-main">تأكيد الحجز</button>
+            <select id="app-time" name="appointment_time" required></select>
+              <input type="hidden" name="patient_id" value="1">
+                <input type="hidden" name="doctor_id" value="1">
 
-            <div style="text-align: center; margin-top: 15px;">
+            <button type="submit" onclick="confirmBooking(event)" class="btn-main">تأكيد الحجز</button>
+
+             <div style="text-align: center; margin-top: 15px;">
                <a href="../patient/dashboard.html" style="text-decoration: none; color: #349Bdb; font-size: 14px; border: 1.5px solid #349Bdb; padding: 6px 20px; border-radius: 25px; font-weight: bold; display: inline-block;">
                  🔙 إلغاء والعودة
               </a>
           </div>
-
-        </div>
+           
+        </form>
 
         <div id="confirmation-msg" style="display: none;">
             <div class="success-icon" style="text-align: center;">💙</div>
@@ -81,18 +83,40 @@
         
         function forceUpdateTimes() {
             const timeSelect = document.getElementById('app-time');
-            
             const periodInput = document.querySelector('input[name="period"]:checked');
-            
             if (!timeSelect) return;
             timeSelect.innerHTML = "";
-            
             let periodValue = periodInput ? periodInput.value : "صباحاً";
-            
             let times = (periodValue === "صباحاً") ? 
                 ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
                 ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
-            
+            times.forEach(t => {
+                let opt = document.createElement("option");
+                opt.value = t; 
+                opt.innerHTML = t;
+                timeSelect.appendChild(opt);
+            });
+        }
+
+        window.onload = function() {
+            forceUpdateTimes();
+        };
+
+        function resetForm() { 
+            window.location.href = "booking.html"; 
+        }
+
+    </script>
+    <script>
+        
+        function updateTimes() {
+            const periodInput = document.querySelector('input[name="period"]:checked');
+            const timeSelect = document.getElementById('app-time');
+            if (!periodInput || !timeSelect) return;
+            timeSelect.innerHTML = "";
+            let times = (periodInput.value === "صباحاً") ? 
+                ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
+                ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
             times.forEach(t => {
                 let opt = document.createElement("option");
                 opt.value = t; 
@@ -102,41 +126,58 @@
         }
 
         
-        window.onload = function() {
-            forceUpdateTimes();
-        };
+        function confirmBooking(event) {
+            
+            if (event) event.preventDefault(); 
 
-        function goToDashboard() {
-            window.location.href = "../patient_dashboard.html";
-        }
+            
+            const clinicInput = document.getElementById('clinic-type');
+            const dateInput = document.getElementById('app-date');
+            const timeInput = document.getElementById('app-time');
+            const bookingForm = document.getElementById('booking-form');
+            const confirmMsg = document.getElementById('confirmation-msg');
+            const finalDetails = document.getElementById('final-details');
 
-        function resetForm() { 
-            window.location.href = "booking.html"; 
-        }
+            
+            const clinic = clinicInput ? clinicInput.value : "";
+            const date = dateInput ? dateInput.value : "";
+            const time = timeInput ? timeInput.value : "";
 
-        function confirmBooking() {
-            const clinic = document.getElementById('clinic-type').value;
-            const date = document.getElementById('app-date').value;
-            const time = document.getElementById('app-time').value;
-
+            
             if (!clinic || !date || !time) {
+                
                 alert("يرجى اختيار العيادة، التاريخ، والوقت أولاً");
                 return;
             }
 
             
-            const successMsg = document.getElementById('confirmation-msg');
-            const bookingForm = document.getElementById('booking-form');
-            const finalDetails = document.getElementById('final-details');
-
-            if (successMsg && bookingForm) {
-                if (finalDetails) {
-                    finalDetails.innerHTML = `تم حجز موعد في عيادة ${clinic}<br>بتاريخ: ${date}<br>الوقت: ${time}`;
-                }
+            if (bookingForm && confirmMsg && finalDetails) {
+                
                 bookingForm.style.display = 'none';
-                successMsg.style.display = 'block';
+                
+                
+                confirmMsg.style.display = 'block';
+                
+                
+                finalDetails.innerHTML = 
+                `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
+
+                console.log("تمت محاكاة نجاح الحجز محلياً.");
             }
         }
+
+        
+        function closeAlert() { 
+            const alertBox = document.getElementById('custom-alert');
+            if(alertBox) alertBox.style.display = 'none'; 
+        }
+
+        
+        window.onload = function() {
+            updateTimes();
+        };
     </script>
+</body>
+</html>
 </body>
 </html>
