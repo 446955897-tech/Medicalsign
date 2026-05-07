@@ -24,14 +24,20 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--page-bg);
             color: var(--text-main);
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .container {
@@ -59,6 +65,11 @@
             margin-bottom: 8px;
         }
 
+        .top-brand p {
+            color: var(--text-sub);
+            font-size: 16px;
+        }
+
         .page-header {
             background-color: var(--white);
             border-radius: 20px;
@@ -66,6 +77,17 @@
             box-shadow: 0 8px 20px var(--shadow-blue);
             border-top: 5px solid var(--primary-blue);
             margin-bottom: 25px;
+        }
+
+        .page-header h2 {
+            color: var(--primary-blue);
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: var(--text-sub);
+            font-size: 15px;
         }
 
         .table-card {
@@ -88,12 +110,19 @@
             color: var(--white);
             padding: 14px;
             text-align: right;
+            font-size: 15px;
         }
 
         td {
             padding: 14px;
             border-bottom: 1px solid var(--border-light);
+            font-size: 14px;
+            color: var(--text-main);
             text-align: right;
+        }
+
+        tr:hover {
+            background-color: #f8fbfd;
         }
 
         .status {
@@ -103,9 +132,20 @@
             font-size: 13px;
         }
 
-        .confirmed { background-color: var(--success-bg); color: var(--primary-blue); }
-        .pending { background-color: #fdf2e9; color: #c27c0e; }
-        .completed { background-color: #eafaf1; color: #239b56; }
+        .confirmed {
+            background-color: var(--success-bg);
+            color: var(--primary-blue);
+        }
+
+        .pending {
+            background-color: #fdf2e9;
+            color: #c27c0e;
+        }
+
+        .completed {
+            background-color: #eafaf1;
+            color: #239b56;
+        }
 
         .action-btn {
             background-color: var(--primary-blue);
@@ -114,10 +154,15 @@
             padding: 8px 12px;
             border-radius: 10px;
             cursor: pointer;
+            transition: 0.3s ease;
+            font-size: 13px;
             margin-left: 6px;
         }
 
-        .action-btn:hover { background-color: var(--hover-blue); }
+        .action-btn:hover {
+            background-color: var(--hover-blue);
+            transform: scale(1.05);
+        }
 
         .back-link {
             display: inline-block;
@@ -127,21 +172,39 @@
             color: var(--white);
             padding: 12px 18px;
             border-radius: 10px;
+            transition: 0.3s ease;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            background-color: var(--hover-blue);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .top-brand h1 {
+                font-size: 28px;
+            }
+
+            .page-header h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
+
         <div class="top-brand">
-            <img src="logo.png" alt="شعار">
+            <img src="logo.png" alt="شعار Medical Sign">
             <h1>Medical Sign</h1>
             <p>مواعيد الطبيب</p>
         </div>
 
         <div class="page-header">
             <h2>قائمة المواعيد</h2>
-            <p>استعراض كافة المواعيد الحالية والقادمة.</p>
+            <p>عرض كافة المواعيد الحالية والقادمة المسندة للطبيب.</p>
         </div>
 
         <div class="table-card">
@@ -156,7 +219,8 @@
                         <th>الإجراءات</th>
                     </tr>
                 </thead>
-                <tbody id="appointmentsBody">
+
+                <tbody>
                     <tr>
                         <td>عائشة محمد</td>
                         <td>2026-04-12</td>
@@ -165,20 +229,22 @@
                         <td><span class="status confirmed">مؤكد</span></td>
                         <td>
                             <button class="action-btn">عرض</button>
-                            <button class="action-btn complete-btn">إتمام</button>
+                            <button class="action-btn">إكمال</button>
                         </td>
                     </tr>
+
                     <tr>
                         <td>خالد سالم</td>
                         <td>2026-04-12</td>
                         <td>11:30 صباحاً</td>
-                        <td>مساعدة الترجمة</td>
-                        <td><span class="status pending">معلق</span></td>
+                        <td>مساعدة في الترجمة</td>
+                        <td><span class="status pending">قيد الانتظار</span></td>
                         <td>
                             <button class="action-btn">عرض</button>
-                            <button class="action-btn confirm-btn">تأكيد</button>
+                            <button class="action-btn">تأكيد</button>
                         </td>
                     </tr>
+
                     <tr>
                         <td>نورة علي</td>
                         <td>2026-04-12</td>
@@ -187,45 +253,39 @@
                         <td><span class="status confirmed">مؤكد</span></td>
                         <td>
                             <button class="action-btn">عرض</button>
-                            <button class="action-btn complete-btn">إتمام</button>
+                            <button class="action-btn">إكمال</button>
                         </td>
                     </tr>
+
+                    <tr>
+                        <td>فيصل أحمد</td>
+                        <td>2026-04-13</td>
+                        <td>09:30 صباحاً</td>
+                        <td>استشارة أولية</td>
+                        <td><span class="status completed">مكتمل</span></td>
+                        <td>
+                            <button class="action-btn">عرض</button>
+                        </td>
+                    </tr>
+
                     <tr>
                         <td>مها سعد</td>
                         <td>2026-04-13</td>
                         <td>12:00 مساءً</td>
                         <td>دعم التواصل الطبي</td>
-                        <td><span class="status pending">معلق</span></td>
+                        <td><span class="status pending">قيد الانتظار</span></td>
                         <td>
                             <button class="action-btn">عرض</button>
-                            <button class="action-btn confirm-btn">تأكيد</button>
+                            <button class="action-btn">تأكيد</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <a href="doctor_dashboard.html" class="back-link">العودة إلى لوحة التحكم</a>
+
+            <a href="doctor_dashboard.html" class="back-link">الرجوع للوحة التحكم</a>
         </div>
+
     </div>
 
-    <script>
-        document.getElementById('appointmentsBody').addEventListener('click', function(e) {
-            const row = e.target.closest('tr');
-            const statusSpan = row.querySelector('.status');
-
-            // وظيفة زر تأكيد
-            if (e.target.classList.contains('confirm-btn')) {
-                statusSpan.innerText = 'مؤكد';
-                statusSpan.className = 'status confirmed';
-                e.target.innerText = 'إتمام';
-                e.target.classList.replace('confirm-btn', 'complete-btn');
-            } 
-            // وظيفة زر إتمام
-            else if (e.target.classList.contains('complete-btn')) {
-                statusSpan.innerText = 'مكتمل';
-                statusSpan.className = 'status completed';
-                e.target.style.display = 'none'; // إخفاء الزر بعد الاكتمال
-            }
-        });
-    </script>
 </body>
 </html>
