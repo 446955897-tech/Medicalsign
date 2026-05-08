@@ -1,51 +1,32 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "medicalsign";
 
-$host = "localhost";
-$user = "root";  // اسم المستخدم الافتراضي في XAMPP
-$pass = "";      
-$db_name = "medicalsign"; // اسم قاعدة البيانات
-
-
-$conn = mysqli_connect($host, $user, $pass, $db_name);
-
-
-if (!$conn) {
-    
-    header('HTTP/1.1 500 Internal Server Error');
-    die("Error connecting to database: " . mysqli_connect_error());
-}
-
-
-mysqli_set_charset($conn, "utf8mb4");
-
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
+$conn->set_charset("utf8mb4");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    
-    $p_id = isset($_POST['patient_id']) ? mysqli_real_escape_escape_string($conn, $_POST['patient_id']) : 1; 
-    $d_id = isset($_POST['doctor_id']) ? mysqli_real_escape_string($conn, $_POST['doctor_id']) : 1;
-    
-    
-    if (isset($_POST['appointment_date']) && !empty($_POST['appointment_date'])) {
-        $a_date = mysqli_real_escape_string($conn, $_POST['appointment_date']);
+    $patient_id       = $_POST['patient_id'];
+    $doctor_id        = $_POST['doctor_id'];
+    $clinic_type      = $_POST['clinic_type'];
+    $appointment_date = $_POST['appointment_date'];
+    $appointment_time = $_POST['appointment_time'];
+    $period           = $_POST['period'];
 
-        
-        $sql = "INSERT INTO appointments (patient_id, doctor_id, appointment_date) 
-                VALUES ('$p_id', '$d_id', '$a_date')";
+    $sql = "INSERT INTO appointments (patient_id, doctor_id, clinic_type, appointment_date, appointment_time, period) 
+            VALUES ('$patient_id', '$doctor_id', '$clinic_type', '$appointment_date', '$appointment_time', '$period')";
 
-        if (mysqli_query($conn, $sql)) {
-        
-            echo "success"; 
-        } else {
-            
-            echo "Database Error: " . mysqli_error($conn);
-        }
+    if ($conn->query($sql) === TRUE) {
+        // نرجع استجابة نجاح عشان الـ Network يطلع أخضر
+        http_response_code(200);
+        echo "Success";
     } else {
-        echo "Error: التاريخ مطلوب.";
+        http_response_code(500);
+        echo "Error: " . $conn->error;
     }
-} else {
-    echo "Error: طريقة الإرسال غير صحيحة.";
 }
-
-mysqli_close($conn);
+$conn->close();
 ?>

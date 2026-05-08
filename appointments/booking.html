@@ -5,29 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>حجز موعد - MedicalSign</title>
     <link rel="stylesheet" href="../CSS/style.css">
+    <style>
+        /* إضافة بسيطة لضمان ظهور القوائم بشكل جيد */
+        select option { padding: 10px; }
+    </style>
 </head>
 <body class="booking-page-body"> 
     <div class="booking-card-container fade-in"> 
         <img src="../images/logo.png" alt="MedicalSign Logo" class="main-logo">
         
-        <form id="booking-form" action="save_appointment.php" method="POST">
+        <form id="booking-form" action="save_appointment.php" method="POST" onsubmit="confirmBooking(event)">
            <h2 style="text-align: center; width: 100%;">📅 حجز موعد</h2>
            <p class="subtitle" style="text-align: center; width: 100%;">يرجى تحديد تفاصيل موعدك</p>
             
            <label>نوع العيادة:</label>
-           <select id="clinic-type" name="clinic_type" required>
+           <select id="clinic-type" name="clinic_type" onchange="updateDoctors()" required>
                <option value="" disabled selected>اختر العيادة المناسبة</option>
-               <option value="السمعيات">عيادة السمعيات</option>
-               <option value="الأسنان">عيادة الأسنان</option>
-               <option value="العيون">عيادة العيون</option>
-               <option value="الأطفال">عيادة الأطفال</option>
-               <option value="الجلدية">عيادة الجلدية</option>
-               <option value="العظام">عيادة العظام</option>
-               <option value="القلب">عيادة القلب</option>
-               <option value="الأنف والأذن والحنجرة">عيادة الأنف والأذن والحنجرة</option>
-               <option value="العلاج الطبيعي">عيادة العلاج الطبيعي</option>
-               <option value="الباطنية">عيادة الباطنية</option>
-               <option value="الصحة النفسية">عيادة الصحة النفسية</option>
+               <option value="السمعيات">السمعيات</option>
+               <option value="الأسنان">الأسنان</option>
+               <option value="العيون">العيون</option>
+               <option value="الأطفال">الأطفال</option>
+               <option value="الجلدية">الجلدية</option>
+               <option value="العظام">العظام</option>
+               <option value="القلب">القلب</option>
+               <option value="الأنف والأذن والحنجرة">الأنف والأذن والحنجرة</option>
+               <option value="العلاج الطبيعي">العلاج الطبيعي</option>
+               <option value="الباطنية">الباطنية</option>
+               <option value="الصحة النفسية">الصحة النفسية</option>
+          </select>
+
+          <label>اختيار الطبيب:</label>
+          <select id="doctor-select" name="doctor_id" required>
+              <option value="" disabled selected>يرجى اختيار العيادة أولاً</option>
           </select>
 
             <label>اختيار التاريخ:</label>
@@ -36,148 +45,119 @@
             <label>فترة الموعد:</label>
             <div class="period-selector">
                 <div class="radio-item">
-                   <input type="radio" id="morning" name="period" value="صباحاً" checked onchange="forceUpdateTimes()">
+                   <input type="radio" id="morning" name="period" value="صباحاً" onchange="updateTimes()" checked>
                     <label for="morning">صباحاً</label>
                 </div>
                 <div class="radio-item">
-                    <input type="radio" id="evening" name="period" value="مساءً" onchange="forceUpdateTimes()">
+                    <input type="radio" id="evening" name="period" value="مساءً" onchange="updateTimes()">
                     <label for="evening">مساءً</label>
                 </div>
             </div>
 
             <label>المواعيد المتاحة:</label>
-            <select id="app-time" name="appointment_time" required></select>
-              <input type="hidden" name="patient_id" value="1">
-                <input type="hidden" name="doctor_id" value="1">
+            <select id="app-time" name="appointment_time" required>
+                <option value="" disabled selected>اختر الوقت</option>
+            </select>
 
-            <button type="submit" onclick="confirmBooking(event)" class="btn-main">تأكيد الحجز</button>
+            <input type="hidden" name="patient_id" value="1">
+
+            <button type="submit" class="btn-main">تأكيد الحجز</button>
 
              <div style="text-align: center; margin-top: 15px;">
                <a href="../patient/dashboard.html" style="text-decoration: none; color: #349Bdb; font-size: 14px; border: 1.5px solid #349Bdb; padding: 6px 20px; border-radius: 25px; font-weight: bold; display: inline-block;">
                  🔙 إلغاء والعودة
               </a>
           </div>
-           
         </form>
 
         <div id="confirmation-msg" style="display: none;">
-            <div class="success-icon" style="text-align: center;">💙</div>
-            <h2 style="text-align: center;">تم تأكيد الحجز</h2>
+            <div class="success-icon" style="text-align: center; font-size: 50px;">💙</div>
+            <h2 style="text-align: center;">تم تأكيد الحجز بنجاح</h2>
             <div class="success-box">
                 <p id="final-details"></p>
             </div>
             <button class="btn-main" style="background-color: #349Bdb;" onclick="window.location.href='../patient/dashboard.html'">العودة للوحة المريض</button>
-            <button class="btn-main" style="background-color: #bdc3c7; margin-top: 10px;" onclick="resetForm()">حجز موعد آخر</button>
+            <button class="btn-main" style="background-color: #bdc3c7; margin-top: 10px;" onclick="location.reload()">حجز موعد آخر</button>
         </div>
     </div>
 
-    <div id="custom-alert" class="modal-overlay" style="display:none;">
-        <div class="modal-box">
-            <p id="alert-message"></p>
-            <button onclick="closeAlert()" style="background:#2980b9; color:white; border:none; padding:10px 20px; border-radius:5px; cursor:pointer;">موافق</button>
-        </div>
-    </div>
-
-    <script src="../JAVA S/script.js"></script>
-    <script>
-        
-        function forceUpdateTimes() {
-            const timeSelect = document.getElementById('app-time');
-            const periodInput = document.querySelector('input[name="period"]:checked');
-            if (!timeSelect) return;
-            timeSelect.innerHTML = "";
-            let periodValue = periodInput ? periodInput.value : "صباحاً";
-            let times = (periodValue === "صباحاً") ? 
-                ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
-                ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
-            times.forEach(t => {
-                let opt = document.createElement("option");
-                opt.value = t; 
-                opt.innerHTML = t;
-                timeSelect.appendChild(opt);
-            });
-        }
-
-        window.onload = function() {
-            forceUpdateTimes();
-        };
-
-        function resetForm() { 
-            window.location.href = "booking.html"; 
-        }
+     <script src="../JAVA S/script.js"></script>
 
     </script>
     <script>
-        
-        function updateTimes() {
-            const periodInput = document.querySelector('input[name="period"]:checked');
-            const timeSelect = document.getElementById('app-time');
-            if (!periodInput || !timeSelect) return;
-            timeSelect.innerHTML = "";
-            let times = (periodInput.value === "صباحاً") ? 
-                ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
-                ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
-            times.forEach(t => {
-                let opt = document.createElement("option");
-                opt.value = t; 
-                opt.innerHTML = t;
-                timeSelect.appendChild(opt);
+      const doctorsByClinic = {
+        "السمعيات": ["د. سارة الأحمد", "د. خالد منصور"],
+        "الأسنان": ["د. نورة السعد", "د. فهد العلي"],
+        "العيون": ["د. ريم القحطاني", "د. محمد الشهري"],
+        "الأطفال": ["د. ليلى حسن" , "د.سلمان علي"],
+        "الجلدية": ["د. عمر فاروق"],
+        "العظام": ["د. ياسر إبراهيم","د.عبد الله الحربي"],
+        "القلب": ["د. عبدالله مصلح"],
+        "الأنف والأذن والحنجرة": ["د. منى السالم","د.غلا ابراهيم"],
+        "العلاج الطبيعي": ["د. هند التركي"],
+        "الباطنية": ["د. فيصل الحربي"],
+        "الصحة النفسية": ["د. جواهر سليمان", "د.منى صالح"]
+    };
+
+    function updateDoctors() {
+        const clinicSelect = document.getElementById('clinic-type');
+        const doctorSelect = document.getElementById('doctor-select');
+        const selected = clinicSelect.value;
+
+        doctorSelect.innerHTML = '<option value="" disabled selected>اختر الطبيب المناسب</option>';
+
+        if (doctorsByClinic[selected]) {
+            doctorsByClinic[selected].forEach(doc => {
+                let opt = document.createElement('option');
+                opt.value = doc;
+                opt.textContent = doc;
+                doctorSelect.appendChild(opt);
             });
         }
+    }
 
+    function updateTimes() {
+        const periodInput = document.querySelector('input[name="period"]:checked');
+        const timeSelect = document.getElementById('app-time');
+        if (!timeSelect || !periodInput) return;
+
+        timeSelect.innerHTML = '<option value="" disabled selected>اختر الوقت</option>';
+        let times = (periodInput.value === "صباحاً") ? 
+            ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
+            ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
+
+        times.forEach(t => {
+            let opt = document.createElement('option');
+            opt.value = t;
+            opt.textContent = t;
+            timeSelect.appendChild(opt);
+        });
+    }
+
+    function confirmBooking(event) {
+        event.preventDefault();
+        document.getElementById('booking-form').style.display = 'none';
+        document.getElementById('confirmation-msg').style.display = 'block';
         
-        function confirmBooking(event) {
-            
-            if (event) event.preventDefault(); 
-
-            
-            const clinicInput = document.getElementById('clinic-type');
-            const dateInput = document.getElementById('app-date');
-            const timeInput = document.getElementById('app-time');
-            const bookingForm = document.getElementById('booking-form');
-            const confirmMsg = document.getElementById('confirmation-msg');
-            const finalDetails = document.getElementById('final-details');
-
-            
-            const clinic = clinicInput ? clinicInput.value : "";
-            const date = dateInput ? dateInput.value : "";
-            const time = timeInput ? timeInput.value : "";
-
-            
-            if (!clinic || !date || !time) {
-                
-                alert("يرجى اختيار العيادة، التاريخ، والوقت أولاً");
-                return;
-            }
-
-            
-            if (bookingForm && confirmMsg && finalDetails) {
-                
-                bookingForm.style.display = 'none';
-                
-                
-                confirmMsg.style.display = 'block';
-                
-                
-                finalDetails.innerHTML = 
-                `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
-
-                console.log("تمت محاكاة نجاح الحجز محلياً.");
-            }
-        }
-
+        const clinic = document.getElementById('clinic-type').value;
+        const doctor = document.getElementById('doctor-select').value;
+        const date = document.getElementById('app-date').value;
+        const time = document.getElementById('app-time').value;
         
-        function closeAlert() { 
-            const alertBox = document.getElementById('custom-alert');
-            if(alertBox) alertBox.style.display = 'none'; 
-        }
+        document.getElementById('final-details').innerHTML = `
+            <strong>العيادة:</strong> ${clinic} <br>
+            <strong>الطبيب:</strong> ${doctor} <br>
+            <strong>التاريخ:</strong> ${date} <br>
+            <strong>الوقت:</strong> ${time}
+        `;
+    }
+    // إرسال البيانات للـ PHP في الخلفية بدون ما تختفي الرسالة الزرقاء
+    fetch('save_appointment.php', {
+        method: 'POST',
+        body: new FormData(document.getElementById('booking-form'))
+    });
 
-        
-        window.onload = function() {
-            updateTimes();
-        };
-    </script>
-</body>
-</html>
+    window.onload = updateTimes;
+</script>
 </body>
 </html>

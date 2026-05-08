@@ -1,86 +1,77 @@
 /*-- تنسيقات صفحة حجز  الموعد --*/
-function updateTimes() {
-    const periodInput = document.querySelector('input[name="period"]:checked');
-    const timeSelect = document.getElementById('app-time');
-    
-    if (!periodInput || !timeSelect) return;
-    
-    timeSelect.innerHTML = "";
-    
-    let times = (periodInput.value === "صباحاً") ? 
-        ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
-        ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
-    
-    times.forEach(t => {
-        let opt = document.createElement("option");
-        opt.value = t; 
-        opt.innerHTML = t;
-        timeSelect.appendChild(opt);
-    });
-}
-function confirmBooking(event) {
-    
-    event.preventDefault(); 
+const doctorsByClinic = {
+        "السمعيات": ["د. سارة الأحمد", "د. خالد منصور"],
+        "الأسنان": ["د. نورة السعد", "د. فهد العلي"],
+        "العيون": ["د. ريم القحطاني", "د. محمد الشهري"],
+        "الأطفال": ["د. ليلى حسن" , "د.سلمان علي"],
+        "الجلدية": ["د. عمر فاروق"],
+        "العظام": ["د. ياسر إبراهيم","د.عبد الله الحربي"],
+        "القلب": ["د. عبدالله مصلح"],
+        "الأنف والأذن والحنجرة": ["د. منى السالم","د.غلا ابراهيم"],
+        "العلاج الطبيعي": ["د. هند التركي"],
+        "الباطنية": ["د. فيصل الحربي"],
+        "الصحة النفسية": ["د. جواهر سليمان", "د.منى صالح"]
+    };
 
-    const clinicInput = document.getElementById('clinic-type');
-    const dateInput = document.getElementById('app-date');
-    const timeInput = document.getElementById('app-time');
+    function updateDoctors() {
+        const clinicSelect = document.getElementById('clinic-type');
+        const doctorSelect = document.getElementById('doctor-select');
+        const selected = clinicSelect.value;
 
-    if (!clinicInput || !dateInput || !timeInput) {
-        console.error("فشل العثور على حقول الإدخال في الـ HTML. تأكدي من الـ IDs.");
-        return;
+        doctorSelect.innerHTML = '<option value="" disabled selected>اختر الطبيب المناسب</option>';
+
+        if (doctorsByClinic[selected]) {
+            doctorsByClinic[selected].forEach(doc => {
+                let opt = document.createElement('option');
+                opt.value = doc;
+                opt.textContent = doc;
+                doctorSelect.appendChild(opt);
+            });
+        }
     }
 
-    const clinic = clinicInput.value;
-    const date = dateInput.value;
-    const time = timeInput.value;
+    function updateTimes() {
+        const periodInput = document.querySelector('input[name="period"]:checked');
+        const timeSelect = document.getElementById('app-time');
+        if (!timeSelect || !periodInput) return;
 
-    if (!clinic || !date || !time) {
-        showAlert("يرجى اختيار العيادة، التاريخ، والوقت أولاً"); 
-        return; 
+        timeSelect.innerHTML = '<option value="" disabled selected>اختر الوقت</option>';
+        let times = (periodInput.value === "صباحاً") ? 
+            ["08:00 صباحاً", "09:30 صباحاً", "10:45 صباحاً", "11:30 صباحاً"] : 
+            ["04:00 مساءً", "05:15 مساءً", "06:30 مساءً", "07:45 مساءً", "08:30 مساءً"];
+
+        times.forEach(t => {
+            let opt = document.createElement('option');
+            opt.value = t;
+            opt.textContent = t;
+            timeSelect.appendChild(opt);
+        });
     }
 
-
-    const bookingForm = document.getElementById('booking-form');
-    const formData = new FormData(bookingForm);
-
-    fetch('save_appointment.php', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => response.text())
-    .then(data => {
-    
+    function confirmBooking(event) {
+        event.preventDefault();
         document.getElementById('booking-form').style.display = 'none';
         document.getElementById('confirmation-msg').style.display = 'block';
         
-        document.getElementById('final-details').innerHTML = 
-        `تم حجز موعد في عيادة <br> <b>${clinic}</b> <br> بتاريخ <b>${date}</b> <br> الساعة <b>${time}</b>`;
-
-        console.log("Response from PHP:", data); 
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("فشل الاتصال بقاعدة البيانات. تأكدي من تشغيل XAMPP.");
-    });
-}
-function showAlert(msg) {
-    const alertBox = document.getElementById('custom-alert');
-    if(alertBox) {
-        document.getElementById('alert-message').innerText = msg;
-        alertBox.style.display = 'flex';
-    } else {
-        alert(msg); 
+        const clinic = document.getElementById('clinic-type').value;
+        const doctor = document.getElementById('doctor-select').value;
+        const date = document.getElementById('app-date').value;
+        const time = document.getElementById('app-time').value;
+        
+        document.getElementById('final-details').innerHTML = `
+            <strong>العيادة:</strong> ${clinic} <br>
+            <strong>الطبيب:</strong> ${doctor} <br>
+            <strong>التاريخ:</strong> ${date} <br>
+            <strong>الوقت:</strong> ${time}
+        `;
     }
-}
-function closeAlert() { 
-    const alertBox = document.getElementById('custom-alert');
-    if(alertBox) alertBox.style.display = 'none'; 
-}
+    // إرسال البيانات للـ PHP في الخلفية بدون ما تختفي الرسالة الزرقاء
+    fetch('save_appointment.php', {
+        method: 'POST',
+        body: new FormData(document.getElementById('booking-form'))
+    });
 
-window.onload = function() {
-    updateTimes();
-};
+    window.onload = updateTimes;
 /* --نهاية تنسيقات صفحة حجز الموعد --*/
 
 
