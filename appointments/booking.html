@@ -134,8 +134,23 @@
         });
     }
 
-    function confirmBooking(event) {
-        event.preventDefault();
+     function confirmBooking(event) {
+        event.preventDefault(); // يمنع تحديث الصفحة
+
+        // 1. إرسال البيانات لملف الـ PHP (أضفته لك هنا جوا الدالة)
+        fetch('save_appointment.php', {
+            method: 'POST',
+            body: new FormData(document.getElementById('booking-form'))
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log("تم حفظ البيانات في القاعدة:", data);
+        })
+        .catch(error => {
+            console.error("خطأ في الاتصال:", error);
+        });
+
+        // 2. إخفاء الفورم وإظهار الرسالة الزرقاء (كودك الأصلي)
         document.getElementById('booking-form').style.display = 'none';
         document.getElementById('confirmation-msg').style.display = 'block';
         
@@ -151,11 +166,6 @@
             <strong>الوقت:</strong> ${time}
         `;
     }
-    // إرسال البيانات للـ PHP في الخلفية بدون ما تختفي الرسالة الزرقاء
-    fetch('save_appointment.php', {
-        method: 'POST',
-        body: new FormData(document.getElementById('booking-form'))
-    });
 
     window.onload = updateTimes;
 </script>
