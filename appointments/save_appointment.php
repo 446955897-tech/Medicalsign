@@ -1,6 +1,6 @@
 <?php
 // 1. تضمين ملف الاتصال بقاعدة البيانات (نفس أسلوب زميلتك)
-include 'database/db.php'; 
+include '../database/db.php'; 
 
 // التأكد من أن الإرسال تم عبر POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
