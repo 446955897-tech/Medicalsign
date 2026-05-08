@@ -98,7 +98,12 @@
             
             // 3. عرض الصورة من المسار الجديد icon3
             const imageElement = document.getElementById("status-image");
-            
+            if (selected === "welcome") {
+    // إذا كانت الحالة ترحيب، نخفي عنصر الصورة تماماً
+                  imageElement.style.display = "none";
+} else {
+    // للحالات الأخرى، نظهر الصورة ونحدد مسارها
+    imageElement.style.display = "block";
             // المسار: نخرج من sentences ثم ندخل images ثم icon3
             imageElement.src = "../images/icon3/" + data.img; 
 
@@ -110,8 +115,9 @@
         }
     }
 };
-
+     
     </script>
     <script src="JAVA%20S/script.js"></script>
 </body>
 </html>
+     
