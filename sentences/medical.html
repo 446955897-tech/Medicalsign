@@ -80,38 +80,25 @@
             "question": { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", img: "question.jpeg" }
         };
      window.onload = function() {
-    // 1. جلب الكلمة من الرابط
-    const urlParams = new URLSearchParams(window.location.search);
-    let selected = urlParams.get('case'); 
+         const urlParams = new URLSearchParams(window.location.search);
+    let selected = urlParams.get('case');
 
     if (selected) {
-        // تحويل الكلمة لحروف صغيرة لضمان المطابقة
-        selected = selected.toLowerCase(); 
-
-        // 2. البحث في المصفوفة (تأكدي أن المفاتيح في المصفوفة بحروف صغيرة)
-        const data = medicalData[selected];
+        selected = selected.toLowerCase();
+               const data = medicalData[selected]; 
 
         if (data) {
-            // عرض النصوص
             document.getElementById("title-text").innerText = data.title;
             document.getElementById("medical-info").innerText = data.tips;
-            
-            // 3. عرض الصورة من المسار الجديد icon3
-            const imageElement = document.getElementById("status-image");
-            if (selected === "welcome") {
-    // إذا كانت الحالة ترحيب، نخفي عنصر الصورة تماماً
-                  imageElement.style.display = "none";
-} else {
-    // للحالات الأخرى، نظهر الصورة ونحدد مسارها
-    imageElement.style.display = "block";
-            // المسار: نخرج من sentences ثم ندخل images ثم icon3
-            imageElement.src = "../images/icon3/" + data.img; 
 
-            // في حال وجود أي خطأ في اسم الملف
-            imageElement.onerror = function() {
-                console.error("فشل في العثور على الصورة: " + this.src);
-                this.alt = "الصورة غير موجودة: " + data.img;
-            };
+            const imageElement = document.getElementById("status-image");
+
+            if (selected === "welcome") {
+                               imageElement.style.display = "none"; 
+            } else {
+                imageElement.style.display = "block";
+                imageElement.src = "../images/icon3/" + data.img;
+            }
         }
     }
 };
