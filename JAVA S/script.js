@@ -195,7 +195,7 @@ function go(key){
     // الانتقال لصفحة التفاصيل
     window.location.href = "medical.html";
     const medicalData = {
-    "Welcome": {
+    "welcome": {
         title: "الاستقبال",
         tips: "أهلاً بك في MedicaSign. نحن هنا لمساعدتك.",
         img: "welcome.jpeg"
