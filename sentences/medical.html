@@ -34,11 +34,10 @@
 <body>
 <a href="index.b.html" class="back-btn">رجوع</a>
     <div class="card">
-        <h2 id="title-text"> "welcome": { title: "الاستقبال", tips: "أهلاً بك، أنا هنا للعناية بك اليوم.\nأخبرني من فضلك، كيف يمكنني مساعدتك؟"</h2>
+        <h2 id="title-text"></h2>
         <div id="description-box">
             <p id="medical-info"></p>
         </div>
-
            </div>
 <script src="JAVA%20S/script.js"></script>
     <script>
@@ -84,13 +83,10 @@
     if (selected) {
         selected = selected.toLowerCase();
                const data = medicalData[selected]; 
-
-        if (data) {
+if (data) {
             document.getElementById("title-text").innerText = data.title;
             document.getElementById("medical-info").innerText = data.tips;
-
-            const imageElement = document.getElementById("status-image");
-
+             const imageElement = document.getElementById("status-image");
             if (selected === "welcome") {
                                imageElement.style.display = "none"; 
             } else {
