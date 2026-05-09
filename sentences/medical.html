@@ -83,21 +83,13 @@
     if (selected) {
         selected = selected.toLowerCase();
                const data = medicalData[selected]; 
-if (data) {
+        if (data) {
             document.getElementById("title-text").innerText = data.title;
             document.getElementById("medical-info").innerText = data.tips;
-             const imageElement = document.getElementById("status-image");
-            if (selected === "welcome") {
-                               imageElement.style.display = "none"; 
-            } else {
-                imageElement.style.display = "block";
-                imageElement.src = "../images/icon3/" + data.img;
-            }
         }
-    }
-};
-     
-    </script>
+      }
+     };
+          </script>
        </body>
 </html>
      
