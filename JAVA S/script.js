@@ -190,11 +190,7 @@ function saveData() {
 
 
 /*-- بداية كود بيان --*/
-function go(key){
- localStorage.setItem("selectedCategory", key);
-    // الانتقال لصفحة التفاصيل
-    window.location.href = "medical.html";
-    const medicalData = {
+         const medicalData = {
     "welcome": {
         title: "الاستقبال",
         tips: "أهلاً بك في MedicaSign. نحن هنا لمساعدتك.",
@@ -221,5 +217,10 @@ function go(key){
         img: "questions.jpeg"
     }
 };
+function go(key){
+ localStorage.setItem("selectedCategory", key);
+    // الانتقال لصفحة التفاصيل
+    window.location.href = "medical.html";
+   
 /*-- نهاية كود بيان --*/
 
