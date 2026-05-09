@@ -43,7 +43,7 @@
 
         <button class="back-btn" onclick="window.location.href='index.b.html'">⬅ العودة للرئيسية</button>
     </div>
-
+<script src="JAVA%20S/script.js"></script>
     <script>
         // مصفوفة البيانات مرتبة من الاستقبال إلى النهاية
         const medicalData = {
@@ -79,6 +79,7 @@
             "hospital": { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", img: "hospital.jpeg" },
             "question": { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", img: "question.jpeg" }
         };
+        
      window.onload = function() {
          const urlParams = new URLSearchParams(window.location.search);
     let selected = urlParams.get('case');
@@ -104,7 +105,6 @@
 };
      
     </script>
-    <script src="JAVA%20S/script.js"></script>
-</body>
+       </body>
 </html>
      
