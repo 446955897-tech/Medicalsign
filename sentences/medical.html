@@ -45,7 +45,7 @@
         // مصفوفة البيانات مرتبة من الاستقبال إلى النهاية
       const medicalData = { 
            // 1. البداية والتشخيص الأولي 
-           "welcome": { "title": "الاستقبال", "tips": "أهلاً بك، كيف يمكنني مساعدتك؟" }, 
+          "welcome": { "title": "الاستقبال", "tips": "أهلاً بك، أنا هنا للعناية بك اليوم، أخبرني من فضلك كيف يمكنني مساعدتك؟" },
            "duration": { title: "مدة التعب", tips: "منذ متى بدأت تشعر بهذا التعب؟\nأحتاج منك تحديد الوقت بدقة لنتمكن من متابعة حالتك.", img: "duration.jpeg" }, 
            "location": { title: "موقع الألم", tips: "من فضلك، أشر لي إلى مكان الألم الذي تشعر به.\nوهل ينتقل هذا الألم إلى أي منطقة أخرى؟", img: "location.jpeg" }, 
             
@@ -88,7 +88,7 @@
     document.getElementById("title-text").innerText = data.title;
     document.getElementById("medical-info").innerText = data.tips;
 
-    const imgElement = document.getElementById("main-image");
+     imgElement = document.getElementById("main-image");
     
     // شرط: إذا كانت الحالة "استقبال" لا تعرض صورة، غير ذلك اعرضها
     if (selected === "welcome") {
@@ -98,9 +98,8 @@
         imgElement.src = "../images/" + selected + ".png"; 
         imgElement.style.display = "block";
     }
-}
-     };
-    </script>
+       };
+      </script>
        </body>
 </html>
      
