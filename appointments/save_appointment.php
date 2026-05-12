@@ -4,14 +4,14 @@ include '../database/db.php';
 
 // التأكد من أن الإرسال تم عبر POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // التعديل هنا: نأخذ المعرف من الجلسة ونحذف أي سطر آخر لـ patient_id
+    $patient_id = $_SESSION['user_id']; 
     
-    // 2. استلام البيانات من الحقول (الأسماء مطابقة للـ HTML حقك)
-    $patient_id       = $_POST['patient_id'];      
-    $clinic_type      = $_POST['clinic_type'];     
-    $doctor_id        = $_POST['doctor_id'];       
-    $appointment_date = $_POST['appointment_date']; 
-    $period           = $_POST['period'];           
-    $appointment_time = $_POST['appointment_time']; 
+    $clinic_type = $_POST['clinic_type'];
+    $doctor_id = $_POST['doctor_id'];
+    $appointment_date = $_POST['appointment_date'];
+    $appointment_time = $_POST['appointment_time'];
+    $period = $_POST['period'];
 
     // 3. جملة الاستعلام لجدول المواعيد (appointments)
     $sql = "INSERT INTO appointments (patient_id, doctor_id, clinic_type, appointment_date, appointment_time, period) 
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mysqli_query($conn, $sql)) {
         // إرجاع رد نجاح عشان الـ Network يطلع أخضر (Status 200)
         http_response_code(200);
-        echo "Success: تم حفظ الموعد في القاعدة بنجاح";
+        echo "Success: تم حفظ الموعد بنجاح";
     } else {
         // في حال وجود خطأ في قاعدة البيانات
         http_response_code(500);

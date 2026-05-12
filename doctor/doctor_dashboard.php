@@ -245,7 +245,7 @@ $doctor_name = $_SESSION['full_name'];
                 <h3>إجمالي المواعيد</h3>
                <div class="value">
            <?php 
-             $count_sql = "SELECT COUNT(*) as total FROM appointments WHERE doctor_id = '$doctor_name'";
+             $count_sql = "SELECT COUNT(*) as total FROM appointments WHERE doctor_id LIKE '%$doctor_name%'";
              $count_res = mysqli_query($conn, $count_sql);
              $count_data = mysqli_fetch_assoc($count_res);
             echo $count_data['total'];
@@ -261,7 +261,7 @@ $doctor_name = $_SESSION['full_name'];
             $today = date('Y-m-d'); 
 
 
-            $today_sql = "SELECT COUNT(*) as total FROM appointments WHERE doctor_id = '$doctor_name' AND appointment_date = '$today'";
+            $today_sql = "SELECT COUNT(*) as total FROM appointments WHERE doctor_id LIKE '%$doctor_name%' AND appointment_date = '$today'";
 
            $today_res = mysqli_query($conn, $today_sql);
            $today_data = mysqli_fetch_assoc($today_res);
@@ -286,7 +286,7 @@ $doctor_name = $_SESSION['full_name'];
     include '../database/db.php'; // تأكدي من مسار ملف الاتصال
     
     // جلب آخر 3 مواعيد لهذا الدكتور فقط
-   $sql = "SELECT * FROM appointments WHERE doctor_id = '$doctor_name' ORDER BY appointment_date DESC LIMIT 3";
+    $sql = "SELECT * FROM appointments WHERE doctor_id LIKE '%$doctor_name%' ORDER BY appointment_date DESC LIMIT 3";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {

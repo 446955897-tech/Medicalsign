@@ -234,36 +234,30 @@ $doctor_name = $_SESSION['full_name'];
                 </thead>
 
          <tbody>
-    <?php
-     $sql = "SELECT appointments.*, users.name, users.full_name 
+<?php
+// استعلام يربط جدول المواعيد بجدول المستخدمين
+$sql = "SELECT appointments.*, users.full_name 
         FROM appointments 
         INNER JOIN users ON appointments.patient_id = users.user_id 
         WHERE appointments.doctor_id = '$doctor_name'";
 
-            
-    $result = mysqli_query($conn, $sql);
+$result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            echo "<tr>";
-           
-            echo "<td>";
-          if (!empty($row['full_name'])) {
-            echo $row['full_name']; 
-           } else {
-          echo $row['name'];     
-     }
-           echo "</td>";
-            echo "<td>" . $row['appointment_date'] . "</td>";
-            echo "<td>" . $row['appointment_time'] . "</td>";
-            echo "<td>" . $row['clinic_type'] . "</td>";
-            echo "<td><span class='status confirmed'>مؤكد</span></td>";
-            echo "</tr>";
-        }
-    } else {
-        echo "<tr><td colspan='5' style='text-align:center;'>لا توجد مواعيد مسجلة</td></tr>";
+if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "<tr>";
+        // عرض الاسم الكامل للمريض
+        echo "<td>" . $row['full_name'] . "</td>"; 
+        echo "<td>" . $row['appointment_date'] . "</td>";
+        echo "<td>" . $row['appointment_time'] . "</td>";
+        echo "<td>" . $row['clinic_type'] . "</td>";
+        echo "<td><span class='status confirmed'>مؤكد</span></td>";
+        echo "</tr>";
     }
-    ?>
+} else {
+    echo "<tr><td colspan='5' style='text-align:center;'>لا توجد مواعيد مسجلة للطبيبة: $doctor_name</td></tr>";
+}
+?>
 </tbody>
             </table>
 
