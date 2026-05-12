@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login-doctor.html");
+    exit();
+}
+$doctor_name = $_SESSION['username']; 
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>

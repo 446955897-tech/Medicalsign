@@ -1,9 +1,20 @@
+<?php
+session_start();
+
+// إذا لم يسجل دخول، يرجعه لصفحة تسجيل دخول الطبيب
+if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'doctor') {
+    header("Location: login-doctor.html");
+    exit();
+}
+
+$doctor_name = $_SESSION['username']; // هنا نجلب اسم الدكتور (سارة أو دانة)
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctor Appointments - Medical Sign</title>
+    <title>لوحة تحكم الطبيب - Medical Sign</title>
     <style>
         :root {
             --primary-blue: #2980b9;
@@ -15,6 +26,7 @@
             --border-light: #ecf0f1;
             --shadow-blue: rgba(41, 128, 185, 0.1);
             --white: #ffffff;
+            --logout-bg: #34495e;
         }
 
         * {
@@ -27,6 +39,7 @@
             font-family: Arial, sans-serif;
             background-color: var(--page-bg);
             color: var(--text-main);
+            line-height: 1.6;
         }
 
         @keyframes fadeUp {
@@ -53,10 +66,10 @@
         }
 
         .top-brand img {
-            width: 120px;
-            height: 120px;
+            width: 250px;
+            height: auto;
             object-fit: contain;
-            margin-bottom: 12px;
+            margin-bottom: 20px;
         }
 
         .top-brand h1 {
@@ -70,7 +83,7 @@
             font-size: 16px;
         }
 
-        .page-header {
+        .dashboard-header {
             background-color: var(--white);
             border-radius: 20px;
             padding: 25px;
@@ -79,113 +92,125 @@
             margin-bottom: 25px;
         }
 
-        .page-header h2 {
+        .dashboard-header h2 {
             color: var(--primary-blue);
-            font-size: 28px;
             margin-bottom: 10px;
+            font-size: 28px;
         }
 
-        .page-header p {
-            color: var(--text-sub);
-            font-size: 15px;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
-        .table-card {
+        .card {
             background-color: var(--white);
             border-radius: 20px;
             padding: 25px;
             box-shadow: 0 8px 20px var(--shadow-blue);
             border-top: 5px solid var(--primary-blue);
-            overflow-x: auto;
+            transition: 0.3s ease;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            min-width: 850px;
+        .card:hover {
+            transform: translateY(-4px);
         }
 
-        th {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 14px;
-            text-align: left;
-            font-size: 15px;
+        .card h3 {
+            color: var(--primary-blue);
+            font-size: 20px;
+            margin-bottom: 12px;
         }
 
-        td {
-            padding: 14px;
-            border-bottom: 1px solid var(--border-light);
-            font-size: 14px;
+        .card .value {
+            font-size: 28px;
+            font-weight: bold;
             color: var(--text-main);
+            margin-bottom: 6px;
         }
 
-        tr:hover {
-            background-color: #f8fbfd;
+        .card .sub-text {
+            color: var(--text-sub);
+            font-size: 14px;
         }
 
-        .status {
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 20px;
+        }
+
+        .appointment-list {
+            list-style: none;
+        }
+
+        .appointment-item {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .appointment-item:last-child {
+            border-bottom: none;
+        }
+
+        .appointment-item h4 {
+            color: var(--text-main);
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .appointment-item p {
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .status-box {
             display: inline-block;
-            padding: 7px 12px;
+            padding: 8px 14px;
             border-radius: 10px;
-            font-size: 13px;
-        }
-
-        .confirmed {
             background-color: var(--success-bg);
             color: var(--primary-blue);
+            font-size: 14px;
+            margin-top: 15px;
         }
 
-        .pending {
-            background-color: #fdf2e9;
-            color: #c27c0e;
-        }
-
-        .completed {
-            background-color: #eafaf1;
-            color: #239b56;
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .action-btn {
             background-color: var(--primary-blue);
             color: var(--white);
-            border: none;
-            padding: 8px 12px;
+            text-decoration: none;
+            text-align: center;
+            padding: 14px;
             border-radius: 10px;
-            cursor: pointer;
             transition: 0.3s ease;
-            font-size: 13px;
-            margin-right: 6px;
+            font-size: 15px;
+            font-weight: bold;
         }
 
         .action-btn:hover {
             background-color: var(--hover-blue);
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
 
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            text-decoration: none;
-            background-color: var(--primary-blue);
-            color: var(--white);
-            padding: 12px 18px;
-            border-radius: 10px;
-            transition: 0.3s ease;
+        .logout-btn {
+            background-color: var(--logout-bg);
         }
 
-        .back-link:hover {
-            background-color: var(--hover-blue);
-            transform: scale(1.05);
+        .logout-btn:hover {
+            background-color: #c0392b;
         }
 
-        @media (max-width: 768px) {
-            .top-brand h1 {
-                font-size: 28px;
-            }
-
-            .page-header h2 {
-                font-size: 24px;
+        @media (max-width: 900px) {
+            .content-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -195,97 +220,68 @@
     <div class="container">
 
         <div class="top-brand">
-            <a href="index.php">
-        <img src="../images/logo.png" alt="MedicalSign">
-    </a>
+            <img src="../images/logo.png" alt="شعار Medical Sign">
             <h1>Medical Sign</h1>
-            <p>Doctor Appointments</p>
+            <p>لوحة تحكم الطبيب</p>
         </div>
 
-        <div class="page-header">
-            <h2>Appointments List</h2>
-            <p>View all current and upcoming appointments assigned to the doctor.</p>
+        <div class="dashboard-header">
+            <h2>مرحباً، د. <?php echo $doctor_name; ?></h2>
+            <p>قم بإدارة مواعيدك، ومراجعة جدول المرضى، ومتابعة نشاطك اليومي من مكان واحد.</p>
         </div>
 
-        <div class="table-card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Patient Name</th>
-                        <th>Date</th>
-                        <th>Time</th>
-                        <th>Service</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
+        <div class="stats-grid">
+            <div class="card">
+                <h3>اسم الطبيب</h3>
+                <div class="value">د. دانة الشهري</div>
+                <div class="sub-text">أخصائية دعم التواصل</div>
+            </div>
 
-                <tbody>
-                    <tr>
-                        <td>Aisha Mohammed</td>
-                        <td>2026-04-12</td>
-                        <td>10:00 AM</td>
-                        <td>Medical Sign Consultation</td>
-                        <td><span class="status confirmed">Confirmed</span></td>
-                        <td>
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Complete</button>
-                        </td>
-                    </tr>
+            <div class="card">
+                <h3>إجمالي المواعيد</h3>
+                <div class="value">24</div>
+                <div class="sub-text">كل المواعيد المجدولة</div>
+            </div>
 
-                    <tr>
-                        <td>Khalid Salem</td>
-                        <td>2026-04-12</td>
-                        <td>11:30 AM</td>
-                        <td>Translation Assistance</td>
-                        <td><span class="status pending">Pending</span></td>
-                        <td>
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Confirm</button>
-                        </td>
-                    </tr>
+            <div class="card">
+                <h3>مواعيد اليوم</h3>
+                <div class="value">6</div>
+                <div class="sub-text">المواعيد المقررة لهذا اليوم</div>
+            </div>
 
-                    <tr>
-                        <td>Nora Ali</td>
-                        <td>2026-04-12</td>
-                        <td>01:00 PM</td>
-                        <td>Follow-up Session</td>
-                        <td><span class="status confirmed">Confirmed</span></td>
-                        <td>
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Complete</button>
-                        </td>
-                    </tr>
+            <div class="card">
+                <h3>حالة التوفر</h3>
+                <div class="value">متاح</div>
+                <div class="sub-text">الطبيب جاهز لاستقبال المواعيد</div>
+            </div>
+        </div>
 
-                    <tr>
-                        <td>Faisal Ahmed</td>
-                        <td>2026-04-13</td>
-                        <td>09:30 AM</td>
-                        <td>Initial Consultation</td>
-                        <td><span class="status completed">Completed</span></td>
-                        <td>
-                            <button class="action-btn">View</button>
-                        </td>
-                    </tr>
+        <div class="content-grid">
+            <div class="card">
+                <h3>المواعيد القادمة</h3>
+                <ul class="appointment-list">
+                    <li class="appointment-item">
+                        <h4>المريض: عائشة محمد</h4>
+                        <p>التاريخ: 12-04-2026 | الوقت: 10:00 صباحاً</p>
+                    </li>
+                    <li class="appointment-item">
+                        <h4>المريض: خالد سالم</h4>
+                        <p>التاريخ: 12-04-2026 | الوقت: 11:30 صباحاً</p>
+                    </li>
+                </ul>
+            </div>
 
-                    <tr>
-                        <td>Maha Saad</td>
-                        <td>2026-04-13</td>
-                        <td>12:00 PM</td>
-                        <td>Medical Communication Support</td>
-                        <td><span class="status pending">Pending</span></td>
-                        <td>
-                            <button class="action-btn">View</button>
-                            <button class="action-btn">Confirm</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <a href="doctor_dashboard.html" class="back-link">Back to Dashboard</a>
+            <div class="card">
+                <h3>إجراءات سريعة</h3>
+                <div class="quick-actions">
+                    <a href="appointments.html" class="action-btn">عرض كافة المواعيد</a>
+                    <a href="../index.html" class="action-btn logout-btn">تسجيل الخروج</a>
+                </div>
+                <div class="status-box">الحالة الحالية: نشط ✅</div>
+            </div>
         </div>
 
     </div>
 
 </body>
-</html>
+</html>ٍ
