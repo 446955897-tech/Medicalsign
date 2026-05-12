@@ -1,14 +1,16 @@
 <?php
 session_start();
-
-// إذا لم يسجل دخول، يرجعه لصفحة تسجيل دخول الطبيب
-if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'doctor') {
-    header("Location: login-doctor.html");
+include '../database/db.php';
+// 1. التعديل: نتحقق من full_name لأن هذا ما خزنته في login.php
+if (!isset($_SESSION['full_name']) || $_SESSION['user_role'] !== 'doctor') {
+    // 2. التعديل: المسار الصحيح للعودة (نقطتين للخلف لأننا داخل مجلد doctor)
+    header("Location: ../login.html"); 
     exit();
 }
 
-$doctor_name = $_SESSION['username']; // هنا نجلب اسم الدكتور (سارة أو دانة)
+$doctor_name = $_SESSION['full_name']; 
 ?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -233,19 +235,39 @@ $doctor_name = $_SESSION['username']; // هنا نجلب اسم الدكتور (
         <div class="stats-grid">
             <div class="card">
                 <h3>اسم الطبيب</h3>
-                <div class="value">د. دانة الشهري</div>
-                <div class="sub-text">أخصائية دعم التواصل</div>
+                <div class="value">د. <?php echo $doctor_name; ?></div>
+               <div class="sub-text">
+    <?php echo $_SESSION['specialty']; ?>
+        </div>
             </div>
 
             <div class="card">
                 <h3>إجمالي المواعيد</h3>
-                <div class="value">24</div>
+               <div class="value">
+           <?php 
+             $count_sql = "SELECT COUNT(*) as total FROM appointments WHERE doctor_id = '$doctor_name'";
+             $count_res = mysqli_query($conn, $count_sql);
+             $count_data = mysqli_fetch_assoc($count_res);
+            echo $count_data['total'];
+            ?>
+        </div>
                 <div class="sub-text">كل المواعيد المجدولة</div>
             </div>
 
             <div class="card">
                 <h3>مواعيد اليوم</h3>
-                <div class="value">6</div>
+                <?php 
+                // جلب تاريخ اليوم
+            $today = date('Y-m-d'); 
+
+
+            $today_sql = "SELECT COUNT(*) as total FROM appointments WHERE doctor_id = '$doctor_name' AND appointment_date = '$today'";
+
+           $today_res = mysqli_query($conn, $today_sql);
+           $today_data = mysqli_fetch_assoc($today_res);
+
+           echo $today_data['total'];
+                       ?>
                 <div class="sub-text">المواعيد المقررة لهذا اليوم</div>
             </div>
 
@@ -260,21 +282,31 @@ $doctor_name = $_SESSION['username']; // هنا نجلب اسم الدكتور (
             <div class="card">
                 <h3>المواعيد القادمة</h3>
                 <ul class="appointment-list">
-                    <li class="appointment-item">
-                        <h4>المريض: عائشة محمد</h4>
-                        <p>التاريخ: 12-04-2026 | الوقت: 10:00 صباحاً</p>
-                    </li>
-                    <li class="appointment-item">
-                        <h4>المريض: خالد سالم</h4>
-                        <p>التاريخ: 12-04-2026 | الوقت: 11:30 صباحاً</p>
-                    </li>
-                </ul>
+    <?php
+    include '../database/db.php'; // تأكدي من مسار ملف الاتصال
+    
+    // جلب آخر 3 مواعيد لهذا الدكتور فقط
+   $sql = "SELECT * FROM appointments WHERE doctor_id = '$doctor_name' ORDER BY appointment_date DESC LIMIT 3";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            echo '<li class="appointment-item">';
+           echo '<h4> المريض: ' . $row['patient_id'] . '</h4>'; // في جدولك الاسم مخزن في patient_id
+           echo '<p>التاريخ: ' . $row['appointment_date'] . ' | الوقت: ' . $row['appointment_time'] . '</p>';
+            echo '</li>';
+        }
+    } else {
+        echo '<p style="padding:10px; color:var(--text-sub);">لا توجد مواعيد قادمة حالياً.</p>';
+    }
+    ?>
+        </ul>
             </div>
 
             <div class="card">
                 <h3>إجراءات سريعة</h3>
                 <div class="quick-actions">
-                    <a href="appointments.html" class="action-btn">عرض كافة المواعيد</a>
+                    <a href="appointments.php" class="action-btn">عرض كافة المواعيد</a>
                     <a href="../index.html" class="action-btn logout-btn">تسجيل الخروج</a>
                 </div>
                 <div class="status-box">الحالة الحالية: نشط ✅</div>
@@ -284,4 +316,4 @@ $doctor_name = $_SESSION['username']; // هنا نجلب اسم الدكتور (
     </div>
 
 </body>
-</html>ٍ
+</html>

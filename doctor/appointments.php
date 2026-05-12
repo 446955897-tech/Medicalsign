@@ -1,10 +1,14 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login-doctor.html");
+include '../database/db.php'; // استدعاء قاعدة البيانات
+
+// التعديل: التحقق من full_name بدلاً من username
+if (!isset($_SESSION['full_name']) || $_SESSION['user_role'] !== 'doctor') {
+    header("Location: ../login.html");
     exit();
 }
-$doctor_name = $_SESSION['username']; 
+
+$doctor_name = $_SESSION['full_name']; 
 ?>
 
 <!DOCTYPE html>
@@ -229,69 +233,31 @@ $doctor_name = $_SESSION['username'];
                     </tr>
                 </thead>
 
-                <tbody>
-                    <tr>
-                        <td>عائشة محمد</td>
-                        <td>2026-04-12</td>
-                        <td>10:00 صباحاً</td>
-                        <td>استشارة Medical Sign</td>
-                        <td><span class="status confirmed">مؤكد</span></td>
-                        <td>
-                            <button class="action-btn">عرض</button>
-                            <button class="action-btn">إكمال</button>
-                        </td>
-                    </tr>
+               <tbody>
+    <?php
+    // لاحظي هنا استخدمنا doctor_id لأنه الاسم الموجود في صورتك لقاعدة البيانات
+    $sql = "SELECT * FROM appointments WHERE doctor_id = '$doctor_name'";
+    $result = mysqli_query($conn, $sql);
 
-                    <tr>
-                        <td>خالد سالم</td>
-                        <td>2026-04-12</td>
-                        <td>11:30 صباحاً</td>
-                        <td>مساعدة في الترجمة</td>
-                        <td><span class="status pending">قيد الانتظار</span></td>
-                        <td>
-                            <button class="action-btn">عرض</button>
-                            <button class="action-btn">تأكيد</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>نورة علي</td>
-                        <td>2026-04-12</td>
-                        <td>01:00 مساءً</td>
-                        <td>جلسة متابعة</td>
-                        <td><span class="status confirmed">مؤكد</span></td>
-                        <td>
-                            <button class="action-btn">عرض</button>
-                            <button class="action-btn">إكمال</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>فيصل أحمد</td>
-                        <td>2026-04-13</td>
-                        <td>09:30 صباحاً</td>
-                        <td>استشارة أولية</td>
-                        <td><span class="status completed">مكتمل</span></td>
-                        <td>
-                            <button class="action-btn">عرض</button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>مها سعد</td>
-                        <td>2026-04-13</td>
-                        <td>12:00 مساءً</td>
-                        <td>دعم التواصل الطبي</td>
-                        <td><span class="status pending">قيد الانتظار</span></td>
-                        <td>
-                            <button class="action-btn">عرض</button>
-                            <button class="action-btn">تأكيد</button>
-                        </td>
-                    </tr>
-                </tbody>
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['patient_id'] . "</td>"; // في صورتك العمود اسمه patient_id ويحتوي على الاسم
+            echo "<td>" . $row['appointment_date'] . "</td>"; // في صورتك اسمه appointment_date
+            echo "<td>" . $row['appointment_time'] . "</td>"; // في صورتك اسمه appointment_time
+            echo "<td>" . $row['clinic_type'] . "</td>";      // في صورتك اسمه clinic_type
+            echo "<td><span class='status confirmed'>مؤكد</span></td>";
+            echo "<td><button class='action-btn'>عرض</button></td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='6' style='text-align:center;'>لا توجد مواعيد مسجلة باسم: $doctor_name</td></tr>";
+    }
+    ?>
+            </tbody>
             </table>
 
-            <a href="doctor_dashboard.html" class="back-link">الرجوع للوحة التحكم</a>
+            <a href="doctor_dashboard.php" class="back-link">الرجوع للوحة التحكم</a>
         </div>
 
     </div>
