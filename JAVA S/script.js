@@ -190,35 +190,72 @@ function saveData() {
 
 
 /*-- بداية كود بيان --*/
-function go(key){
- localStorage.setItem("selectedCategory", key);
-    // الانتقال لصفحة التفاصيل
-    window.location.href = "medical.html";
-    const medicalData = {
-    "Welcome": {
-        title: "الاستقبال",
-        tips: "أهلاً بك في MedicaSign. نحن هنا لمساعدتك.",
-        img: "welcome.jpeg"
+       // 1. قاعدة البيانات الخاصة بمشروع MedicaSign
+const medicalData = {
+    "welcome": {
+        "title": "الاستقبال",
+        "tips": "نحن هنا لمساعدتك.. أهلاً بك في MedicaSign",
+        "img": "welcome.jpeg"
     },
     "duration": {
-        title: "مدة التعب",
-        tips: "منذ متى تشعر بهذه الأعراض؟",
-        img: "duration.jpeg"
+        "title": "مدة التعب",
+        "tips": "منذ متى تشعر بهذه الأعراض؟",
+        "img": "duration.jpeg"
     },
     "headache": {
-        title: "الصداع",
-        tips: "هل الصداع مستمر أم يذهب ويأتي؟",
-        img: "headache.jpeg"
+        "title": "الصداع",
+        "tips": "هل الصداع مستمر أم يذهب ويأتي؟",
+        "img": "headache.jpeg"
     },
     "dizzy": {
-        title: "الدوار",
-        tips: "حاول الجلوس والراحة حتى يزول الدوار.",
-        img: "dizzy.jpeg"
+        "title": "الدوار",
+        "tips": "حاول الجلوس والراحة حتى يزول الدوار",
+        "img": "dizzy.jpeg"
     },
     "questions": {
-        title: "الاستفسارات",
-        tips: "هل هناك أي استفسار آخر تود طرحه؟",
-        img: "questions.jpeg"
+        "title": "الاستفسارات",
+        "tips": "هل هناك أي استفسار آخر تود طرحه؟",
+        "img": "questions.jpeg"
+    },
+    "hospital": {
+        "title": "المستشفى",
+        "tips": "نرى أن حالتك تتطلب فحوصات أدق في المستشفى",
+        "img": "hospital.jpeg"
+    }
+};
+
+// 2. كود التشغيل عند تحميل الصفحة
+window.onload = function() {
+    // جلب المعلمة (case) من رابط الصفحة
+    const urlParams = new URLSearchParams(window.location.search);
+    let selected = urlParams.get('case');
+
+    if (selected) {
+        // تحويل النص لحروف صغيرة لضمان المطابقة مع قاعدة البيانات
+        selected = selected.toLowerCase();
+        const data = medicalData[selected];
+
+        if (data) {
+            // تحديث النصوص في الصفحة (يؤدي لإخفاء كلمة "تحميل")
+            const titleElement = document.getElementById("title-text");
+            const infoElement = document.getElementById("medical-info");
+            const imageElement = document.getElementById("status-image");
+
+            if (titleElement) titleElement.innerText = data.title;
+            if (infoElement) infoElement.innerText = data.tips;
+
+            // 3. منطق التحكم في الصورة (الحل لمشكلتك)
+            if (imageElement) {
+                if (selected === "welcome") {
+                    // إخفاء الصورة المكسورة تماماً في حالة الترحيب
+                    imageElement.style.display = "none"; 
+                } else {
+                    // إظهار الصورة وتحديث مسارها في الحالات الطبية الأخرى
+                    imageElement.style.display = "block";
+                    imageElement.src = "../images/icon3/" + data.img;
+                }
+            }
+        }
     }
 };
 /*-- نهاية كود بيان --*/

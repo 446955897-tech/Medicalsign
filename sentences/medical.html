@@ -34,90 +34,72 @@
 <body>
 <a href="index.b.html" class="back-btn">رجوع</a>
     <div class="card">
-        <h2 id="title-text">تحميل...</h2>
-        <img id="status-image" src="" alt="Sign Language Image" class="main-img">
-        
+          <img id="main-image" src="" class="main-img" style="display: none; width: 70%; margin-bottom: 20px;">
+        <h2 id="title-text"></h2>
         <div id="description-box">
             <p id="medical-info"></p>
         </div>
-
-        <button class="back-btn" onclick="window.location.href='index.b.html'">⬅ العودة للرئيسية</button>
-    </div>
-
+           </div>
+<script src="JAVA%20S/script.js"></script>
     <script>
         // مصفوفة البيانات مرتبة من الاستقبال إلى النهاية
-        const medicalData = {
-            // 1. البداية والتشخيص الأولي
-            "Welcome": { title: "الاستقبال", tips: "أهلاً بك، أنا هنا للعناية بك اليوم.\nأخبرني من فضلك، كيف يمكنني مساعدتك؟", img: "welcome.jpeg" },
-            "duration": { title: "مدة التعب", tips: "منذ متى بدأت تشعر بهذا التعب؟\nأحتاج منك تحديد الوقت بدقة لنتمكن من متابعة حالتك.", img: "duration.jpeg" },
-            "location": { title: "موقع الألم", tips: "من فضلك، أشر لي إلى مكان الألم الذي تشعر به.\nوهل ينتقل هذا الألم إلى أي منطقة أخرى؟", img: "location.jpeg" },
+      const medicalData = { 
+           // 1. البداية والتشخيص الأولي 
+          "welcome": { "title": "الاستقبال", "tips": "أهلاً بك، أنا هنا للعناية بك اليوم، أخبرني من فضلك كيف يمكنني مساعدتك؟" },
+           "duration": { title: "مدة التعب", tips: "منذ متى بدأت تشعر بهذا التعب؟\nأحتاج منك تحديد الوقت بدقة لنتمكن من متابعة حالتك.", img: "duration.jpeg" }, 
+           "location": { title: "موقع الألم", tips: "من فضلك، أشر لي إلى مكان الألم الذي تشعر به.\nوهل ينتقل هذا الألم إلى أي منطقة أخرى؟", img: "location.jpeg" }, 
             
-            // 2. الأعراض الشائعة
-            "headache": { title: "الصداع", tips: "هل تشعر بنبض أو ضغط شديد في رأسك؟\nأنصحك بالبقاء في مكان هادئ وبعيد عن الضوء القوي.", img: "headache.jpeg" },
-            "dizzy": { title: "الدوار", tips: "هل تشعر بعدم الاتزان أو أن المكان يدور من حولك؟\nمن فضلك اجلس الآن بهدوء لتجنب أي سقوط مفاجئ.", img: "dizzy.jpeg" },
-            "nausea": { title: "الغثيان", tips: "هل تشعر برغبة في التقيؤ أو ألم في المعدة؟\nيفضل أن تشرب الماء برشفات صغيرة جداً ومتكررة.", img: "nausea.jpeg" },
+           // 2. الأعراض الشائعة 
+           "headache": { title: "الصداع", tips: "هل تشعر بنبض أو ضغط شديد في رأسك؟\nأنصحك بالبقاء في مكان هادئ وبعيد عن الضوء القوي.", img: "headache.jpeg" }, 
+           "dizzy": { title: "الدوار", tips: "هل تشعر بعدم الاتزان أو أن المكان يدور من حولك؟\nمن فضلك اجلس الآن بهدوء لتجنب أي سقوط مفاجئ.", img: "dizzy.jpeg" }, 
+           "nausea": { title: "الغثيان", tips: "هل تشعر برغبة في التقيؤ أو ألم في المعدة؟\nيفضل أن تشرب الماء برشفات صغيرة جداً ومتكررة.", img: "nausea.jpeg" }, 
             
-            // 3. التاريخ الطبي والفحوصات
-            "allergy": { title: "الحساسية", tips: "هل تعاني من حساسية تجاه أدوية أو أطعمة معينة؟\nأخبرني إذا لاحظت ظهور أي طفح جلدي مؤخراً.", img: "allergy.jpeg" },
-            "chronic": { title: "الأمراض المزمنة", tips: "هل تم تشخيصك مسبقاً بأمراض مثل السكري أو الضغط؟\nمن فضلك أخبرني إذا كنت تتابع مع طبيب مختص.", img: "chronic.jpeg" },
-            "meds": { title: "الأدوية الحالية", tips: "هل تتناول أي أدوية بانتظام في الوقت الحالي؟\nأريدك أن تريني علب الأدوية أو تخبرني بأسمائها.", img: "meds.jpeg" },
-            "pressure": { title: "قياس الضغط", tips: "سأقيس ضغطك الآن، ارخِ ذراعك تماماً.\nحاول ألا تتحدث أو تتحرك حتى يكتمل القياس.", img: "pressure.jpeg" },
-            "temp": { title: "قياس الحرارة", tips: "سأقوم الآن بقياس درجة حرارتك.\nيرجى البقاء ثابتاً تماماً حتى ينتهي الفحص.", img: "temp.jpeg" },
-            "mouth": { title: "فحص الفم", tips: "من فضلك افتح فمك لأتمكن من فحص الحلق.\nسأستخدم إضاءة بسيطة للتأكد من سلامة اللوزتين.", img: "mouth.jpeg" },
-            "bed": { title: "الفحص السريري", tips: "أريدك أن تستلقي على السرير لبدء الفحص السريري.\nحاول إرخاء عضلات بطنك قدر الإمكان.", img: "bed.jpeg" },
+           // 3. التاريخ الطبي والفحوصات 
+           "allergy": { title: "الحساسية", tips: "هل تعاني من حساسية تجاه أدوية أو أطعمة معينة؟\nأخبرني إذا لاحظت ظهور أي طفح جلدي مؤخراً.", img: "allergy.jpeg" }, 
+           "chronic": { title: "الأمراض المزمنة", tips: "هل تم تشخيصك مسبقاً بأمراض مثل السكري أو الضغط؟\nمن فضلك أخبرني إذا كنت تتابع مع طبيب مختص.", img: "chronic.jpeg" }, 
+           "meds": { title: "الأدوية الحالية", tips: "هل تتناول أي أدوية بانتظام في الوقت الحالي؟\nأريدك أن تريني علب الأدوية أو تخبرني بأسمائها.", img: "meds.jpeg" }, 
+           "pressure": { title: "قياس الضغط", tips: "سأقيس ضغطك الآن، ارخِ ذراعك تماماً.\nحاول ألا تتحدث أو تتحرك حتى يكتمل القياس.", img: "pressure.jpeg" }, 
+           "temp": { title: "قياس الحرارة", tips: "سأقوم الآن بقياس درجة حرارتك.\nيرجى البقاء ثابتاً تماماً حتى ينتهي الفحص.", img: "temp.jpeg" }, 
+           "mouth": { title: "فحص الفم", tips: "من فضلك افتح فمك لأتمكن من فحص الحلق.\nسأستخدم إضاءة بسيطة للتأكد من سلامة اللوزتين.", img: "mouth.jpeg" }, 
+           "bed": { title: "الفحص السريري", tips: "أريدك أن تستلقي على السرير لبدء الفحص السريري.\nحاول إرخاء عضلات بطنك قدر الإمكان.", img: "bed.jpeg" }, 
 
-            // 4. التعليمات والعلاج
-            "dose": { title: "الجرعة الدوائية", tips: "يجب عليك تناول هذا الدواء مرتين يومياً.\nاحرص على الالتزام بالمواعيد لضمان مفعول العلاج.", img: "dose.jpeg" },
-            "before_food": { title: "توقيت العلاج", tips: "هذا العلاج يجب تناوله قبل الأكل بـ 30 دقيقة.\nتجنب الأكل مباشرة بعد أخذ الجرعة.", img: "before_food.jpeg" },
-            "rest": { title: "الراحة التامة", tips: "أنت بحاجة إلى راحة تامة في المنزل لمدة يومين.\nتجنب القيام بأي مجهود بدني شاق حالياً.", img: "rest.jpeg" },
-            "sit": { title: "الاستراحة", tips: "من فضلك اجلس وخذ قسطاً من الراحة الآن.\nحاول أن تسترخي تماماً حتى تهدأ أعراضك.", img: "rest.jpeg" },
-            "water": { title: "شرب السوائل", tips: "يجب عليك شرب كميات كافية من الماء يومياً.\nالسوائل ستساعد جسمك على التعافي بشكل أسرع.", img: "water.jpeg" },
-            "food_avoid": { title: "النظام الغذائي", tips: "أنصحك بتجنب الأطعمة الدسمة والمقليات حالياً.\nركز على الأكل المسلوق والخضروات لراحة معدتك.", img: "food_avoid.jpeg" },
-            "breath": { title: "التنفس", tips: "خذ نفساً عميقاً من الأنف وأخرجه ببطء من الفم.\nكرر العملية بهدوء لنساعد جسمك على الاسترخاء.", img: "breath.jpeg" },
+           // 4. التعليمات والعلاج 
+           "dose": { title: "الجرعة الدوائية", tips: "يجب عليك تناول هذا الدواء مرتين يومياً.\nاحرص على الالتزام بالمواعيد لضمان مفعول العلاج.", img: "dose.jpeg" }, 
+           "before_food": { title: "توقيت العلاج", tips: "هذا العلاج يجب تناوله قبل الأكل بـ 30 دقيقة.\nتجنب الأكل مباشرة بعد أخذ الجرعة.", img: "before_food.jpeg" }, 
+           "rest": { title: "الراحة التامة", tips: "أنت بحاجة إلى راحة تامة في المنزل لمدة يومين.\nتجنب القيام بأي مجهود بدني شاق حالياً.", img: "rest.jpeg" }, 
+           "sit": { title: "الاستراحة", tips: "من فضلك اجلس وخذ قسطاً من الراحة الآن.\nحاول أن تسترخي تماماً حتى تهدأ أعراضك.", img: "rest.jpeg" }, 
+           "water": { title: "شرب السوائل", tips: "يجب عليك شرب كميات كافية من الماء يومياً.\nالسوائل ستساعد جسمك على التعافي بشكل أسرع.", img: "water.jpeg" }, 
+           "food_avoid": { title: "النظام الغذائي", tips: "أنصحك بتجنب الأطعمة الدسمة والمقليات حالياً.\nركز على الأكل المسلوق والخضروات لراحة معدتك.", img: "food_avoid.jpeg" }, 
+           "breath": { title: "التنفس", tips: "خذ نفساً عميقاً من الأنف وأخرجه ببطء من الفم.\nكرر العملية بهدوء لنساعد جسمك على الاسترخاء.", img: "breath.jpeg" }, 
 
-            // 5. حالات الطوارئ والخاتمة
-            "hospital": { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", img: "hospital.jpeg" },
-            "question": { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", img: "question.jpeg" }
-        };
+           // 5. حالات الطوارئ والخاتمة 
+           "hospital": { title: "المستشفى", tips: "أرى أن حالتك تتطلب فحوصات أدق في المستشفى.\nيجب عليك التوجه لقسم الطوارئ فوراً للمتابعة.", img: "hospital.jpeg" }, 
+           "question": { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", img: "question.jpeg" } 
+       };
+        
      window.onload = function() {
-    // 1. جلب الكلمة من الرابط
-    const urlParams = new URLSearchParams(window.location.search);
-    let selected = urlParams.get('case'); 
+         const urlParams = new URLSearchParams(window.location.search);
+    let selected = urlParams.get('case');
 
     if (selected) {
-        // تحويل الكلمة لحروف صغيرة لضمان المطابقة
-        selected = selected.toLowerCase(); 
+        selected = selected.toLowerCase();
+               const data = medicalData[selected]; 
+       if (data) {
+    document.getElementById("title-text").innerText = data.title;
+    document.getElementById("medical-info").innerText = data.tips;
 
-        // 2. البحث في المصفوفة (تأكدي أن المفاتيح في المصفوفة بحروف صغيرة)
-        const data = medicalData[selected];
-
-        if (data) {
-            // عرض النصوص
-            document.getElementById("title-text").innerText = data.title;
-            document.getElementById("medical-info").innerText = data.tips;
-            
-            // 3. عرض الصورة من المسار الجديد icon3
-            const imageElement = document.getElementById("status-image");
-            if (selected === "welcome") {
-    // إذا كانت الحالة ترحيب، نخفي عنصر الصورة تماماً
-                  imageElement.style.display = "none";
-} else {
-    // للحالات الأخرى، نظهر الصورة ونحدد مسارها
-    imageElement.style.display = "block";
-            // المسار: نخرج من sentences ثم ندخل images ثم icon3
-            imageElement.src = "../images/icon3/" + data.img; 
-
-            // في حال وجود أي خطأ في اسم الملف
-            imageElement.onerror = function() {
-                console.error("فشل في العثور على الصورة: " + this.src);
-                this.alt = "الصورة غير موجودة: " + data.img;
-            };
-        }
+     imgElement = document.getElementById("main-image");
+    
+    // شرط: إذا كانت الحالة "استقبال" لا تعرض صورة، غير ذلك اعرضها
+    if (selected === "welcome") {
+        imgElement.style.display = "none";
+    } else {
+        // تأكدي من مسار الصور الصحيح عندك، مثلاً مجلد images
+        imgElement.src = "../images/" + selected + ".png"; 
+        imgElement.style.display = "block";
     }
-};
-     
-    </script>
-    <script src="JAVA%20S/script.js"></script>
-</body>
+       };
+      </script>
+       </body>
 </html>
      
