@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 
 // الاتصال باستخدام بياناتك الحقيقية من الصورة
@@ -20,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // التوجيه بناءً على القيم الموجودة في صورتك (patient / doctor)
         if ($user['role'] == 'doctor') {
-            header("Location: doctor/doctor_dashboard.html");
+            header("Location: doctor/doctor_dashboard.php");
         } else if ($user['role'] == 'patient') {
-            header("Location: patient/dashboard.html");
+            header("Location: patient/dashboard.php");
         }
         exit(); 
     } else {
