@@ -229,32 +229,36 @@ $doctor_name = $_SESSION['full_name'];
                         <th>الوقت</th>
                         <th>الخدمة</th>
                         <th>الحالة</th>
-                        <th>الإجراءات</th>
+                        
                     </tr>
                 </thead>
 
-               <tbody>
+         <tbody>
     <?php
-    // لاحظي هنا استخدمنا doctor_id لأنه الاسم الموجود في صورتك لقاعدة البيانات
-    $sql = "SELECT * FROM appointments WHERE doctor_id = '$doctor_name'";
+    // هذا الاستعلام يربط جدول المواعيد بجدول المستخدمين لجلب 'full_name'
+    $sql = "SELECT appointments.*, users.full_name 
+            FROM appointments 
+            INNER JOIN users ON appointments.patient_id = users.user_id 
+            WHERE appointments.doctor_id = '$doctor_name'";
+            
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            echo "<td>" . $row['patient_id'] . "</td>"; // في صورتك العمود اسمه patient_id ويحتوي على الاسم
-            echo "<td>" . $row['appointment_date'] . "</td>"; // في صورتك اسمه appointment_date
-            echo "<td>" . $row['appointment_time'] . "</td>"; // في صورتك اسمه appointment_time
-            echo "<td>" . $row['clinic_type'] . "</td>";      // في صورتك اسمه clinic_type
+            // التعديل هنا: نستخدم full_name الذي جلبناه من جدول users
+            echo "<td>" . $row['full_name'] . "</td>"; 
+            echo "<td>" . $row['appointment_date'] . "</td>";
+            echo "<td>" . $row['appointment_time'] . "</td>";
+            echo "<td>" . $row['clinic_type'] . "</td>";
             echo "<td><span class='status confirmed'>مؤكد</span></td>";
-            echo "<td><button class='action-btn'>عرض</button></td>";
             echo "</tr>";
         }
     } else {
-        echo "<tr><td colspan='6' style='text-align:center;'>لا توجد مواعيد مسجلة باسم: $doctor_name</td></tr>";
+        echo "<tr><td colspan='5' style='text-align:center;'>لا توجد مواعيد مسجلة</td></tr>";
     }
     ?>
-            </tbody>
+</tbody>
             </table>
 
             <a href="doctor_dashboard.php" class="back-link">الرجوع للوحة التحكم</a>

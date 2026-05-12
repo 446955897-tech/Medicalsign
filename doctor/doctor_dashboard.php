@@ -228,14 +228,14 @@ $doctor_name = $_SESSION['full_name'];
         </div>
 
         <div class="dashboard-header">
-            <h2>مرحباً، د. <?php echo $doctor_name; ?></h2>
+            <h2>مرحباً،  <?php echo $doctor_name; ?></h2>
             <p>قم بإدارة مواعيدك، ومراجعة جدول المرضى، ومتابعة نشاطك اليومي من مكان واحد.</p>
         </div>
 
         <div class="stats-grid">
             <div class="card">
                 <h3>اسم الطبيب</h3>
-                <div class="value">د. <?php echo $doctor_name; ?></div>
+                <div class="value"> <?php echo $doctor_name; ?></div>
                <div class="sub-text">
     <?php echo $_SESSION['specialty']; ?>
         </div>
