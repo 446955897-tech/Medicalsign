@@ -235,19 +235,25 @@ $doctor_name = $_SESSION['full_name'];
 
          <tbody>
     <?php
-    // هذا الاستعلام يربط جدول المواعيد بجدول المستخدمين لجلب 'full_name'
-    $sql = "SELECT appointments.*, users.full_name 
-            FROM appointments 
-            INNER JOIN users ON appointments.patient_id = users.user_id 
-            WHERE appointments.doctor_id = '$doctor_name'";
+     $sql = "SELECT appointments.*, users.name, users.full_name 
+        FROM appointments 
+        INNER JOIN users ON appointments.patient_id = users.user_id 
+        WHERE appointments.doctor_id = '$doctor_name'";
+
             
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             echo "<tr>";
-            // التعديل هنا: نستخدم full_name الذي جلبناه من جدول users
-            echo "<td>" . $row['full_name'] . "</td>"; 
+           
+            echo "<td>";
+          if (!empty($row['full_name'])) {
+            echo $row['full_name']; 
+           } else {
+          echo $row['name'];     
+     }
+           echo "</td>";
             echo "<td>" . $row['appointment_date'] . "</td>";
             echo "<td>" . $row['appointment_time'] . "</td>";
             echo "<td>" . $row['clinic_type'] . "</td>";
