@@ -1,3 +1,15 @@
+<?php
+include 'database/db.php';
+
+// جلب المستخدمين الذين ينتظرون القبول
+$users_query = "SELECT * FROM users WHERE is_active = 0 AND role != 'admin'";
+$users_result = mysqli_query($conn, $users_query);
+
+// جلب المواعيد التي بانتظار الموافقة
+$app_query = "SELECT * FROM appointments WHERE status = 'pending'";
+$app_result = mysqli_query($conn, $app_query);
+?>
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -81,7 +93,7 @@
 <body>
 
     <div style="text-align: center; margin-top: 20px;">
-        <img src="logo.png" width="120" alt="Medical Sign Logo">
+        <img src="images/logo.png" width="120">
     </div>
 
     <h1>لوحة تحكم المدير</h1>
@@ -89,36 +101,33 @@
     <div class="account-settings">
         
         <div class="box-description">إدارة المستخدمين الجدد</div>
-        <table class="admin-table">
-            <tr>
-                <td>د. فهد العتيبي (طبيب)</td>
-                <td style="text-align: left;">
-                    <button class="btn-action btn-approve" onclick="adminAction('قبول الدكتور')">قبول</button>
-                    <button class="btn-action btn-reject" onclick="adminAction('رفض طلب الدكتور')">رفض</button>
-                </td>
-            </tr>
-            <tr>
-                <td>سارة محمد (مريض)</td>
-                <td style="text-align: left;">
-                    <button class="btn-action btn-approve" onclick="adminAction('قبول المريض')">قبول</button>
-                    <button class="btn-action btn-reject" onclick="adminAction('رفض طلب المريض')">رفض</button>
-                </td>
-            </tr>
+       <table class="admin-table">
+      <?php while($user = mysqli_fetch_assoc($users_result)) { ?>
+    <tr>
+        <td><?php echo $user['full_name']; ?> (<?php echo ($user['role'] == 'doctor' ? 'طبيب' : 'مريض'); ?>)</td>
+        <td style="text-align: left;">
+            <button class="btn-action btn-approve" onclick="adminAction('accept', '<?php echo $user['full_name']; ?>')">قبول</button>
+            <button class="btn-action btn-reject" onclick="adminAction('reject', '<?php echo $user['full_name']; ?>')">رفض</button>
+        </td>
+    </tr>
+    <?php } ?>
         </table>
 
         <div class="box-description">إدارة المواعيد الطبية</div>
-        <table class="admin-table">
-            <tr>
-                <td>موعد: خالد منصور مع د. ريما</td>
-                <td style="text-align: left;">
-                    <button class="btn-action btn-approve" onclick="adminAction('تأكيد الموعد')">موافقة</button>
-                    <button class="btn-action btn-reject" onclick="adminAction('إلغاء الموعد')">إلغاء</button>
-                </td>
-            </tr>
-        </table>
+       <table class="admin-table">
+    <?php while($app = mysqli_fetch_assoc($app_result)) { ?>
+    <tr>
+        <td>موعد: <?php echo $app['doctor_id']; ?> (المريض: <?php echo $app['patient_id']; ?>)</td>
+        <td style="text-align: left;">
+            <button class="btn-action btn-approve" onclick="adminAction('approve_apt', '<?php echo $app['id']; ?>')">موافقة</button>
+            <button class="btn-action btn-reject" onclick="adminAction('reject_apt', '<?php echo $app['id']; ?>')">إلغاء</button>
+        </td>
+    </tr>
+    <?php } ?>
+     </table>
 
         <div style="margin-top: 20px; text-align: center;">
-            <a href="login.html" style="color: #2980b9; text-decoration: none; font-weight: bold; font-size: 14px;">
+            <a href="index.html" style="color: #2980b9; text-decoration: none; font-weight: bold; font-size: 14px;">
                 تسجيل الخروج من لوحة المدير
             </a>
         </div>
@@ -127,17 +136,29 @@
     </div>
 
     <script>
-        function adminAction(actionName) {
-            let message = document.getElementById("adminMsg");
-            message.style.display = "block";
-            message.style.backgroundColor = "#ebf5fb";
-            message.style.color = "#2980b9";
-            message.innerText = "تمت عملية (" + actionName + ") بنجاح ✅";
+        function adminAction(actionName, userName) {
+    let message = document.getElementById("adminMsg");
+    
+    // إرسال الطلب للخلفية (PHP)
+    fetch('update_status.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'action=' + actionName + '&name=' + userName
+    })
+    .then(response => response.text())
+    .then(data => {
+        // إظهار الرسالة الخضراء
+        message.style.display = "block";
+        message.style.backgroundColor = "#ebf5fb";
+        message.style.color = "#2980b9";
+        message.innerText = "تمت عملية (" + actionName + ") للمستخدم " + userName + " بنجاح ✅";
 
-            setTimeout(() => {
-                message.style.display = "none";
-            }, 3000);
-        }
+        setTimeout(() => {
+            message.style.display = "none";
+            location.reload(); // تحديث الصفحة عشان تختفي الأسماء اللي تم معالجتها
+        }, 3000);
+    });
+}
     </script>
 
     <script src="JAVA%20S/script.js"></script>
