@@ -14,9 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $health = isset($_POST['health']) ? $_POST['health'] : '';
     $headphone = isset($_POST['headphone']) ? $_POST['headphone'] : '';
 
-    
-    $sql = "INSERT INTO users (full_name, email, password, role, Gender, `health condition`, `Dose he use headphones`) 
-            VALUES ('$full_name', '$email', '$password', '$role', '$gender', '$health', '$headphone')";
+    $is_active = 0; 
+    $status = 'pending';
+
+   $sql = "INSERT INTO users (full_name, email, password, phone, role, is_active, status) 
+        VALUES ('$full_name', '$email', '$password', '$phone', 'patient', '$is_active', '$status')";
 
     if (mysqli_query($conn, $sql)) {
         echo "<script>alert('تم إنشاء حساب المريض بنجاح'); window.location.href='login.html';</script>";

@@ -1,60 +1,63 @@
 <?php
-include 'db_config.php'; // استدعاء ملف الاتصال
-
-// الاستعلام لجلب كافة المواعيد
-$sql = "SELECT id, patient_id, doctor_id, clinic_type, appointment_date, appointment_time, period FROM appointments";
-$result = $conn->query($sql);
+session_start();
+include '../database/db.php';
+$patient_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM appointments WHERE patient_id = '$patient_id'";
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>مواعيدي الطبية</title>
-    <style>
-        /* ستايل بسيط ليتناسب مع الواجهة الخاصة بك */
-        .appointments-table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        .appointments-table th, .appointments-table td { border: 1px solid #ddd; padding: 12px; text-align: center; }
-        .appointments-table th { background-color: #2980b9; color: white; }
-        .appointments-table tr:nth-child(even) { background-color: #f2f2f2; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicalSign - مواعيدي</title>
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
-<body>
+<body class="patient-body fade-in">
+    <div class="patient-container">
+        <div class="patient-card table-card">
+            <div class="header">
+                <img src="../images/logo.png" alt="MedicalSign Logo" class="logo">
+                <h2>قائمة المواعيد المحجوزة</h2>
+            </div>
 
-<div class="patient-container">
-    <h2>قائمة المواعيد الطبية</h2>
-
-    <?php if ($result->num_rows > 0): ?>
-        <table class="appointments-table">
-            <thead>
-                <tr>
-                    <th>رقم الموعد</th>
-                    <th>نوع العيادة</th>
-                    <th>التاريخ</th>
-                    <th>الوقت</th>
-                    <th>الفترة</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($row = $result->fetch_assoc()): ?>
+            <table class="appointments-table">
+                <thead>
                     <tr>
-                        <td><?php echo $row["id"]; ?></td>
-                        <td><?php echo $row["clinic_type"]; ?></td>
-                        <td><?php echo $row["appointment_date"]; ?></td>
-                        <td><?php echo $row["appointment_time"]; ?></td>
-                        <td><?php echo $row["period"]; ?></td>
+                        <th>التاريخ</th>
+                        <th>الوقت</th>
+                        <th>العيادة</th>
+                        <th>الحالة</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    <?php else: ?>
-        <p>لا توجد مواعيد مسجلة حالياً.</p>
-    <?php endif; ?>
-</div>
-
+                </thead>
+              <tbody>
+    <?php
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['appointment_date'] . "</td>";
+            echo "<td>" . $row['appointment_time'] . "</td>";
+            echo "<td>" . $row['clinic_type'] . "</td>";
+            
+            // تلوين الحالة
+            $class = ($row['status'] == 'approved') ? 'confirmed' : 'pending';
+            $text = ($row['status'] == 'approved') ? 'مؤكد' : 'قيد الانتظار';
+            
+            echo "<td><span class='status $class'>$text</span></td>";
+            echo "</tr>";
+        }
+    } else {
+        echo "<tr><td colspan='4'>لا يوجد مواعيد مسجلة لك حالياً.</td></tr>";
+    }
+    ?>
+</tbody>
+            </table>
+            
+            <button class="btn secondary-btn" onclick="location.href='dashboard.php'" style="margin-top: 20px;">
+                العودة للملف الشخصي
+            </button>
+        </div>
+    </div>
 </body>
 </html>
-
-<?php
-$conn->close(); // إغلاق الاتصال بعد الانتهاء
-?>
