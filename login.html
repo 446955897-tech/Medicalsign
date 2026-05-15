@@ -18,14 +18,16 @@
     </div>
 
     <div id="doc-login" class="tab-pane active">
-        <form action="login.php" method="POST"> 
+        <form action="login.php" method="POST" id="form-doc"> 
             <div class="input-box">
-                <input type="email" name="email" placeholder="البريد الإلكتروني للدكتور" required autocomplete="off">
+                <input type="email" name="email" id="email-doc" placeholder="البريد الإلكتروني للدكتور" required autocomplete="off">
             </div>
             <div class="input-box">
                 <input type="password" name="password" placeholder="كلمة المرور للدكتور" required autocomplete="new-password">
             </div>
-            <a href="profile.php" class="forgot-link">نسيت كلمة السر؟</a>
+            
+            <a href="javascript:void(0)" class="forgot-link" onclick="submitToProfile('form-doc')">نسيت كلمة السر؟</a>
+            
             <button type="submit" class="btn-primary">تسجيل دخول</button>
             <a href="register.html" class="link-text">إنشاء حساب دكتور</a>
 
@@ -38,14 +40,16 @@
     </div>
 
     <div id="pat-login" class="tab-pane">
-        <form action="login.php" method="POST">
+        <form action="login.php" method="POST" id="form-pat">
             <div class="input-box">
-               <input type="email" name="email" placeholder="البريد الإلكتروني للمريض" required autocomplete="off">
+               <input type="email" name="email" id="email-pat" placeholder="البريد الإلكتروني للمريض" required autocomplete="off">
             </div>
             <div class="input-box">
                 <input type="password" name="password" placeholder="كلمة المرور للمريض" required autocomplete="new-password">
             </div>
-            <a href="profile.php" class="forgot-link">نسيت كلمة السر؟</a>
+            
+            <a href="javascript:void(0)" class="forgot-link" onclick="submitToProfile('form-pat')">نسيت كلمة السر؟</a>
+            
             <button type="submit" class="btn-primary">تسجيل دخول</button>
             <a href="register.html" class="link-text">إنشاء حساب مريض</a>
 
@@ -59,6 +63,7 @@
 </div>
 
     <script>
+        // وظيفة التبديل بين التبويبات
         function toggleTab(evt, tabId) {
             let i, tabContent, tabLinks;
             tabContent = document.getElementsByClassName("tab-pane");
@@ -71,6 +76,21 @@
             }
             document.getElementById(tabId).classList.add("active");
             evt.currentTarget.classList.add("active");
+        }
+
+        // الوظيفة الجديدة لإرسال الإيميل لصفحة البروفايل
+        function submitToProfile(formId) {
+            const form = document.getElementById(formId);
+            const emailInput = form.querySelector('input[type="email"]').value;
+            
+            if(emailInput === "") {
+                alert("يرجى كتابة البريد الإلكتروني أولاً ليتم التعرف على حسابك.");
+                return;
+            }
+            
+            // تغيير وجهة الفورم مؤقتاً لصفحة البروفايل ليتم حفظ الإيميل في السيشين
+            form.action = "profile.php";
+            form.submit();
         }
     </script>
 </body>
