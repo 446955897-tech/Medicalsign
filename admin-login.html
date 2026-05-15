@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedicalSign | دخول الإدارة</title>
+    <style>
+        /* إعادة تعيين */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            /* خلفية الصفحة (#eef2f7) */
+            background-color: #eef2f7; 
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #2c3e50; /* لون النصوص الأساسي */
+        }
+
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* تنسيق مساحة اللوقو */
+        .logo-container {
+            margin-bottom: 30px;
+            width: 250px; /* يمكنك تكبير أو تصغير العرض حسب شكل اللوقو */
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .login-box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            /* الحدود والنوافذ (#ecf0f1) */
+            border: 1px solid #ecf0f1;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            text-align: center;
+        }
+
+        .login-box h2 {
+            /* الأزرق الملكي (#2980b9) للعناوين */
+            color: #2980b9;
+            margin-bottom: 10px;
+            font-size: 26px;
+        }
+
+        .login-box p {
+            /* النصوص الفرعية (#7f8c8d) */
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            /* الحدود والنوافذ (#ecf0f1) */
+            border: 2px solid #ecf0f1;
+            border-radius: 6px;
+            background-color: #fbfcfc;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        /* عند الضغط على الخانة يتحول للون الملكي */
+        .input-group input:focus {
+            border-color: #2980b9;
+        }
+
+        /* بوتون تسجيل الدخول */
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            /* الأزرق الملكي (#2980b9) للأزرار */
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* أزرق التفاعل (#1a5276) عند Hover */
+        .login-btn:hover {
+            background-color: #1a5276;
+        }
+
+        .footer-link {
+            margin-top: 25px;
+            display: block;
+            text-decoration: none;
+            color: #7f8c8d;
+            font-size: 13px;
+        }
+
+        .footer-link:hover {
+            color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-wrapper">
+        <!-- مساحة اللوقو مسارها جاهز ومربوط بمجلد images -->
+        <div class="logo-container">
+            <img src="images/logo.png" alt="MedicalSign Logo">
+        </div>
+
+        <div class="login-box">
+            <h2>MedicalSign</h2>
+            <p>لوحة تحكم الإدارة </p>
+
+            <form action="admin.php" method="POST">
+                <div class="input-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" name="email" placeholder="example@medicalsign.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" name="password" placeholder="••••••••" required>
+                </div>
+
+                <button type="submit" class="login-btn">تسجيل الدخول</button>
+            </form>
+
+           <a href="index.html" style="color: #e53e3e; text-decoration: none; font-weight: bold; font-size: 16px;">
+        العودة للرئيسية 
+    </a>
+    
+        </div>
+    </div>
+
+</body>
+</html>
