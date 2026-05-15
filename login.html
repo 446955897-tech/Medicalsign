@@ -26,7 +26,7 @@
                 <input type="password" name="password" placeholder="كلمة المرور للدكتور" required autocomplete="new-password">
             </div>
             
-            <a href="javascript:void(0)" class="forgot-link" onclick="goToProfile('email-doc')">نسيت كلمة السر؟</a>
+            <a href="javascript:void(0)" class="forgot-link" onclick="handleForgotPassword('email-doc')">نسيت كلمة السر؟</a>
             
             <button type="submit" class="btn-primary">تسجيل دخول</button>
             <a href="register.html" class="link-text">إنشاء حساب دكتور</a>
@@ -48,7 +48,7 @@
                 <input type="password" name="password" placeholder="كلمة المرور للمريض" required autocomplete="new-password">
             </div>
             
-            <a href="javascript:void(0)" class="forgot-link" onclick="goToProfile('email-pat')">نسيت كلمة السر؟</a>
+            <a href="javascript:void(0)" class="forgot-link" onclick="handleForgotPassword('email-pat')">نسيت كلمة السر؟</a>
             
             <button type="submit" class="btn-primary">تسجيل دخول</button>
             <a href="register.html" class="link-text">إنشاء حساب مريض</a>
@@ -61,6 +61,11 @@
         </form>
     </div>
 </div>
+
+    <form id="hidden-forgot-form" action="profile.php" method="POST" style="display:none;">
+        <input type="hidden" name="action" value="save_email_only">
+        <input type="hidden" name="email" id="hidden-email-input">
+    </form>
 
     <script>
         function toggleTab(evt, tabId) {
@@ -77,15 +82,15 @@
             evt.currentTarget.classList.add("active");
         }
 
-        // الدالة المعدلة للانتقال المباشر بالإيميل عبر الرابط
-        function goToProfile(inputId) {
+        // الدالة الجديدة لإرسال الإيميل بشكل مخفي تماماً
+        function handleForgotPassword(inputId) {
             const emailValue = document.getElementById(inputId).value;
             if(emailValue === "") {
                 alert("يرجى كتابة البريد الإلكتروني أولاً ليتم التعرف على حسابك.");
                 return;
             }
-            // الانتقال لصفحة profile.php مع إرسال الإيميل في الرابط
-            window.location.href = "profile.php?temp_email=" + encodeURIComponent(emailValue);
+            document.getElementById('hidden-email-input').value = emailValue;
+            document.getElementById('hidden-forgot-form').submit();
         }
     </script>
 </body>
