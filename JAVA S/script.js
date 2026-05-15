@@ -224,39 +224,44 @@ const medicalData = {
     }
 };
 
-// 2. كود التشغيل عند تحميل الصفحة
 window.onload = function() {
-    // جلب المعلمة (case) من رابط الصفحة
+    // 1. استخراج اسم الحالة من الرابط (URL)
     const urlParams = new URLSearchParams(window.location.search);
     let selected = urlParams.get('case');
 
+    // التأكد من وجود حالة مختارة
     if (selected) {
-        // تحويل النص لحروف صغيرة لضمان المطابقة مع قاعدة البيانات
         selected = selected.toLowerCase();
+        
+        // جلب البيانات من مصفوفة medicalData (الموجودة في ملف الجمل)
         const data = medicalData[selected];
 
         if (data) {
-            // تحديث النصوص في الصفحة (يؤدي لإخفاء كلمة "تحميل")
+            // 2. تحديث العنوان والنصوص في الصفحة
             const titleElement = document.getElementById("title-text");
             const infoElement = document.getElementById("medical-info");
-            const imageElement = document.getElementById("status-image");
-
+            
             if (titleElement) titleElement.innerText = data.title;
             if (infoElement) infoElement.innerText = data.tips;
 
-            // 3. منطق التحكم في الصورة (الحل لمشكلتك)
-            if (imageElement) {
+            // 3. التحكم في ظهور الصورة
+            // نبحث عن الصورة باستخدام الـ ID أو الـ Class
+            const imgElement = document.getElementById("main-image") || document.querySelector(".main-img");
+
+            if (imgElement) {
                 if (selected === "welcome") {
-                    // إخفاء الصورة المكسورة تماماً في حالة الترحيب
-                    imageElement.style.display = "none"; 
+                    // إذا كانت الحالة هي "استقبال"، نخفي الصورة تماماً
+                    imgElement.style.display = "none";
                 } else {
-                    // إظهار الصورة وتحديث مسارها في الحالات الطبية الأخرى
-                    imageElement.style.display = "block";
-                    imageElement.src = "../images/icon3/" + data.img;
+                    // في أي حالة أخرى (صداع، دوار، إلخ)، نظهر الصورة ونحدث مصدرها
+                    // تأكدي أن الصور في مجلد images بنفس اسم الحالة وصيغتها .png
+                    imgElement.src = "../images/" + selected + ".png"; 
+                    imgElement.style.display = "block";
                 }
             }
         }
     }
 };
+
 /*-- نهاية كود بيان --*/
 
