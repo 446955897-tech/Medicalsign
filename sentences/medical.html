@@ -34,15 +34,18 @@
 <body>
 <a href="index.b.html" class="back-btn">رجوع</a>
     <div class="card">
-          <img id="main-image" src="" class="main-img" style="display: none; width: 70%; margin-bottom: 20px;">
-        <h2 id="title-text"></h2>
-        <div id="description-box">
-            <p id="medical-info"></p>
-        </div>
+       <div class="card">
+    <img id="img_element" src="" class="main-img" style="display: none; width: 70%; margin-bottom: 20px;">
+    
+    <h2 id="title_element"></h2> 
+    
+    <div id="description-box">
+        <p id="content_element"></p>
+    </div>
+</div>
            </div>
-<script src="JAVA%20S/script.js"></script>
     <script>
-        جلب المفتاح (case) من الرابط
+       // جلب المفتاح (case) من الرابط
 let params = new URLSearchParams(window.location.search);
 let caseKey = params.get("case");
         // مصفوفة البيانات مرتبة من الاستقبال إلى النهاية
@@ -95,7 +98,7 @@ let caseKey = params.get("case");
                 imgElement.style.display = "none"; // إخفاء صورة الاستقبال
             } else {
                 imgElement.style.display = "block"; // إظهار باقي الصور
-                imgElement.src = "icon/" + caseKey + ".jpeg"; 
+               imgElement.src = "../images/icon3/" + caseKey + ".jpeg";
             }
         }
     }
