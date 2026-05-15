@@ -1,15 +1,17 @@
 <?php
 session_start();
-include '../database/db.php'; // استدعاء قاعدة البيانات
+include '../database/db.php'; // تأكدي من المسار الصحيح لقاعدة البيانات
 
-// التعديل: التحقق من full_name بدلاً من username
-if (!isset($_SESSION['full_name']) || $_SESSION['user_role'] !== 'doctor') {
+// التعديل هنا: نتحقق من أن المستخدم هو "doctor" وليس "patient"
+if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'doctor') {
     header("Location: ../login.html");
     exit();
 }
 
+// جلب اسم الدكتور من الجلسة لعرض مواعيده فقط
 $doctor_name = $_SESSION['full_name']; 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -229,42 +231,92 @@ $doctor_name = $_SESSION['full_name'];
                         <th>الوقت</th>
                         <th>الخدمة</th>
                         <th>الحالة</th>
-                        
+                        <th> الإجراءات</th>
                     </tr>
                 </thead>
 
-         <tbody>
+                <tbody>
 <?php
-// استعلام يربط جدول المواعيد بجدول المستخدمين
-$sql = "SELECT appointments.*, users.full_name 
+// استعلام متطور يربط جدول المواعيد بجدول المستخدمين لجلب اسم المريض
+$sql = "SELECT appointments.*, users.full_name AS patient_name 
         FROM appointments 
         INNER JOIN users ON appointments.patient_id = users.user_id 
-        WHERE appointments.doctor_id = '$doctor_name'";
+        WHERE appointments.doctor_id = '$doctor_name' 
+        ORDER BY appointment_date DESC";
 
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
-    while($row = mysqli_fetch_assoc($result)) {
-        echo "<tr>";
-        // عرض الاسم الكامل للمريض
-        echo "<td>" . $row['full_name'] . "</td>"; 
-        echo "<td>" . $row['appointment_date'] . "</td>";
-        echo "<td>" . $row['appointment_time'] . "</td>";
-        echo "<td>" . $row['clinic_type'] . "</td>";
-        echo "<td><span class='status confirmed'>مؤكد</span></td>";
-        echo "</tr>";
+   while($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo "<td>" . $row['patient_name'] . "</td>"; 
+    echo "<td>" . $row['appointment_date'] . "</td>";
+    echo "<td>" . $row['appointment_time'] . "</td>";
+    echo "<td>" . $row['clinic_type'] . "</td>";
+    
+    // هنا مكان عرض "حالة الموعد" ككلمة ملونة
+    echo "<td>";
+    if ($row['status'] == 'approved') {
+        echo "<span class='status confirmed'>✅ تم التأكيد</span>";
+    } elseif ($row['status'] == 'rejected') {
+        echo "<span class='status' style='background-color:#f8d7da; color:#721c24;'>❌ ملغي</span>";
+    } else {
+        echo "<span class='status pending'>⏳ قيد الانتظار</span>";
     }
+    echo "</td>";
+
+    // هنا "أزرار الإجراءات" التي يتحكم بها الطبيب
+    // داخل حلقة while المواعيد
+       echo "<td>";
+if ($row['status'] == 'approved') {
+    // إذا الموعد مؤكد: نعرض الحالة وزر إلغاء فقط
+    echo "<span class='status confirmed'>✅ تم التأكيد</span>";
+    echo "<button class='action-btn' style='background-color: #e74c3c; margin-right:10px;' onclick='updateStatus(".$row['id'].", \"reject_apt\")'>إلغاء الموعد</button>";
+} elseif ($row['status'] == 'rejected') {
+    // إذا الموعد ملغي: نعرض الحالة مع إمكانية إعادته للانتظار
+    echo "<span class='status' style='background-color:#f8d7da; color:#721c24;'>❌ ملغي</span>";
+    echo "<button class='action-btn' style='background-color: #7f8c8d; margin-right:10px;' onclick='updateStatus(".$row['id'].", \"pending_apt\")'>إعادة للانتظار</button>";
 } else {
-    echo "<tr><td colspan='5' style='text-align:center;'>لا توجد مواعيد مسجلة للطبيبة: $doctor_name</td></tr>";
+    // إذا الحالة "انتظار": نعرض زرين (تأكيد وإلغاء)
+    echo "<button class='action-btn' style='background-color: #2ecc71;' onclick='updateStatus(".$row['id'].", \"approve_apt\")'>تأكيد</button>";
+    echo "<button class='action-btn' style='background-color: #e74c3c;' onclick='updateStatus(".$row['id'].", \"reject_apt\")'>إلغاء</button>";
+}
+       echo "</td>";
+
+    echo "</tr>";
+}
+} else {
+    echo "<tr><td colspan='5' style='text-align:center;'>لا توجد مواعيد مسجلة للطبيب: $doctor_name</td></tr>";
 }
 ?>
-</tbody>
+     </tbody>
             </table>
 
             <a href="doctor_dashboard.php" class="back-link">الرجوع للوحة التحكم</a>
         </div>
 
     </div>
-
+    <script>
+        function updateStatus(appointmentId, action) {
+            if (confirm("هل أنت متأكد من تنفيذ هذا الإجراء؟")) {
+                fetch('../update_status.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `action=${action}&name=${appointmentId}`
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    location.reload(); // إعادة تحميل الصفحة لتحديث الحالة
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('حدث خطأ أثناء تحديث الحالة.');
+                });
+            }
+        }
+    </script>
 </body>
 </html>

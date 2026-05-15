@@ -1,27 +1,30 @@
 <?php
-include('database/db.php'); 
+include 'database/db.php';
 
-if (isset($_POST['action']) && isset($_POST['name'])) {
-    $action = $_POST['action'];
-    $identifier = $_POST['name']; // هنا الاسم أو الـ ID
+$action = $_POST['action'];
+$identifier = $_POST['id']; // تأكدي إن الجافا سكريبت ترسل id
 
-    if ($action == 'accept') {
-        $sql = "UPDATE users SET is_active = 1 WHERE full_name = '$identifier'";
-    } 
-    elseif ($action == 'reject') {
-        $sql = "DELETE FROM users WHERE full_name = '$identifier'";
-    } 
-    elseif ($action == 'approve_apt') {
-        $sql = "UPDATE appointments SET status = 'approved' WHERE id = '$identifier'";
-    } 
-    elseif ($action == 'reject_apt') {
-        $sql = "UPDATE appointments SET status = 'rejected' WHERE id = '$identifier'";
-    }
+if ($action == 'approve_apt') {
+    // 1. حالة قبول الموعد
+    $sql = "UPDATE appointments SET status = 'approved' WHERE id = '$identifier'";
+} 
+elseif ($action == 'reject_apt') {
+    // 2. حالة رفض الموعد
+    $sql = "UPDATE appointments SET status = 'rejected' WHERE id = '$identifier'";
+} 
+elseif ($action == 'accept') {
+    // 3. حالة قبول حساب جديد (هند) - هذا اللي كان ناقصك
+   $sql = "UPDATE users SET is_active = 1 WHERE id = '$identifier'";
+} 
+elseif ($action == 'reject') {
+    // 4. حالة رفض حساب جديد
+    $sql = "DELETE FROM users WHERE id = '$identifier'";
+}
 
-    if (mysqli_query($conn, $sql)) {
-        echo "تم تنفيذ العملية بنجاح";
-    } else {
-        echo "خطأ: " . mysqli_error($conn);
-    }
+// تنفيذ الاستعلام اللي اخترناه فوق
+if (isset($sql) && mysqli_query($conn, $sql)) {
+    echo "success";
+} else {
+    echo "error";
 }
 ?>

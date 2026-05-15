@@ -1,27 +1,23 @@
 <?php
-
-include 'database/db.php';
+include 'database/db.php'; // مسار الاتصال الصحيح بمشروعك
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // جلب البيانات من فورم الدكتور
-    $full_name = $_POST['doctor_name']; // تأكدي أن name في الـ HTML هو 'doctor_name'
-    $email     = $_POST['email'];
-    $password  = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $role      = 'doctor'; // نحدد الرتبة دكتور يدوياً هنا
+    
+    // جلب البيانات وتنظيفها
+    $full_name = mysqli_real_escape_string($conn, $_POST['doctor_name']);
+    $email     = mysqli_real_escape_string($conn, $_POST['email']);
+    $password  = mysqli_real_escape_string($conn, $_POST['password']); // حفظ بدو تشفير ليطابق كود اللوجن عندك
+    $role      = 'doctor';
+    $is_active = 0; // تفعيل الحساب فوراً
 
-    // نترك حقول المريض فارغة (NULL) في جدول المستخدمين
-    $sql = "INSERT INTO users 
-            (username, email, password, role) 
-            VALUES 
-            ('$full_name', '$email', '$password', '$role')";
+    // الإدخال في الأعمدة الصحيحة (full_name وليس username)
+    $sql = "INSERT INTO users (full_name, email, password, role, is_active) 
+            VALUES ('$full_name', '$email', '$password', '$role', '$is_active')";
 
     if (mysqli_query($conn, $sql)) {
-        echo "<script>alert('تم إنشاء حساب الدكتور بنجاح'); window.location.href='login-doctor.html';</script>";
+        echo "<script>alert('تم إنشاء حساب الدكتور بنجاح!'); window.location.href='login.html';</script>";
     } else {
-
-        echo 'خطأ: ' . mysqli_error($conn);
-
+        echo "خطأ في التسجيل: " . mysqli_error($conn);
     }
 }
-
 ?>

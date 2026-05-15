@@ -23,7 +23,7 @@ include '../database/db.php';
         
         <div style="display: flex; flex-direction: column; align-items: flex-start; width: 100%;">
             <div style="margin-right: auto; padding-left: 20px;">
-                <a href="../patient/dashboard.html" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; 
+                <a href="../patient/dashboard.php" class="symp-btn btn-back" style="text-decoration: none; display: flex; align-items: center; 
                 justify-content: center; width: 220px; padding: 10px; border-radius: 25px; margin-bottom: 8px;">
                     رجوع للوحة التحكم ⬅️
                 </a>
