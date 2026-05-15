@@ -225,43 +225,38 @@ const medicalData = {
 };
 
 window.onload = function() {
-    // 1. استخراج اسم الحالة من الرابط (URL)
+    // 1. استخراج اسم الحالة من الرابط
     const urlParams = new URLSearchParams(window.location.search);
     let selected = urlParams.get('case');
 
-    // التأكد من وجود حالة مختارة
     if (selected) {
         selected = selected.toLowerCase();
-        
-        // جلب البيانات من مصفوفة medicalData (الموجودة في ملف الجمل)
         const data = medicalData[selected];
 
         if (data) {
-            // 2. تحديث العنوان والنصوص في الصفحة
-            const titleElement = document.getElementById("title-text");
-            const infoElement = document.getElementById("medical-info");
-            
+            // 2. تحديث العنوان والنصوص (تعديل الأسماء لتطابق الـ HTML عندك)
+            const titleElement = document.getElementById("title_element");
+            const infoElement = document.getElementById("content_element");
+
             if (titleElement) titleElement.innerText = data.title;
             if (infoElement) infoElement.innerText = data.tips;
 
             // 3. التحكم في ظهور الصورة
-            // نبحث عن الصورة باستخدام الـ ID أو الـ Class
-            const imgElement = document.getElementById("main-image") || document.querySelector(".main-img");
+            const imgElement = document.getElementById("img_element");
 
             if (imgElement) {
                 if (selected === "welcome") {
-                    // إذا كانت الحالة هي "استقبال"، نخفي الصورة تماماً
+                    // إذا كانت الحالة "استقبال"، نخفي الصورة تماماً
                     imgElement.style.display = "none";
                 } else {
-                    // في أي حالة أخرى (صداع، دوار، إلخ)، نظهر الصورة ونحدث مصدرها
-                    // تأكدي أن الصور في مجلد images بنفس اسم الحالة وصيغتها .png
-                    imgElement.src = "../images/" + selected + ".png"; 
+                    // إظهار الصورة وتحديث مسارها
                     imgElement.style.display = "block";
+                    // تأكدي من المسار (icon أو images) ومن الصيغة (jpeg أو png)
+                    imgElement.src = "icon/" + selected + ".jpeg"; 
                 }
             }
         }
     }
 };
-
 /*-- نهاية كود بيان --*/
 
