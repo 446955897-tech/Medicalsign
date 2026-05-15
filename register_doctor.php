@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email     = mysqli_real_escape_string($conn, $_POST['email']);
     $password  = mysqli_real_escape_string($conn, $_POST['password']); // حفظ بدو تشفير ليطابق كود اللوجن عندك
     $role      = 'doctor';
-    $is_active = 1; // تفعيل الحساب فوراً
+    $is_active = 0; // تفعيل الحساب فوراً
 
     // الإدخال في الأعمدة الصحيحة (full_name وليس username)
     $sql = "INSERT INTO users (full_name, email, password, role, is_active) 

@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $health    = isset($_POST['health']) ? mysqli_real_escape_string($conn, $_POST['health']) : '';
     $headphone = isset($_POST['headphone']) ? mysqli_real_escape_string($conn, $_POST['headphone']) : '';
     
-    $is_active = 1; // جعل الحساب مفعل مباشرة لتسجيل الدخول بنجاح
+    $is_active = 0; // جعل الحساب مفعل مباشرة لتسجيل الدخول بنجاح
 
     // أمر الإدخال المتوافق مع أسماء أعمدة جدولك الفعلي بالملي
     $sql = "INSERT INTO users (full_name, email, password, role, Gender, health_condition, Dose_he_use_headphones, is_active) 
