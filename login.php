@@ -1,35 +1,33 @@
 <?php
-
+// 1. بدء الجلسة واستدعاء ملف قاعدة البيانات
 session_start();
-include 'database/db.php'; // تأكدي أن المسار لملف القاعدة صح
+include 'database/db.php'; 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    
+    // جلب البيانات من الحقول الحالية وتنظيفها
+    $email    = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    
+    // 2. الاستعلام البسيط والآمن (البحث بالإيميل والباسورد فقط لتجنب الأخطاء)
+   
+        // تنبيه في حال كانت البيانات غير مطابقة
+        echo "<script>
+                alert('البريد الإلكتروني أو كلمة المرور غير صحيحة!');
+                window.location.href='login.html';
+              </script>";
+    }$sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
+$result = mysqli_query($conn, $sql);
 
-    // نبحث عن المستخدم في جدول users العام
-    $sql = "SELECT * FROM users WHERE email = '$email' AND password = '$password'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
-
-        // تخزين البيانات في الجلسة (Session)
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role'] = $user['role'];
-        $_SESSION['full_name'] = $user['full_name'];
-
-        // --- التوجيه حسب نوع الحساب (الرول) ---
-       if ($user['role'] == 'admin') {
-            header("Location: admin.php"); // يفتح صفحة الأدمن
-        } elseif ($user['role'] == 'doctor') {
-            header("Location: doctor/doctor_dashboard.php"); // يفتح صفحة الدكتور
-        } else {
-            header("Location: patient/dashboard.php"); // يفتح صفحة المريض
-        }
-        exit();
-    } else {
-        echo "<script>alert('البريد أو كلمة المرور غير صحيحة'); window.location.href='login.html';</script>";
-    }
+if (!$result) {
+    die("خطأ في الاستعلام: " . mysqli_error($conn));
 }
+
+if (mysqli_num_rows($result) > 0) {
+    echo "تم العثور على المستخدم!"; // للتجربة فقط
+    // بقية الكود...
+} else {
+    echo "لم يتم العثور على مستخدم بهذه البيانات في قاعدة البيانات.";
+}
+
 ?>

@@ -2,7 +2,7 @@
 session_start();
 include '../database/db.php';
 $patient_id = $_SESSION['user_id'];
-$sql = "SELECT * FROM appointments WHERE patient_id = '$patient_id'";
+$sql = "SELECT * FROM appointments WHERE patient_id = '$patient_id' AND status = 'approved'";
 $result = mysqli_query($conn, $sql);
 ?>
 

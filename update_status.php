@@ -2,23 +2,29 @@
 include 'database/db.php';
 
 $action = $_POST['action'];
-$identifier = $_POST['name'];
+$identifier = $_POST['id']; // تأكدي إن الجافا سكريبت ترسل id
 
 if ($action == 'approve_apt') {
-    // تأكيد الموعد مباشرة
+    // 1. حالة قبول الموعد
     $sql = "UPDATE appointments SET status = 'approved' WHERE id = '$identifier'";
-} elseif ($action == 'reject_apt') {
-    // إلغاء الموعد
+} 
+elseif ($action == 'reject_apt') {
+    // 2. حالة رفض الموعد
     $sql = "UPDATE appointments SET status = 'rejected' WHERE id = '$identifier'";
-} elseif ($action == 'pending_apt') {
-    // إعادة للانتظار (إذا احتجتيها)
-    $sql = "UPDATE appointments SET status = 'pending' WHERE id = '$identifier'";
+} 
+elseif ($action == 'accept') {
+    // 3. حالة قبول حساب جديد (هند) - هذا اللي كان ناقصك
+   $sql = "UPDATE users SET is_active = 1 WHERE id = '$identifier'";
+} 
+elseif ($action == 'reject') {
+    // 4. حالة رفض حساب جديد
+    $sql = "DELETE FROM users WHERE id = '$identifier'";
 }
 
+// تنفيذ الاستعلام اللي اخترناه فوق
 if (isset($sql) && mysqli_query($conn, $sql)) {
-    echo "تمت العملية بنجاح";
+    echo "success";
 } else {
-    // في حال كان الاستعلام فارغاً لن ينهار النظام بل سيعطي رسالة واضحة
-    echo "إجراء غير معروف أو خطأ في البيانات";
+    echo "error";
 }
 ?>
