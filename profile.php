@@ -4,8 +4,14 @@ include 'database/db.php';
 
 $message = "";
 
-// 1. نأخذ الإيميل اللي انكتب في صفحة الدخول
-$email_to_update = isset($_SESSION['temp_email']) ? $_SESSION['temp_email'] : '';
+// استقبال الإيميل سواء جاء من الرابط (GET) أو تم حفظه مسبقاً
+$email_to_update = "";
+if (isset($_GET['temp_email'])) {
+    $email_to_update = $_GET['temp_email'];
+    $_SESSION['temp_email'] = $email_to_update; // حفظه في الجلسة للاستخدام عند إرسال الفورم
+} elseif (isset($_SESSION['temp_email'])) {
+    $email_to_update = $_SESSION['temp_email'];
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $new_password = $_POST['password'];
@@ -15,11 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = "عذراً، لم نتمكن من تحديد الحساب. يرجى كتابة الإيميل في صفحة الدخول أولاً.";
     } elseif ($new_password === $confirm_password) {
         
-        // 2. تحديث الباسورد بناءً على الإيميل
+        // تحديث كلمة المرور في قاعدة البيانات بناءً على الإيميل
         $sql = "UPDATE users SET password = '$new_password' WHERE email = '$email_to_update'";
         
         if (mysqli_query($conn, $sql)) {
-            // 3. رسالة النجاح والتحويل للرئيسية
+            // مسح الإيميل المؤقت من الجلسة بعد النجاح
+            unset($_SESSION['temp_email']);
+            
+            // رسالة النجاح المنبثقة والتحويل للرئيسية
             echo "<script>
                     alert('تم تغيير كلمة المرور بنجاح للحساب ($email_to_update) ✅');
                     window.location.href='index.html';
@@ -55,15 +64,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="card">
     <h2>تغيير كلمة المرور</h2>
     
-    <?php if ($email_to_update): ?>
-        <div class="user-info">تغيير باسوورد الحساب: <b><?php echo $email_to_update; ?></b></div>
+    <?php if (!empty($email_to_update)): ?>
+        <div class="user-info">تغيير باسوورد الحساب: <b><?php echo htmlspecialchars($email_to_update); ?></b></div>
+    <?php else: ?>
+        <div class="error">تحذير: لم يتم تحديد بريد إلكتروني!</div>
     <?php endif; ?>
 
     <?php if ($message != ""): ?>
         <div class="error"><?php echo $message; ?></div>
     <?php endif; ?>
 
-    <form method="POST">
+    <form method="POST" action="profile.php">
         <input type="password" name="password" placeholder="كلمة المرور الجديدة" required>
         <input type="password" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
         <button type="submit">تحديث ونجاح</button>
