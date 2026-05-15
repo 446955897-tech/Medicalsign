@@ -42,6 +42,9 @@
            </div>
 <script src="JAVA%20S/script.js"></script>
     <script>
+        جلب المفتاح (case) من الرابط
+let params = new URLSearchParams(window.location.search);
+let caseKey = params.get("case");
         // مصفوفة البيانات مرتبة من الاستقبال إلى النهاية
       const medicalData = { 
            // 1. البداية والتشخيص الأولي 
@@ -77,30 +80,33 @@
            "question": { title: "استفسارات", tips: "هل لديك أي سؤال آخر تريد سؤالي عنه؟\nأنا هنا للإجابة على كل ما يقلقك بوضوح.", img: "question.jpeg" } 
        };
         
-     window.onload = function() {
-         const urlParams = new URLSearchParams(window.location.search);
-    let selected = urlParams.get('case');
+    function render() {
+    let data = medicalData[caseKey];
 
-    if (selected) {
-        selected = selected.toLowerCase();
-               const data = medicalData[selected]; 
-       if (data) {
-    document.getElementById("title-text").innerText = data.title;
-    document.getElementById("medical-info").innerText = data.tips;
+    if (data) {
+        // تحديث النصوص (بالعربي فقط)
+        document.getElementById("title_element").innerText = data.title;
+        document.getElementById("content_element").innerText = data.tips;
 
-     imgElement = document.getElementById("main-image");
-    
-    // شرط: إذا كانت الحالة "استقبال" لا تعرض صورة، غير ذلك اعرضها
-    if (selected === "welcome") {
-        imgElement.style.display = "none";
-    } else {
-        // تأكدي من مسار الصور الصحيح عندك، مثلاً مجلد images
-        imgElement.src = "../images/" + selected + ".png"; 
-        imgElement.style.display = "block";
+        // منطق الصورة
+        let imgElement = document.getElementById("img_element");
+        if (imgElement) {
+            if (caseKey === "welcome") {
+                imgElement.style.display = "none"; // إخفاء صورة الاستقبال
+            } else {
+                imgElement.style.display = "block"; // إظهار باقي الصور
+                imgElement.src = "icon/" + caseKey + ".jpeg"; 
+            }
+        }
     }
-       };
+}
+
+// تشغيل عند التحميل
+window.onload = function() {
+    render();
+};
+
       </script>
-    <script src="JS/script.js"></script>
        </body>
 </html>
      
