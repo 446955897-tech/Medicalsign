@@ -1,33 +1,36 @@
 <?php
-// 1. الاتصال بقاعدة البيانات وبدء الجلسة
-include 'database/db.php';
 session_start();
+include 'database/db.php'; 
 
-// 2. التحقق من أن المستخدم مسجل دخوله فعلياً
+// التحقق من أن المستخدم سجل دخوله
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.html");
     exit();
 }
 
 $message = "";
-$user_id = $_SESSION['user_id'];
 
-// 3. معالجة تحديث كلمة المرور عند الضغط على الزر
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $new_password = $_POST['new_password'];
+    $user_id = $_SESSION['user_id'];
+    $new_password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    if (!empty($new_password) && $new_password === $confirm_password) {
-        // تحديث كلمة المرور في الجدول للمستخدم الحالي
+    if ($new_password === $confirm_password) {
+        // تحديث كلمة المرور في قاعدة البيانات
         $sql = "UPDATE users SET password = '$new_password' WHERE user_id = '$user_id'";
         
         if (mysqli_query($conn, $sql)) {
-            $message = "تم تحديث بيانات الحساب بنجاح ✅";
+            // 👇 هنا الرسالة التي طلبتِها
+            echo "<script>
+                    alert('تم حفظ كلمة المرور الجديدة بنجاح ✅');
+                    window.location.href='index.html'; 
+                  </script>";
+            exit();
         } else {
             $message = "خطأ في التحديث: " . mysqli_error($conn);
         }
     } else {
-        $message = "كلمات المرور غير متطابقة! ❌";
+        $message = "كلمتا المرور غير متطابقتين!";
     }
 }
 ?>
@@ -36,65 +39,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>إعدادات الحساب</title>
-    <link rel="stylesheet" href="CSS/style.css">
-    
+    <title>تعديل الملف الشخصي</title>
     <style>
-        /* تنسيقات إضافية لظهور رسالة النجاح بشكل جميل */
-        .success-message-php {
-            background-color: #ebf5fb;
-            color: #2980b9;
-            padding: 10px;
-            border-radius: 10px;
-            margin-top: 15px;
-            text-align: center;
-            font-weight: bold;
-            border: 1px solid #2980b9;
-        }
-        .btn-save { cursor: pointer; }
+        body { font-family: Arial, sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; height: 100vh; direction: rtl; }
+        .card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 350px; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        button { background-color: #2980b9; color: white; border: none; padding: 12px; width: 100%; border-radius: 8px; cursor: pointer; font-size: 16px; }
+        button:hover { background-color: #1a5276; }
+        .error { color: red; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="images/logo.png" width="120">
-    </div>
+<div class="card">
+    <h2>تغيير كلمة المرور</h2>
+    
+    <?php if ($message != ""): ?>
+        <p class="error"><?php echo $message; ?></p>
+    <?php endif; ?>
 
-    <h1 style="text-align: center;">إعدادات الحساب</h1>
-
-    <div class="account-settings">
-        <div class="box-description">
-            يمكنك هنا تغيير كلمة المرور الخاصة بك 
-        </div>
-        
-        <form method="POST" action="profile.php">
-            <div class="setting-item">
-                <label>كلمة المرور الجديدة</label>
-                <input type="password" name="new_password" placeholder="يرجى إدخال كلمة المرور" required>
-            </div>
-
-            <div class="setting-item">
-                <label>تأكيد كلمة المرور</label>
-                <input type="password" name="confirm_password" placeholder="يرجى إعادة إدخال كلمة المرور" required>
-            </div>
-
-            <button type="submit" class="btn-save">حفظ التعديلات</button>
-        </form>
-
-        <div style="margin-top: 20px; text-align: center;">
-            <a href="index.html" style="color: #2980b9; text-decoration: none; font-weight: bold; font-size: 14px;">
-                العودة إلى الصفحة الرئيسية
-            </a>
-        </div>
-
-        <?php if ($message != ""): ?>
-            <div class="success-message-php">
-                <?php echo $message; ?>
-            </div>
-        <?php endif; ?>
-    </div>
-
-    <script src="JAVA%20S/script.js"></script>
+    <form method="POST">
+        <input type="password" name="password" placeholder="كلمة المرور الجديدة" required>
+        <input type="password" name="confirm_password" placeholder="تأكيد كلمة المرور" required>
+        <button type="submit">حفظ التعديلات</button>
+    </form>
+    <br>
+    <a href="index.html" style="text-decoration: none; color: #7f8c8d;">إلغاء</a>
+</div>
 
 </body>
 </html>
