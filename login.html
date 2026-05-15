@@ -26,7 +26,7 @@
                 <input type="password" name="password" placeholder="كلمة المرور للدكتور" required autocomplete="new-password">
             </div>
             
-            <a href="javascript:void(0)" class="forgot-link" onclick="submitToProfile('form-doc')">نسيت كلمة السر؟</a>
+            <a href="javascript:void(0)" class="forgot-link" onclick="goToProfile('email-doc')">نسيت كلمة السر؟</a>
             
             <button type="submit" class="btn-primary">تسجيل دخول</button>
             <a href="register.html" class="link-text">إنشاء حساب دكتور</a>
@@ -48,7 +48,7 @@
                 <input type="password" name="password" placeholder="كلمة المرور للمريض" required autocomplete="new-password">
             </div>
             
-            <a href="javascript:void(0)" class="forgot-link" onclick="submitToProfile('form-pat')">نسيت كلمة السر؟</a>
+            <a href="javascript:void(0)" class="forgot-link" onclick="goToProfile('email-pat')">نسيت كلمة السر؟</a>
             
             <button type="submit" class="btn-primary">تسجيل دخول</button>
             <a href="register.html" class="link-text">إنشاء حساب مريض</a>
@@ -63,7 +63,6 @@
 </div>
 
     <script>
-        // وظيفة التبديل بين التبويبات
         function toggleTab(evt, tabId) {
             let i, tabContent, tabLinks;
             tabContent = document.getElementsByClassName("tab-pane");
@@ -78,19 +77,15 @@
             evt.currentTarget.classList.add("active");
         }
 
-        // الوظيفة الجديدة لإرسال الإيميل لصفحة البروفايل
-        function submitToProfile(formId) {
-            const form = document.getElementById(formId);
-            const emailInput = form.querySelector('input[type="email"]').value;
-            
-            if(emailInput === "") {
+        // الدالة المعدلة للانتقال المباشر بالإيميل عبر الرابط
+        function goToProfile(inputId) {
+            const emailValue = document.getElementById(inputId).value;
+            if(emailValue === "") {
                 alert("يرجى كتابة البريد الإلكتروني أولاً ليتم التعرف على حسابك.");
                 return;
             }
-            
-            // تغيير وجهة الفورم مؤقتاً لصفحة البروفايل ليتم حفظ الإيميل في السيشين
-            form.action = "profile.php";
-            form.submit();
+            // الانتقال لصفحة profile.php مع إرسال الإيميل في الرابط
+            window.location.href = "profile.php?temp_email=" + encodeURIComponent(emailValue);
         }
     </script>
 </body>
