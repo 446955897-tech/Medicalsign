@@ -229,7 +229,7 @@ $doctor_name = $_SESSION['full_name'];
                         <th>اسم المريض</th>
                         <th>التاريخ</th>
                         <th>الوقت</th>
-                        <th>الخدمة</th>
+                        <th>العيادة</th>
                         <th>الحالة</th>
                         <th> الإجراءات</th>
                     </tr>
