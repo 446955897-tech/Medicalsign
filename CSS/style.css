@@ -858,8 +858,14 @@ button:hover {
   padding:20px;
   border-radius:20px;
 }
+img {
+    display: block;      /* هذا السطر يخلي الصورة تتعامل ككتلة مستقلة */
+    margin: 0 auto 15px auto; /* كلمة auto هي اللي تجيب الصورة في النص بالضبط */
+    max-width: 100%;     /* عشان الصورة ما تطلع برا الإطار */
+    height: auto;
+    border-radius: 20px;
+}
 
-img { width:200px; border-radius:20px; }
 
 @keyframes fadeIn {
   from {
