@@ -190,7 +190,7 @@ function saveData() {
 
 
 /*-- بداية كود بيان --*/
-       // 1. قاعدة البيانات الخاصة بمشروع MedicaSign
+ // 1. قاعدة البيانات (تأكدي أن الأسماء هنا تطابق اللي يجي في الرابط)
 const medicalData = {
     "welcome": {
         "title": "الاستقبال",
@@ -225,7 +225,6 @@ const medicalData = {
 };
 
 window.onload = function() {
-    // 1. استخراج اسم الحالة من الرابط
     const urlParams = new URLSearchParams(window.location.search);
     let selected = urlParams.get('case');
 
@@ -234,25 +233,23 @@ window.onload = function() {
         const data = medicalData[selected];
 
         if (data) {
-            // 2. تحديث العنوان والنصوص (تعديل الأسماء لتطابق الـ HTML عندك)
+            // تحديث النصوص
             const titleElement = document.getElementById("title_element");
             const infoElement = document.getElementById("content_element");
 
             if (titleElement) titleElement.innerText = data.title;
             if (infoElement) infoElement.innerText = data.tips;
 
-            // 3. التحكم في ظهور الصورة
+            // تحديث الصور
             const imgElement = document.getElementById("img_element");
-
             if (imgElement) {
                 if (selected === "welcome") {
-                    // إذا كانت الحالة "استقبال"، نخفي الصورة تماماً
                     imgElement.style.display = "none";
                 } else {
-                    // إظهار الصورة وتحديث مسارها
                     imgElement.style.display = "block";
-                    // تأكدي من المسار (icon أو images) ومن الصيغة (jpeg أو png)
-                    imgElement.src = "icon/" + selected + ".jpeg"; 
+                    // عدلت لك المسار هنا ليطابق المجلد اللي في جهازك (images/icon3)
+                    // واستخدمت data.img عشان يضمن ياخذ الاسم الصحيح من القائمة فوق
+                    imgElement.src = "../images/icon3/" + data.img;
                 }
             }
         }
