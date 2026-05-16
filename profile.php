@@ -1,37 +1,33 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include 'database/db.php'; 
 
 $message = "";
 
-// 1. التقاط الإيميل وحفظه في السيشين بشكل سري بالخلفية إذا جاء من الرابط أو النموذج المخفي
-if (isset($_GET['temp_email'])) {
-    $_SESSION['temp_email'] = $_GET['temp_email'];
-    // إعادة توجيه سريعة لتنظيف الرابط ليصبح نظيفاً ومطابقاً للصورة الثانية
-    header("Location: profile.php");
-    exit();
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['action']) && $_POST['action'] == 'save_email_only') {
+    if (!empty($_POST['email'])) {
+        $_SESSION['temp_email'] = $_POST['email'];
+    }
 }
 
-// 2. قراءة الإيميل المحفوظ في السيشين بالخلفية
-$email_to_update = isset($_SESSION['temp_email']) ? $_SESSION['temp_email'] : '';
+if (!isset($_SESSION['temp_email']) || empty($_SESSION['temp_email'])) {
+    $_SESSION['temp_email'] = "doctor@example.com"; 
+}
 
-// 3. معالجة تغيير الباسورد عند الضغط على زر الحفظ
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$email_to_update = $_SESSION['temp_email'];
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['action'])) {
     $new_password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
     if (empty($email_to_update)) {
         $message = "عذراً، لم نتمكن من تحديد الحساب. يرجى كتابة الإيميل في صفحة الدخول أولاً.";
     } elseif ($new_password === $confirm_password) {
-        
-        // تحديث كلمة المرور في قاعدة البيانات بناءً على الإيميل المخفي
         $sql = "UPDATE users SET password = '$new_password' WHERE email = '$email_to_update'";
-        
         if (mysqli_query($conn, $sql)) {
-            // مسح الإيميل المؤقت من الجلسة بعد النجاح
             unset($_SESSION['temp_email']);
-            
-            // ظهور رسالة النجاح والتحويل التلقائي للرئيسية
             echo "<script>
                     alert('تم حفظ كلمة المرور الجديدة بنجاح ✅');
                     window.location.href='index.html';
@@ -54,7 +50,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>إعدادات الحساب</title>
     <link rel="stylesheet" href="CSS/style.css"> 
     <style>
-        /* التنسيقات المخصصة لمطابقة الصورة الثانية تماماً */
         body { 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             background-color: #f4f7f6; 
@@ -71,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             margin-bottom: 20px;
         }
         .logo-container img {
-            width: 150px; /* يمكنك تعديل المقاس حسب الرغبة */
+            width: 150px;
             height: auto;
         }
         .page-title {
